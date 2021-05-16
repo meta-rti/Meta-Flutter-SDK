@@ -1,0 +1,41 @@
+PODS:
+  - e2e (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - "permission_handler (5.1.0+2)":
+    - Flutter
+  - wuji_rtc_engine (1.0.2):
+    - Flutter
+    - wujicFrameWorkDemo
+  - wujicFrameWorkDemo (0.1.0)
+
+DEPENDENCIES:
+  - e2e (from `.symlinks/plugins/e2e/ios`)
+  - Flutter (from `Flutter`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - wuji_rtc_engine (from `.symlinks/plugins/wuji_rtc_engine/ios`)
+
+SPEC REPOS:
+  trunk:
+    - wujicFrameWorkDemo
+
+EXTERNAL SOURCES:
+  e2e:
+    :path: ".symlinks/plugins/e2e/ios"
+  Flutter:
+    :path: Flutter
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
+  wuji_rtc_engine:
+    :path: ".symlinks/plugins/wuji_rtc_engine/ios"
+
+SPEC CHECKSUMS:
+  e2e: 967b9b1fc533b7636a3b7a719f840c27f301fe1f
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
+  wuji_rtc_engine: fa883862558d2a7072e58f895b6a4b8b8df9e0d9
+  wujicFrameWorkDemo: 614e3c3a94d288a4142140af2b91aee90211f9a6
+
+PODFILE CHECKSUM: 88590bff5c4137f6e41a1d7b4f69f8412422941c
+
+COCOAPODS: 1.10.0
