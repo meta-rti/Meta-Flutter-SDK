@@ -7,7 +7,7 @@ PODS:
   - wuji_rtc_engine (1.0.3):
     - Flutter
     - wujicFrameWorkDemo
-  - wujicFrameWorkDemo (0.1.1)
+  - wujicFrameWorkDemo (0.1.2)
 
 DEPENDENCIES:
   - e2e (from `.symlinks/plugins/e2e/ios`)
@@ -34,7 +34,7 @@ SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
   wuji_rtc_engine: c4bed52dfabcaf7ba743e95cf888e5d8cf110292
-  wujicFrameWorkDemo: 90dd12ebc560e9246d304dd19fdd200bc6b5b8ab
+  wujicFrameWorkDemo: 27a3d44a73307caa1aea2eb0fb46d907bda9cc31
 
 PODFILE CHECKSUM: 88590bff5c4137f6e41a1d7b4f69f8412422941c
 
