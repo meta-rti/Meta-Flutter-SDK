@@ -416,7 +416,7 @@ class RtcEngineManager(
     }
 
     override fun setParameters(params: Map<String, *>, callback: Callback) {
-        callback.code(engine?.setParameters(params["parameters"] as String))
+        callback.code(RtcEngine.setParameters(params["parameters"] as String))
     }
 
     override fun registerLocalUserAccount(params: Map<String, *>, callback: Callback) {
