@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
 
     // var engine = await RtcEngine.create('d193f2093417435cbcfc41720269bad0');
     var engine = await RtcEngine.create('123');
+    // engine.setParameters("{\"server_url_type\": 1000}");
     engine.setEventHandler(RtcEngineEventHandler(
         joinChannelSuccess: (String channel, int uid, int elapsed) {
           print('joinChannelSuccess ${channel} ${uid}');
@@ -55,7 +56,7 @@ class _MyAppState extends State<MyApp> {
         }));
     await engine.enableVideo();
     // await engine.joinChannel('006d193f2093417435cbcfc41720269bad0IADVGhWETcjAdojvYUFPFlVE+hQmhItEuY4EMRkwLNY13dJjSIgAAAAAEAAWal0mnjTHXwEAAQCfNMdf', '123', null, 0);
-    await engine.joinChannel(null, '123', null, 0);
+    await engine.joinChannel(null, 'wuji_test', null, 0);
   }
 
   @override

@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  wuji_rtc_engine: ^1.0.3
+  wuji_rtc_engine: ^1.6.10
     # When depending on this package from a real application you should use:
     #   wuji_rtc_engine: ^x.y.z  //lasted version 1.0.3
     # See https://dart.dev/tools/pub/dependencies#version-constraints
