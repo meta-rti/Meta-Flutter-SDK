@@ -377,8 +377,7 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
 
     @objc func joinChannel(_ params: NSDictionary, _ callback: Callback) {
-        //params["token"] as? String  params["token"] as? String
-        callback.code(engine?.joinChannel(byToken: nil, channelId: "hello_kit", info: nil, uid: params["optionalUid"] as! UInt))
+        callback.code(engine?.joinChannel(byToken: params["token"] as? String, channelId: params["channelName"] as! String, info: nil, uid: params["optionalUid"] as! UInt))
     }
 
     @objc func switchChannel(_ params: NSDictionary, _ callback: Callback) {
