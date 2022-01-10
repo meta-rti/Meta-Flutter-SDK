@@ -46,5 +46,5 @@ dependencies {
 
 
     //wuji rtc sdk
-    implementation 'io.github.wuji-co:wuji-co:1.3.2.1'
+    implementation 'io.github.wuji-co:wuji-co:1.6.14'
 }
