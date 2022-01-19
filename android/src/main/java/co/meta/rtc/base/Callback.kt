@@ -1,7 +1,7 @@
-package co.wuji.rtc.base
+package co.meta.rtc.base
 
-import co.wuji.rtc.Constants
-import co.wuji.rtc.RtcEngine
+import co.meta.rtc.Constants
+import co.meta.rtc.RtcEngine
 import kotlin.math.abs
 
 abstract class Callback {

@@ -1,11 +1,11 @@
-//package co.wuji.rtc.base
+//package co.meta.rtc.base
 //
 //import android.content.Context
 //import android.view.TextureView
 //import android.widget.FrameLayout
-//import co.wuji.rtc.RtcChannel
-//import co.wuji.rtc.RtcEngine
-//import co.wuji.rtc.video.VideoCanvas
+//import co.meta.rtc.RtcChannel
+//import co.meta.rtc.RtcEngine
+//import co.meta.rtc.video.VideoCanvas
 //import java.lang.ref.WeakReference
 //
 //class RtcTextureView(
@@ -49,12 +49,12 @@
 //        }
 //    }
 //
-//    fun setRenderMode(engine: RtcEngine, @Annotations.WujiVideoRenderMode renderMode: Int) {
+//    fun setRenderMode(engine: RtcEngine, @Annotations.MetaVideoRenderMode renderMode: Int) {
 //        canvas.renderMode = renderMode
 //        setupRenderMode(engine)
 //    }
 //
-//    fun setMirrorMode(engine: RtcEngine, @Annotations.WujiVideoMirrorMode mirrorMode: Int) {
+//    fun setMirrorMode(engine: RtcEngine, @Annotations.MetaVideoMirrorMode mirrorMode: Int) {
 //        canvas.mirrorMode = mirrorMode
 //        setupRenderMode(engine)
 //    }

@@ -1,4 +1,4 @@
-group 'co.wuji.wuji_rtc_engine'
+group 'co.meta.meta_rtc_engine'
 version '1.0-SNAPSHOT'
 
 buildscript {
@@ -45,6 +45,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
 
-    //wuji rtc sdk
-    implementation 'io.github.wuji-co:wuji-co:1.6.14'
+    //meta rtc sdk
+    implementation 'io.github.meta-rti:meta-rti:1.6.14'
 }

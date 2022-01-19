@@ -1,10 +1,10 @@
-package co.wuji.wuji_rtc_engine
+package co.meta.meta_rtc_engine
 
 import android.content.Context
 import android.view.View
-import co.wuji.rtc.RtcChannel
-import co.wuji.rtc.RtcEngine
-import co.wuji.rtc.base.RtcSurfaceView
+import co.meta.rtc.RtcChannel
+import co.meta.rtc.RtcEngine
+import co.meta.rtc.base.RtcSurfaceView
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -14,26 +14,26 @@ import io.flutter.plugin.platform.PlatformViewFactory
 import kotlin.reflect.full.declaredMemberFunctions
 import kotlin.reflect.jvm.javaMethod
 
-class WujiSurfaceViewFactory(
+class MetaSurfaceViewFactory(
         private val messenger: BinaryMessenger,
-        private val rtcEnginePlugin: WujiRtcEnginePlugin,
-        private val rtcChannelPlugin: WujiRtcChannelPlugin
+        private val rtcEnginePlugin: MetaRtcEnginePlugin,
+        private val rtcChannelPlugin: MetaRtcChannelPlugin
 ) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
     override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
-        return WujiSurfaceView(context.applicationContext, messenger, viewId, args as? Map<*, *>, rtcEnginePlugin, rtcChannelPlugin)
+        return MetaSurfaceView(context.applicationContext, messenger, viewId, args as? Map<*, *>, rtcEnginePlugin, rtcChannelPlugin)
     }
 }
 
-class WujiSurfaceView(
+class MetaSurfaceView(
         context: Context,
         messenger: BinaryMessenger,
         viewId: Int,
         args: Map<*, *>?,
-        private val rtcEnginePlugin: WujiRtcEnginePlugin,
-        private val rtcChannelPlugin: WujiRtcChannelPlugin
+        private val rtcEnginePlugin: MetaRtcEnginePlugin,
+        private val rtcChannelPlugin: MetaRtcChannelPlugin
 ) : PlatformView, MethodChannel.MethodCallHandler {
     private val view = RtcSurfaceView(context)
-    private val channel = MethodChannel(messenger, "wuji_rtc_engine/surface_view_$viewId")
+    private val channel = MethodChannel(messenger, "meta_rtc_engine/surface_view_$viewId")
 
     init {
         args?.let { map ->

@@ -1,7 +1,7 @@
-package co.wuji.rtc.base
+package co.meta.rtc.base
 
 import androidx.annotation.IntRange
-import co.wuji.rtc.IMetadataObserver
+import co.meta.rtc.IMetadataObserver
 import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 

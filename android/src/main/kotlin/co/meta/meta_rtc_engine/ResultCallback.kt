@@ -1,6 +1,6 @@
-package co.wuji.wuji_rtc_engine
+package co.meta.meta_rtc_engine
 
-import co.wuji.rtc.base.Callback
+import co.meta.rtc.base.Callback
 import io.flutter.plugin.common.MethodChannel.Result
 
 class ResultCallback(

@@ -1,30 +1,30 @@
-package co.wuji.rtc.base;
+package co.meta.rtc.base;
 
 import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import co.wuji.rtc.Constants;
-import co.wuji.rtc.video.BeautyOptions;
-import co.wuji.rtc.video.VideoCanvas;
+import co.meta.rtc.Constants;
+import co.meta.rtc.video.BeautyOptions;
+import co.meta.rtc.video.VideoCanvas;
 
 
 @SuppressWarnings("deprecation")
 public class Annotations {
     @IntDef({
-            WujiRtcAppType.NATIVE,
-            WujiRtcAppType.COCOS,
-            WujiRtcAppType.UNITY,
-            WujiRtcAppType.ELECTRON,
-            WujiRtcAppType.FLUTTER,
-            WujiRtcAppType.UNREAL,
-            WujiRtcAppType.XAMARIN,
-            WujiRtcAppType.APICLOUD,
-            WujiRtcAppType.REACTNATIVE,
+            MetaRtcAppType.NATIVE,
+            MetaRtcAppType.COCOS,
+            MetaRtcAppType.UNITY,
+            MetaRtcAppType.ELECTRON,
+            MetaRtcAppType.FLUTTER,
+            MetaRtcAppType.UNREAL,
+            MetaRtcAppType.XAMARIN,
+            MetaRtcAppType.APICLOUD,
+            MetaRtcAppType.REACTNATIVE,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiRtcAppType {
+    public @interface MetaRtcAppType {
         int NATIVE = 0;
         int COCOS = 1;
         int UNITY = 2;
@@ -37,11 +37,11 @@ public class Annotations {
     }
 
     @IntDef({
-            WujiAudioCodecProfileType.LC_AAC,
-            WujiAudioCodecProfileType.HE_AAC,
+            MetaAudioCodecProfileType.LC_AAC,
+            MetaAudioCodecProfileType.HE_AAC,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioCodecProfileType {
+    public @interface MetaAudioCodecProfileType {
         int LC_AAC = 0;
         int HE_AAC = 1;
     }
@@ -59,7 +59,7 @@ public class Annotations {
             Constants.AUDIO_EQUALIZATION_BAND_16K,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioEqualizationBandFrequency {
+    public @interface MetaAudioEqualizationBandFrequency {
     }
 
     @IntDef({
@@ -71,7 +71,7 @@ public class Annotations {
             Constants.LOCAL_AUDIO_STREAM_ERROR_ENCODE_FAILURE,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioLocalError {
+    public @interface MetaAudioLocalError {
     }
 
     @IntDef({
@@ -81,17 +81,17 @@ public class Annotations {
             Constants.LOCAL_AUDIO_STREAM_STATE_FAILED,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioLocalState {
+    public @interface MetaAudioLocalState {
     }
 
     @IntDef({
             Constants.MEDIA_ENGINE_AUDIO_ERROR_MIXING_OPEN,
             Constants.MEDIA_ENGINE_AUDIO_ERROR_MIXING_TOO_FREQUENT,
             Constants.MEDIA_ENGINE_AUDIO_EVENT_MIXING_INTERRUPTED_EOF,
-            WujiAudioMixingErrorCode.MEDIA_ENGINE_AUDIO_ERROR_OK,
+            MetaAudioMixingErrorCode.MEDIA_ENGINE_AUDIO_ERROR_OK,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioMixingErrorCode {
+    public @interface MetaAudioMixingErrorCode {
         int MEDIA_ENGINE_AUDIO_ERROR_OK = 0;
     }
 
@@ -102,7 +102,7 @@ public class Annotations {
             Constants.MEDIA_ENGINE_AUDIO_EVENT_MIXING_ERROR,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioMixingStateCode {
+    public @interface MetaAudioMixingStateCode {
     }
 
     @IntDef({
@@ -115,7 +115,7 @@ public class Annotations {
             Constants.AUDIO_ROUTE_HEADSETBLUETOOTH,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioOutputRouting {
+    public @interface MetaAudioOutputRouting {
     }
 
     @IntDef({
@@ -127,7 +127,7 @@ public class Annotations {
             Constants.AUDIO_PROFILE_MUSIC_HIGH_QUALITY_STEREO,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioProfile {
+    public @interface MetaAudioProfile {
     }
 
     @IntDef({
@@ -136,7 +136,7 @@ public class Annotations {
             Constants.AUDIO_RECORDING_QUALITY_HIGH,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioRecordingQuality {
+    public @interface MetaAudioRecordingQuality {
     }
 
     @IntDef({
@@ -147,7 +147,7 @@ public class Annotations {
             Constants.REMOTE_AUDIO_STATE_FAILED,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioRemoteState {
+    public @interface MetaAudioRemoteState {
     }
 
     @IntDef({
@@ -161,7 +161,7 @@ public class Annotations {
             Constants.REMOTE_AUDIO_REASON_REMOTE_OFFLINE,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioRemoteStateReason {
+    public @interface MetaAudioRemoteStateReason {
     }
 
     @IntDef({
@@ -184,7 +184,7 @@ public class Annotations {
 //            Constants.AUDIO_VIRTUAL_STEREO,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioReverbPreset {
+    public @interface MetaAudioReverbPreset {
     }
 
     @IntDef({
@@ -195,16 +195,16 @@ public class Annotations {
             Constants.AUDIO_REVERB_STRENGTH,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioReverbType {
+    public @interface MetaAudioReverbType {
     }
 
     @IntDef({
-            WujiAudioSampleRateType.TYPE_32000,
-            WujiAudioSampleRateType.TYPE_44100,
-            WujiAudioSampleRateType.TYPE_48000,
+            MetaAudioSampleRateType.TYPE_32000,
+            MetaAudioSampleRateType.TYPE_44100,
+            MetaAudioSampleRateType.TYPE_48000,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioSampleRateType {
+    public @interface MetaAudioSampleRateType {
         int TYPE_32000 = 32000;
         int TYPE_44100 = 44100;
         int TYPE_48000 = 48000;
@@ -219,7 +219,7 @@ public class Annotations {
             Constants.AUDIO_SCENARIO_CHATROOM_GAMING,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioScenario {
+    public @interface MetaAudioScenario {
     }
 
     @IntDef({
@@ -244,27 +244,27 @@ public class Annotations {
 //            Constants.GENERAL_BEAUTY_VOICE_FEMALE_VITALITY,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiAudioVoiceChanger {
+    public @interface MetaAudioVoiceChanger {
     }
 
     @IntDef({
-            WujiCameraCaptureOutputPreference.CAPTURER_OUTPUT_PREFERENCE_AUTO,
-            WujiCameraCaptureOutputPreference.CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE,
-            WujiCameraCaptureOutputPreference.CAPTURER_OUTPUT_PREFERENCE_PREVIEW,
+            MetaCameraCaptureOutputPreference.CAPTURER_OUTPUT_PREFERENCE_AUTO,
+            MetaCameraCaptureOutputPreference.CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE,
+            MetaCameraCaptureOutputPreference.CAPTURER_OUTPUT_PREFERENCE_PREVIEW,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiCameraCaptureOutputPreference {
+    public @interface MetaCameraCaptureOutputPreference {
         int CAPTURER_OUTPUT_PREFERENCE_AUTO = 0;
         int CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE = 1;
         int CAPTURER_OUTPUT_PREFERENCE_PREVIEW = 2;
     }
 
     @IntDef({
-            WujiCameraDirection.CAMERA_REAR,
-            WujiCameraDirection.CAMERA_FRONT,
+            MetaCameraDirection.CAMERA_REAR,
+            MetaCameraDirection.CAMERA_FRONT,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiCameraDirection {
+    public @interface MetaCameraDirection {
         int CAMERA_REAR = 0;
         int CAMERA_FRONT = 1;
     }
@@ -284,7 +284,7 @@ public class Annotations {
             Constants.RELAY_ERROR_DEST_TOKEN_EXPIRED,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiChannelMediaRelayError {
+    public @interface MetaChannelMediaRelayError {
     }
 
     @IntDef({
@@ -302,7 +302,7 @@ public class Annotations {
             Constants.RELAY_EVENT_VIDEO_PROFILE_UPDATE,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiChannelMediaRelayEvent {
+    public @interface MetaChannelMediaRelayEvent {
     }
 
     @IntDef({
@@ -312,7 +312,7 @@ public class Annotations {
             Constants.RELAY_STATE_FAILURE,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiChannelMediaRelayState {
+    public @interface MetaChannelMediaRelayState {
     }
 
     @IntDef({
@@ -321,7 +321,7 @@ public class Annotations {
             Constants.CHANNEL_PROFILE_GAME,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiChannelProfile {
+    public @interface MetaChannelProfile {
     }
 
     @IntDef({
@@ -329,7 +329,7 @@ public class Annotations {
             Constants.CLIENT_ROLE_AUDIENCE,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiClientRole {
+    public @interface MetaClientRole {
     }
 
     @IntDef({
@@ -350,7 +350,7 @@ public class Annotations {
             Constants.CONNECTION_CHANGED_KEEP_ALIVE_TIMEOUT,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiConnectionChangedReason {
+    public @interface MetaConnectionChangedReason {
     }
 
     @IntDef({
@@ -361,30 +361,30 @@ public class Annotations {
             Constants.CONNECTION_STATE_FAILED,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiConnectionStateType {
+    public @interface MetaConnectionStateType {
     }
 
     @IntDef({
-            WujiDegradationPreference.MAINTAIN_QUALITY,
-            WujiDegradationPreference.MAINTAIN_FRAMERATE,
-            WujiDegradationPreference.MAINTAIN_BALANCED,
+            MetaDegradationPreference.MAINTAIN_QUALITY,
+            MetaDegradationPreference.MAINTAIN_FRAMERATE,
+            MetaDegradationPreference.MAINTAIN_BALANCED,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiDegradationPreference {
+    public @interface MetaDegradationPreference {
         int MAINTAIN_QUALITY = 0;
         int MAINTAIN_FRAMERATE = 1;
         int MAINTAIN_BALANCED = 2;
     }
 
     @IntDef({
-            WujiEncryptionMode.NONE,
-            WujiEncryptionMode.AES128XTS,
-            WujiEncryptionMode.AES128ECB,
-            WujiEncryptionMode.AES256XTS,
-            WujiEncryptionMode.SM4128ECB,
+            MetaEncryptionMode.NONE,
+            MetaEncryptionMode.AES128XTS,
+            MetaEncryptionMode.AES128ECB,
+            MetaEncryptionMode.AES256XTS,
+            MetaEncryptionMode.SM4128ECB,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiEncryptionMode {
+    public @interface MetaEncryptionMode {
         int NONE = 0;
         int AES128XTS = 1;
         int AES128ECB = 2;
@@ -466,7 +466,7 @@ public class Annotations {
 //            Constants.ERR_VCM_ENCODER_SET_ERROR,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiErrorCode {
+    public @interface MetaErrorCode {
     }
 
     @IntDef({
@@ -483,7 +483,7 @@ public class Annotations {
             Constants.INJECT_STREAM_STATUS_BROKEN,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiInjectStreamStatus {
+    public @interface MetaInjectStreamStatus {
     }
 
     @IntDef({
@@ -492,7 +492,7 @@ public class Annotations {
             Constants.LASTMILE_PROBE_RESULT_UNAVAILABLE,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiLastmileProbeResultState {
+    public @interface MetaLastmileProbeResultState {
     }
 
     @IntDef({
@@ -501,7 +501,7 @@ public class Annotations {
             BeautyOptions.LIGHTENING_CONTRAST_HIGH,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiLighteningContrastLevel {
+    public @interface MetaLighteningContrastLevel {
     }
 
     @IntDef({
@@ -513,7 +513,7 @@ public class Annotations {
             Constants.LOCAL_VIDEO_STREAM_ERROR_ENCODE_FAILURE,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiLocalVideoStreamError {
+    public @interface MetaLocalVideoStreamError {
     }
 
     @IntDef({
@@ -523,7 +523,7 @@ public class Annotations {
             Constants.LOCAL_VIDEO_STREAM_STATE_FAILED,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiLocalVideoStreamState {
+    public @interface MetaLocalVideoStreamState {
     }
 
     @IntDef({
@@ -535,7 +535,7 @@ public class Annotations {
             Constants.LOG_FILTER_CRITICAL,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiLogFilter {
+    public @interface MetaLogFilter {
     }
 
     @IntDef({
@@ -550,7 +550,7 @@ public class Annotations {
             Constants.QUALITY_DETECTING,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiNetworkQuality {
+    public @interface MetaNetworkQuality {
     }
 
     @IntDef({
@@ -563,7 +563,7 @@ public class Annotations {
             Constants.NETWORK_TYPE_MOBILE_4G,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiNetworkType {
+    public @interface MetaNetworkType {
     }
 
     @IntDef({
@@ -580,7 +580,7 @@ public class Annotations {
             Constants.RTMP_STREAM_PUBLISH_ERROR_FORMAT_NOT_SUPPORTED,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiRtmpStreamingErrorCode {
+    public @interface MetaRtmpStreamingErrorCode {
     }
 
     @IntDef({
@@ -591,7 +591,7 @@ public class Annotations {
             Constants.RTMP_STREAM_PUBLISH_STATE_FAILURE,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiRtmpStreamingState {
+    public @interface MetaRtmpStreamingState {
     }
 
     @IntDef({
@@ -600,7 +600,7 @@ public class Annotations {
             Constants.STREAM_FALLBACK_OPTION_AUDIO_ONLY,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiStreamFallbackOptions {
+    public @interface MetaStreamFallbackOptions {
     }
 
     @IntDef({
@@ -609,7 +609,7 @@ public class Annotations {
             Constants.USER_OFFLINE_BECOME_AUDIENCE,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiUserOfflineReason {
+    public @interface MetaUserOfflineReason {
     }
 
     @IntDef({
@@ -617,31 +617,31 @@ public class Annotations {
             Constants.USER_PRIORITY_NORANL,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiUserPriority {
+    public @interface MetaUserPriority {
     }
 
     @IntDef({
-            WujiVideoCodecProfileType.BASELINE,
-            WujiVideoCodecProfileType.MAIN,
-            WujiVideoCodecProfileType.HIGH,
+            MetaVideoCodecProfileType.BASELINE,
+            MetaVideoCodecProfileType.MAIN,
+            MetaVideoCodecProfileType.HIGH,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiVideoCodecProfileType {
+    public @interface MetaVideoCodecProfileType {
         int BASELINE = 66;
         int MAIN = 77;
         int HIGH = 100;
     }
 
     @IntDef({
-            WujiVideoFrameRate.FRAME_RATE_FPS_1,
-            WujiVideoFrameRate.FRAME_RATE_FPS_7,
-            WujiVideoFrameRate.FRAME_RATE_FPS_10,
-            WujiVideoFrameRate.FRAME_RATE_FPS_15,
-            WujiVideoFrameRate.FRAME_RATE_FPS_24,
-            WujiVideoFrameRate.FRAME_RATE_FPS_30,
+            MetaVideoFrameRate.FRAME_RATE_FPS_1,
+            MetaVideoFrameRate.FRAME_RATE_FPS_7,
+            MetaVideoFrameRate.FRAME_RATE_FPS_10,
+            MetaVideoFrameRate.FRAME_RATE_FPS_15,
+            MetaVideoFrameRate.FRAME_RATE_FPS_24,
+            MetaVideoFrameRate.FRAME_RATE_FPS_30,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiVideoFrameRate {
+    public @interface MetaVideoFrameRate {
         int FRAME_RATE_FPS_1 = 1;
         int FRAME_RATE_FPS_7 = 7;
         int FRAME_RATE_FPS_10 = 10;
@@ -656,16 +656,16 @@ public class Annotations {
             Constants.VIDEO_MIRROR_MODE_DISABLED,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiVideoMirrorMode {
+    public @interface MetaVideoMirrorMode {
     }
 
     @IntDef({
-            WujiVideoOutputOrientationMode.ORIENTATION_MODE_ADAPTIVE,
-            WujiVideoOutputOrientationMode.ORIENTATION_MODE_FIXED_LANDSCAPE,
-            WujiVideoOutputOrientationMode.ORIENTATION_MODE_FIXED_PORTRAIT,
+            MetaVideoOutputOrientationMode.ORIENTATION_MODE_ADAPTIVE,
+            MetaVideoOutputOrientationMode.ORIENTATION_MODE_FIXED_LANDSCAPE,
+            MetaVideoOutputOrientationMode.ORIENTATION_MODE_FIXED_PORTRAIT,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiVideoOutputOrientationMode {
+    public @interface MetaVideoOutputOrientationMode {
         int ORIENTATION_MODE_ADAPTIVE = 0;
         int ORIENTATION_MODE_FIXED_LANDSCAPE = 1;
         int ORIENTATION_MODE_FIXED_PORTRAIT = 2;
@@ -677,7 +677,7 @@ public class Annotations {
             Constants.ADAPT_DOWN_BANDWIDTH,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiVideoQualityAdaptIndication {
+    public @interface MetaVideoQualityAdaptIndication {
     }
 
     @IntDef({
@@ -688,7 +688,7 @@ public class Annotations {
             Constants.REMOTE_VIDEO_STATE_FAILED,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiVideoRemoteState {
+    public @interface MetaVideoRemoteState {
     }
 
     @IntDef({
@@ -704,7 +704,7 @@ public class Annotations {
             Constants.REMOTE_VIDEO_STATE_REASON_AUDIO_FALLBACK_RECOVERY,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiVideoRemoteStateReason {
+    public @interface MetaVideoRemoteStateReason {
     }
 
     @IntDef({
@@ -714,7 +714,7 @@ public class Annotations {
             VideoCanvas.RENDER_MODE_FILL,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiVideoRenderMode {
+    public @interface MetaVideoRenderMode {
     }
 
     @IntDef({
@@ -722,7 +722,7 @@ public class Annotations {
             Constants.VIDEO_STREAM_LOW,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiVideoStreamType {
+    public @interface MetaVideoStreamType {
     }
 
     @IntDef({
@@ -754,7 +754,7 @@ public class Annotations {
 //            Constants.WARN_APM_RESIDUAL_ECHO,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiWarningCode {
+    public @interface MetaWarningCode {
     }
 
 //    @IntDef({
@@ -767,7 +767,7 @@ public class Annotations {
 //            RtcEngineConfig.AreaCode.AREA_CODE_GLOB,
 //    })
 //    @Retention(RetentionPolicy.SOURCE)
-//    public @interface WujiAreaCode {
+//    public @interface MetaAreaCode {
 //    }
 
     @IntDef({
@@ -777,7 +777,7 @@ public class Annotations {
 //            Constants.SUB_STATE_SUBSCRIBED,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiStreamSubscribeState {
+    public @interface MetaStreamSubscribeState {
     }
 
     @IntDef({
@@ -787,13 +787,13 @@ public class Annotations {
 //            Constants.PUB_STATE_PUBLISHED,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiStreamPublishState {
+    public @interface MetaStreamPublishState {
     }
 
     @IntDef({
 //            Constants.RTMP_STREAMING_EVENT_FAILED_LOAD_IMAGE,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WujiRtmpStreamingEvent {
+    public @interface MetaRtmpStreamingEvent {
     }
 }

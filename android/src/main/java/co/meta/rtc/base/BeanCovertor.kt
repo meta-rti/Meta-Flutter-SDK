@@ -1,13 +1,13 @@
-package co.wuji.rtc.base
+package co.meta.rtc.base
 
 import android.graphics.Color
-//import co.wuji.rtc.internal.EncryptionConfig
-import co.wuji.rtc.internal.LastmileProbeConfig
-import co.wuji.rtc.live.LiveInjectStreamConfig
-import co.wuji.rtc.live.LiveTranscoding
-import co.wuji.rtc.live.LiveTranscoding.TranscodingUser
-import co.wuji.rtc.models.ChannelMediaOptions
-import co.wuji.rtc.video.*
+//import co.meta.rtc.internal.EncryptionConfig
+import co.meta.rtc.internal.LastmileProbeConfig
+import co.meta.rtc.live.LiveInjectStreamConfig
+import co.meta.rtc.live.LiveTranscoding
+import co.meta.rtc.live.LiveTranscoding.TranscodingUser
+import co.meta.rtc.models.ChannelMediaOptions
+import co.meta.rtc.video.*
 
 fun mapToVideoDimensions(map: Map<*, *>): VideoEncoderConfiguration.VideoDimensions {
     return VideoEncoderConfiguration.VideoDimensions().apply {
@@ -38,8 +38,8 @@ fun mapToBeautyOptions(map: Map<*, *>): BeautyOptions {
     }
 }
 
-//fun mapToWujiImage(map: Map<*, *>): WujiImage {
-//    return WujiImage().apply {
+//fun mapToMetaImage(map: Map<*, *>): MetaImage {
+//    return MetaImage().apply {
 //        (map["url"] as? String)?.let { url = it }
 //        (map["x"] as? Number)?.let { x = it.toInt() }
 //        (map["y"] as? Number)?.let { y = it.toInt() }
@@ -77,8 +77,8 @@ fun mapToColor(map: Map<*, *>): Int {
 //        (map["videoFramerate"] as? Number)?.let { videoFramerate = it.toInt() }
 //        (map["lowLatency"] as? Boolean)?.let { lowLatency = it }
 //        (map["videoGop"] as? Number)?.let { videoGop = it.toInt() }
-//        (map["watermark"] as? Map<*, *>)?.let { watermark = mapToWujiImage(it) }
-//        (map["backgroundImage"] as? Map<*, *>)?.let { backgroundImage = mapToWujiImage(it) }
+//        (map["watermark"] as? Map<*, *>)?.let { watermark = mapToMetaImage(it) }
+//        (map["backgroundImage"] as? Map<*, *>)?.let { backgroundImage = mapToMetaImage(it) }
 //        (map["audioSampleRate"] as? Number)?.let { audioSampleRate = intToLiveTranscodingAudioSampleRate(it.toInt()) }
 //        (map["audioBitrate"] as? Number)?.let { audioBitrate = it.toInt() }
 //        (map["audioChannels"] as? Number)?.let { audioChannels = it.toInt() }

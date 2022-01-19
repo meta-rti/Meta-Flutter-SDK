@@ -1,8 +1,8 @@
-package co.wuji.rtc.base
+package co.meta.rtc.base
 
 import android.graphics.Rect
-import co.wuji.rtc.IRtcEngineEventHandler.*
-import co.wuji.rtc.models.UserInfo
+import co.meta.rtc.IRtcEngineEventHandler.*
+import co.meta.rtc.models.UserInfo
 
 fun UserInfo.toMap(): Map<String, Any?> {
     return hashMapOf(
@@ -141,7 +141,7 @@ fun LastmileProbeResult.toMap(): Map<String, Any?> {
     )
 }
 //
-//fun WujiFacePositionInfo.toMap(): Map<String, Any?> {
+//fun MetaFacePositionInfo.toMap(): Map<String, Any?> {
 //    return hashMapOf(
 //            "x" to x,
 //            "y" to y,
@@ -151,6 +151,6 @@ fun LastmileProbeResult.toMap(): Map<String, Any?> {
 //    )
 //}
 //
-//fun Array<out WujiFacePositionInfo>.toMapList(): List<Map<String, Any?>> {
+//fun Array<out MetaFacePositionInfo>.toMapList(): List<Map<String, Any?>> {
 //    return List(size) { this[it].toMap() }
 //}

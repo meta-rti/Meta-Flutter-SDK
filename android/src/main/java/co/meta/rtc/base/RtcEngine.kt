@@ -1,9 +1,9 @@
-package co.wuji.rtc.base
+package co.meta.rtc.base
 
 import android.content.Context
-import co.wuji.rtc.*
-//import co.wuji.rtc.internal.EncryptionConfig
-import co.wuji.rtc.models.UserInfo
+import co.meta.rtc.*
+//import co.meta.rtc.internal.EncryptionConfig
+import co.meta.rtc.models.UserInfo
 
 class IRtcEngine {
     interface RtcEngineInterface : RtcUserInfoInterface, RtcAudioInterface, RtcVideoInterface,

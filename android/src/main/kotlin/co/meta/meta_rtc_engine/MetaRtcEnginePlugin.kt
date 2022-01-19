@@ -1,11 +1,11 @@
-package co.wuji.wuji_rtc_engine
+package co.meta.meta_rtc_engine
 
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import androidx.annotation.NonNull
-import co.wuji.rtc.RtcEngine
-import co.wuji.rtc.base.RtcEngineManager
+import co.meta.rtc.RtcEngine
+import co.meta.rtc.base.RtcEngineManager
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.EventChannel
@@ -18,8 +18,8 @@ import io.flutter.plugin.platform.PlatformViewRegistry
 import kotlin.reflect.full.declaredMemberFunctions
 import kotlin.reflect.jvm.javaMethod
 
-/** WujiRtcEnginePlugin */
-class WujiRtcEnginePlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler {
+/** MetaRtcEnginePlugin */
+class MetaRtcEnginePlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
@@ -30,7 +30,7 @@ class WujiRtcEnginePlugin : FlutterPlugin, MethodCallHandler, EventChannel.Strea
     private var eventSink: EventChannel.EventSink? = null
     private val manager = RtcEngineManager { methodName, data -> emit(methodName, data) }
     private val handler = Handler(Looper.getMainLooper())
-    private val rtcChannelPlugin = WujiRtcChannelPlugin(this)
+    private val rtcChannelPlugin = MetaRtcChannelPlugin(this)
 
     // This static function is optional and equivalent to onAttachedToEngine. It supports the old
     // pre-Flutter-1.12 Android projects. You are encouraged to continue supporting
@@ -44,7 +44,7 @@ class WujiRtcEnginePlugin : FlutterPlugin, MethodCallHandler, EventChannel.Strea
     companion object {
         @JvmStatic
         fun registerWith(registrar: Registrar) {
-            WujiRtcEnginePlugin().apply {
+            MetaRtcEnginePlugin().apply {
                 initPlugin(registrar.context(), registrar.messenger(), registrar.platformViewRegistry())
                 rtcChannelPlugin.initPlugin(registrar.messenger())
             }
@@ -53,12 +53,12 @@ class WujiRtcEnginePlugin : FlutterPlugin, MethodCallHandler, EventChannel.Strea
 
     private fun initPlugin(context: Context, binaryMessenger: BinaryMessenger, platformViewRegistry: PlatformViewRegistry) {
         applicationContext = context.applicationContext
-        methodChannel = MethodChannel(binaryMessenger, "wuji_rtc_engine")
+        methodChannel = MethodChannel(binaryMessenger, "meta_rtc_engine")
         methodChannel.setMethodCallHandler(this)
-        eventChannel = EventChannel(binaryMessenger, "wuji_rtc_engine/events")
+        eventChannel = EventChannel(binaryMessenger, "meta_rtc_engine/events")
         eventChannel.setStreamHandler(this)
 
-        platformViewRegistry.registerViewFactory("WujiSurfaceView", WujiSurfaceViewFactory(binaryMessenger, this, rtcChannelPlugin))
+        platformViewRegistry.registerViewFactory("MetaSurfaceView", MetaSurfaceViewFactory(binaryMessenger, this, rtcChannelPlugin))
     }
 
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {

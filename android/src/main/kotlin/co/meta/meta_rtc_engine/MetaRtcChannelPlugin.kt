@@ -1,11 +1,11 @@
-package co.wuji.wuji_rtc_engine
+package co.meta.meta_rtc_engine
 
 import android.os.Handler
 import android.os.Looper
 import androidx.annotation.NonNull
-import co.wuji.rtc.RtcChannel
-import co.wuji.rtc.RtcEngine
-import co.wuji.rtc.base.RtcChannelManager
+import co.meta.rtc.RtcChannel
+import co.meta.rtc.RtcEngine
+import co.meta.rtc.base.RtcChannelManager
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.EventChannel
@@ -16,9 +16,9 @@ import io.flutter.plugin.common.MethodChannel.Result
 import kotlin.reflect.full.declaredMemberFunctions
 import kotlin.reflect.jvm.javaMethod
 
-/** WujiRtcChannelPlugin */
-class WujiRtcChannelPlugin(
-        private val rtcEnginePlugin: WujiRtcEnginePlugin
+/** MetaRtcChannelPlugin */
+class MetaRtcChannelPlugin(
+        private val rtcEnginePlugin: MetaRtcEnginePlugin
 ) : FlutterPlugin, MethodCallHandler, EventChannel.StreamHandler {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
@@ -31,9 +31,9 @@ class WujiRtcChannelPlugin(
     private val handler = Handler(Looper.getMainLooper())
 
     fun initPlugin(binaryMessenger: BinaryMessenger) {
-        methodChannel = MethodChannel(binaryMessenger, "wuji_rtc_channel")
+        methodChannel = MethodChannel(binaryMessenger, "meta_rtc_channel")
         methodChannel.setMethodCallHandler(this)
-        eventChannel = EventChannel(binaryMessenger, "wuji_rtc_channel/events")
+        eventChannel = EventChannel(binaryMessenger, "meta_rtc_channel/events")
         eventChannel.setStreamHandler(this)
     }
 

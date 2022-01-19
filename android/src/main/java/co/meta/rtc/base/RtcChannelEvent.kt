@@ -1,9 +1,9 @@
-package co.wuji.rtc.base
+package co.meta.rtc.base
 
 import androidx.annotation.IntRange
-import co.wuji.rtc.IRtcChannelEventHandler
-import co.wuji.rtc.IRtcEngineEventHandler
-import co.wuji.rtc.RtcChannel
+import co.meta.rtc.IRtcChannelEventHandler
+import co.meta.rtc.IRtcEngineEventHandler
+import co.meta.rtc.RtcChannel
 
 class RtcChannelEvents {
     companion object {
@@ -89,7 +89,7 @@ class RtcChannelEventHandler(
         private val emitter: (methodName: String, data: Map<String, Any?>?) -> Unit
 ) : IRtcChannelEventHandler() {
     companion object {
-        const val PREFIX = "co.wuji.rtc."
+        const val PREFIX = "co.meta.rtc."
     }
 
     private fun callback(methodName: String, channel: RtcChannel?, vararg data: Any?) {
@@ -101,11 +101,11 @@ class RtcChannelEventHandler(
         }
     }
 
-    override fun onChannelWarning(rtcChannel: RtcChannel?, @Annotations.WujiWarningCode warn: Int) {
+    override fun onChannelWarning(rtcChannel: RtcChannel?, @Annotations.MetaWarningCode warn: Int) {
         callback(RtcChannelEvents.Warning, rtcChannel, warn)
     }
 
-    override fun onChannelError(rtcChannel: RtcChannel?, @Annotations.WujiErrorCode err: Int) {
+    override fun onChannelError(rtcChannel: RtcChannel?, @Annotations.MetaErrorCode err: Int) {
         callback(RtcChannelEvents.Error, rtcChannel, err)
     }
 
@@ -121,7 +121,7 @@ class RtcChannelEventHandler(
         callback(RtcChannelEvents.LeaveChannel, rtcChannel, stats?.toMap())
     }
 
-    override fun onClientRoleChanged(rtcChannel: RtcChannel?, @Annotations.WujiClientRole oldRole: Int, @Annotations.WujiClientRole newRole: Int) {
+    override fun onClientRoleChanged(rtcChannel: RtcChannel?, @Annotations.MetaClientRole oldRole: Int, @Annotations.MetaClientRole newRole: Int) {
         callback(RtcChannelEvents.ClientRoleChanged, rtcChannel, oldRole, newRole)
     }
 
@@ -129,11 +129,11 @@ class RtcChannelEventHandler(
         callback(RtcChannelEvents.UserJoined, rtcChannel, uid, elapsed)
     }
 
-    override fun onUserOffline(rtcChannel: RtcChannel?, uid: Int, @Annotations.WujiUserOfflineReason reason: Int) {
+    override fun onUserOffline(rtcChannel: RtcChannel?, uid: Int, @Annotations.MetaUserOfflineReason reason: Int) {
         callback(RtcChannelEvents.UserOffline, rtcChannel, uid, reason)
     }
 
-    override fun onConnectionStateChanged(rtcChannel: RtcChannel?, @Annotations.WujiConnectionStateType state: Int, @Annotations.WujiConnectionChangedReason reason: Int) {
+    override fun onConnectionStateChanged(rtcChannel: RtcChannel?, @Annotations.MetaConnectionStateType state: Int, @Annotations.MetaConnectionChangedReason reason: Int) {
         callback(RtcChannelEvents.ConnectionStateChanged, rtcChannel, state, reason)
     }
 
@@ -157,11 +157,11 @@ class RtcChannelEventHandler(
         callback(RtcChannelEvents.VideoSizeChanged, rtcChannel, uid, width, height, rotation)
     }
 
-    override fun onRemoteVideoStateChanged(rtcChannel: RtcChannel?, uid: Int, @Annotations.WujiVideoRemoteState state: Int, @Annotations.WujiVideoRemoteStateReason reason: Int, elapsed: Int) {
+    override fun onRemoteVideoStateChanged(rtcChannel: RtcChannel?, uid: Int, @Annotations.MetaVideoRemoteState state: Int, @Annotations.MetaVideoRemoteStateReason reason: Int, elapsed: Int) {
         callback(RtcChannelEvents.RemoteVideoStateChanged, rtcChannel, uid, state, reason, elapsed)
     }
 
-    override fun onRemoteAudioStateChanged(rtcChannel: RtcChannel?, uid: Int, @Annotations.WujiAudioRemoteState state: Int, @Annotations.WujiAudioRemoteStateReason reason: Int, elapsed: Int) {
+    override fun onRemoteAudioStateChanged(rtcChannel: RtcChannel?, uid: Int, @Annotations.MetaAudioRemoteState state: Int, @Annotations.MetaAudioRemoteStateReason reason: Int, elapsed: Int) {
         callback(RtcChannelEvents.RemoteAudioStateChanged, rtcChannel, uid, state, reason, elapsed)
     }
 
@@ -177,7 +177,7 @@ class RtcChannelEventHandler(
         callback(RtcChannelEvents.RtcStats, rtcChannel, stats?.toMap())
     }
 
-    override fun onNetworkQuality(rtcChannel: RtcChannel?, uid: Int, @Annotations.WujiNetworkQuality txQuality: Int, @Annotations.WujiNetworkQuality rxQuality: Int) {
+    override fun onNetworkQuality(rtcChannel: RtcChannel?, uid: Int, @Annotations.MetaNetworkQuality txQuality: Int, @Annotations.MetaNetworkQuality rxQuality: Int) {
         callback(RtcChannelEvents.NetworkQuality, rtcChannel, uid, txQuality, rxQuality)
     }
 
@@ -189,7 +189,7 @@ class RtcChannelEventHandler(
         callback(RtcChannelEvents.RemoteAudioStats, rtcChannel, stats?.toMap())
     }
 
-    override fun onRtmpStreamingStateChanged(rtcChannel: RtcChannel?, url: String?, @Annotations.WujiRtmpStreamingState state: Int, @Annotations.WujiRtmpStreamingErrorCode errCode: Int) {
+    override fun onRtmpStreamingStateChanged(rtcChannel: RtcChannel?, url: String?, @Annotations.MetaRtmpStreamingState state: Int, @Annotations.MetaRtmpStreamingErrorCode errCode: Int) {
         callback(RtcChannelEvents.RtmpStreamingStateChanged, rtcChannel, url, state, errCode)
     }
 
@@ -197,7 +197,7 @@ class RtcChannelEventHandler(
         callback(RtcChannelEvents.TranscodingUpdated, rtcChannel)
     }
 
-    override fun onStreamInjectedStatus(rtcChannel: RtcChannel?, url: String?, uid: Int, @Annotations.WujiInjectStreamStatus status: Int) {
+    override fun onStreamInjectedStatus(rtcChannel: RtcChannel?, url: String?, uid: Int, @Annotations.MetaInjectStreamStatus status: Int) {
         callback(RtcChannelEvents.StreamInjectedStatus, rtcChannel, url, uid, status)
     }
 
@@ -205,35 +205,35 @@ class RtcChannelEventHandler(
         callback(RtcChannelEvents.StreamMessage, rtcChannel, uid, streamId, data?.let { String(it, Charsets.UTF_8) })
     }
 
-    override fun onStreamMessageError(rtcChannel: RtcChannel?, uid: Int, streamId: Int, @Annotations.WujiErrorCode error: Int, missed: Int, cached: Int) {
+    override fun onStreamMessageError(rtcChannel: RtcChannel?, uid: Int, streamId: Int, @Annotations.MetaErrorCode error: Int, missed: Int, cached: Int) {
         callback(RtcChannelEvents.StreamMessageError, rtcChannel, uid, streamId, error, missed, cached)
     }
 
-    override fun onChannelMediaRelayStateChanged(rtcChannel: RtcChannel?, @Annotations.WujiChannelMediaRelayState state: Int, @Annotations.WujiChannelMediaRelayError code: Int) {
+    override fun onChannelMediaRelayStateChanged(rtcChannel: RtcChannel?, @Annotations.MetaChannelMediaRelayState state: Int, @Annotations.MetaChannelMediaRelayError code: Int) {
         callback(RtcChannelEvents.ChannelMediaRelayStateChanged, rtcChannel, state, code)
     }
 
-    override fun onChannelMediaRelayEvent(rtcChannel: RtcChannel?, @Annotations.WujiChannelMediaRelayEvent code: Int) {
+    override fun onChannelMediaRelayEvent(rtcChannel: RtcChannel?, @Annotations.MetaChannelMediaRelayEvent code: Int) {
         callback(RtcChannelEvents.ChannelMediaRelayEvent, rtcChannel, code)
     }
 
-//    override fun onAudioPublishStateChanged(rtcChannel: RtcChannel?, @Annotations.WujiStreamPublishState oldState: Int, @Annotations.WujiStreamPublishState newState: Int, elapseSinceLastState: Int) {
+//    override fun onAudioPublishStateChanged(rtcChannel: RtcChannel?, @Annotations.MetaStreamPublishState oldState: Int, @Annotations.MetaStreamPublishState newState: Int, elapseSinceLastState: Int) {
 //        callback(RtcChannelEvents.AudioPublishStateChanged, rtcChannel, rtcChannel?.channelId(), oldState, newState, elapseSinceLastState)
 //    }
 
-//    override fun onVideoPublishStateChanged(rtcChannel: RtcChannel?, @Annotations.WujiStreamPublishState oldState: Int, @Annotations.WujiStreamPublishState newState: Int, elapseSinceLastState: Int) {
+//    override fun onVideoPublishStateChanged(rtcChannel: RtcChannel?, @Annotations.MetaStreamPublishState oldState: Int, @Annotations.MetaStreamPublishState newState: Int, elapseSinceLastState: Int) {
 //        callback(RtcChannelEvents.VideoPublishStateChanged, rtcChannel, rtcChannel?.channelId(), oldState, newState, elapseSinceLastState)
 //    }
 
-//    override fun onAudioSubscribeStateChanged(rtcChannel: RtcChannel?, uid: Int, @Annotations.WujiStreamSubscribeState oldState: Int, @Annotations.WujiStreamSubscribeState newState: Int, elapseSinceLastState: Int) {
+//    override fun onAudioSubscribeStateChanged(rtcChannel: RtcChannel?, uid: Int, @Annotations.MetaStreamSubscribeState oldState: Int, @Annotations.MetaStreamSubscribeState newState: Int, elapseSinceLastState: Int) {
 //        callback(RtcChannelEvents.AudioSubscribeStateChanged, rtcChannel, rtcChannel?.channelId(), uid, oldState, newState, elapseSinceLastState)
 //    }
 
-//    override fun onVideoSubscribeStateChanged(rtcChannel: RtcChannel?, uid: Int, @Annotations.WujiStreamSubscribeState oldState: Int, @Annotations.WujiStreamSubscribeState newState: Int, elapseSinceLastState: Int) {
+//    override fun onVideoSubscribeStateChanged(rtcChannel: RtcChannel?, uid: Int, @Annotations.MetaStreamSubscribeState oldState: Int, @Annotations.MetaStreamSubscribeState newState: Int, elapseSinceLastState: Int) {
 //        callback(RtcChannelEvents.VideoSubscribeStateChanged, rtcChannel, rtcChannel?.channelId(), uid, oldState, newState, elapseSinceLastState)
 //    }
 
-//    override fun onRtmpStreamingEvent(rtcChannel: RtcChannel?, url: String?, @Annotations.WujiRtmpStreamingEvent errCode: Int) {
+//    override fun onRtmpStreamingEvent(rtcChannel: RtcChannel?, url: String?, @Annotations.MetaRtmpStreamingEvent errCode: Int) {
 //        callback(RtcChannelEvents.RtmpStreamingEvent, rtcChannel, url, errCode)
 //    }
 }
