@@ -1,4 +1,4 @@
-# wuji_rtc_engine
+# meta_rtc_engine
 
 A new flutter plugin project.
 

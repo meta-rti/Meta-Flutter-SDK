@@ -1,7 +1,7 @@
-name: wuji_rtc_engine
+name: meta_rtc_engine
 description: A new flutter plugin project.
 version: 1.6.11
-repository:  https://github.com/wuji-co/Wuji-Flutter-SDK
+repository:  https://github.com/meta-rti/Meta-Flutter-SDK
 homepage: https://www.wuji.co
 
 environment:
@@ -35,10 +35,10 @@ flutter:
   plugin:
     platforms:
       android:
-        package: co.wuji.wuji_rtc_engine
-        pluginClass: WujiRtcEnginePlugin
+        package: co.meta.meta_rtc_engine
+        pluginClass: MetaRtcEnginePlugin
       ios:
-        pluginClass: WujiRtcEnginePlugin
+        pluginClass: MetaRtcEnginePlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

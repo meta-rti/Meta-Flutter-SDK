@@ -1,25 +1,25 @@
-# wuji_rtc_engine
+# meta_rtc_engine
 
-![pub package](https://img.shields.io/pub/v/wuji_rtc_engine.svg?include_prereleases)
+![pub package](https://img.shields.io/pub/v/meta_rtc_engine.svg?include_prereleases)
 
 [English](README.md)
 
-此 Flutter 插件 是对 [wuji 视频 SDK](https://docs.wuji.co/cn/Video/API%20Reference/java/v3.0.1.1/index.html) 的包装。
+此 Flutter 插件 是对 [meta 视频 SDK](https://docs.wuji.co/cn/Video/API%20Reference/java/v3.0.1.1/index.html) 的包装。
 
-wuji.io 通过一个简单而强大的 SDK 为您提供了添加实时语音和视频通信的构建块。您可以集成此 SDK 以便在您自己的应用程序中快速实现实时通信。
+meta.io 通过一个简单而强大的 SDK 为您提供了添加实时语音和视频通信的构建块。您可以集成此 SDK 以便在您自己的应用程序中快速实现实时通信。
 
 ## 如何使用
 
-为了使用此插件, 添加 `wuji_rtc_engine` 到您的 [pubspec.yaml](https://flutter.dev/docs/development/packages-and-plugins/using-packages) 文件中。
+为了使用此插件, 添加 `meta_rtc_engine` 到您的 [pubspec.yaml](https://flutter.dev/docs/development/packages-and-plugins/using-packages) 文件中。
 
 ## 快速开始
 
 * 参阅 [example](example) 目录，这是一个一对一视频聊天的示例。
-* 或者检出 [Tutorial](https://github.com/wuji-co/Basic-Video-Call/tree/main/One-to-One-Video) ，这是一个直播场景的示例.
+* 或者检出 [Tutorial](https://github.com/meta-rti/Basic-Video-Call/tree/main/One-to-One-Video) ，这是一个直播场景的示例.
 
 ## 设备权限
 
-wuji 视频 SDK 需要 `摄像头` 和 `麦克风` 权限来开始视频通话。
+meta 视频 SDK 需要 `摄像头` 和 `麦克风` 权限来开始视频通话。
 
 ### Android
 
@@ -35,7 +35,7 @@ wuji 视频 SDK 需要 `摄像头` 和 `麦克风` 权限来开始视频通话�
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     
-    <!-- The Wuji SDK requires Bluetooth permissions in case users are using Bluetooth devices.-->
+    <!-- The Meta SDK requires Bluetooth permissions in case users are using Bluetooth devices.-->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     ...
 </manifest>
@@ -66,6 +66,6 @@ wuji 视频 SDK 需要 `摄像头` 和 `麦克风` 权限来开始视频通话�
 
 * [Flutter API](https://docs.wuji.co/cn/Video/API%20Reference/java/v3.0.1.1/index.html)
 * [Android API](https://docs.wuji.co/cn/Video/API%20Reference/java/v3.0.1.1/index.html)
-* [iOS API](https://docs.wuji.co/cn/Video/API%20Reference/oc/v3.0.1.1/docs/headers/Wuji-Objective-C-API-Overview.html)
+* [iOS API](https://docs.wuji.co/cn/Video/API%20Reference/oc/v3.0.1.1/docs/headers/Meta-Objective-C-API-Overview.html)
 
 
