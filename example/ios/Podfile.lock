@@ -2,40 +2,40 @@ PODS:
   - e2e (0.0.1):
     - Flutter
   - Flutter (1.0.0)
+  - meta_rtc_engine (1.6.11):
+    - Flutter
+    - MetaRTCFramework
+  - MetaRTCFramework (0.1.3)
   - "permission_handler (5.1.0+2)":
     - Flutter
-  - wuji_rtc_engine (1.0.3):
-    - Flutter
-    - wujicFrameWorkDemo
-  - wujicFrameWorkDemo (0.1.2)
 
 DEPENDENCIES:
   - e2e (from `.symlinks/plugins/e2e/ios`)
   - Flutter (from `Flutter`)
+  - meta_rtc_engine (from `.symlinks/plugins/meta_rtc_engine/ios`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
-  - wuji_rtc_engine (from `.symlinks/plugins/wuji_rtc_engine/ios`)
 
 SPEC REPOS:
   trunk:
-    - wujicFrameWorkDemo
+    - MetaRTCFramework
 
 EXTERNAL SOURCES:
   e2e:
     :path: ".symlinks/plugins/e2e/ios"
   Flutter:
     :path: Flutter
+  meta_rtc_engine:
+    :path: ".symlinks/plugins/meta_rtc_engine/ios"
   permission_handler:
     :path: ".symlinks/plugins/permission_handler/ios"
-  wuji_rtc_engine:
-    :path: ".symlinks/plugins/wuji_rtc_engine/ios"
 
 SPEC CHECKSUMS:
   e2e: 967b9b1fc533b7636a3b7a719f840c27f301fe1f
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  meta_rtc_engine: e8e575113d67917aab163227c6663070d1920c85
+  MetaRTCFramework: 6f45946a6a84157f12f6ab24f662cd3e33692606
   permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
-  wuji_rtc_engine: c4bed52dfabcaf7ba743e95cf888e5d8cf110292
-  wujicFrameWorkDemo: 27a3d44a73307caa1aea2eb0fb46d907bda9cc31
 
 PODFILE CHECKSUM: 88590bff5c4137f6e41a1d7b4f69f8412422941c
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.11.2

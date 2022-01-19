@@ -1,6 +1,6 @@
-# wuji_rtc_engine_example
+# meta_rtc_engine_example
 
-Demonstrates how to use the wuji_rtc_engine plugin.
+Demonstrates how to use the meta_rtc_engine plugin.
 
 ## Getting Started
 

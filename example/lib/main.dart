@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:wuji_rtc_engine/rtc_engine.dart';
-import 'package:wuji_rtc_engine/rtc_local_view.dart' as RtcLocalView;
-import 'package:wuji_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
+import 'package:meta_rtc_engine/rtc_engine.dart';
+import 'package:meta_rtc_engine/rtc_local_view.dart' as RtcLocalView;
+import 'package:meta_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
         }));
     await engine.enableVideo();
     // await engine.joinChannel('006d193f2093417435cbcfc41720269bad0IADVGhWETcjAdojvYUFPFlVE+hQmhItEuY4EMRkwLNY13dJjSIgAAAAAEAAWal0mnjTHXwEAAQCfNMdf', '123', null, 0);
-    await engine.joinChannel(null, 'wuji_test', null, 0);
+    await engine.joinChannel(null, 'meta_test', null, 0);
   }
 
   @override
