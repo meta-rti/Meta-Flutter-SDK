@@ -167,8 +167,8 @@ const _$LighteningContrastLevelEnumMap = {
   LighteningContrastLevel.High: 2,
 };
 
-WujiImage _$WujiImageFromJson(Map<String, dynamic> json) {
-  return WujiImage(
+MetaImage _$MetaImageFromJson(Map<String, dynamic> json) {
+  return MetaImage(
     json['url'] as String,
     json['x'] as int,
     json['y'] as int,
@@ -177,7 +177,7 @@ WujiImage _$WujiImageFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$WujiImageToJson(WujiImage instance) =>
+Map<String, dynamic> _$MetaImageToJson(MetaImage instance) =>
     <String, dynamic>{
       'url': instance.url,
       'x': instance.x,
@@ -260,10 +260,10 @@ LiveTranscoding _$LiveTranscodingFromJson(Map<String, dynamic> json) {
     videoGop: json['videoGop'] as int,
     watermark: json['watermark'] == null
         ? null
-        : WujiImage.fromJson(json['watermark'] as Map<String, dynamic>),
+        : MetaImage.fromJson(json['watermark'] as Map<String, dynamic>),
     backgroundImage: json['backgroundImage'] == null
         ? null
-        : WujiImage.fromJson(json['backgroundImage'] as Map<String, dynamic>),
+        : MetaImage.fromJson(json['backgroundImage'] as Map<String, dynamic>),
     audioSampleRate: _$enumDecodeNullable(
         _$AudioSampleRateTypeEnumMap, json['audioSampleRate']),
     audioBitrate: json['audioBitrate'] as int,

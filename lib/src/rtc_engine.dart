@@ -9,11 +9,11 @@ import 'enums.dart';
 import 'events.dart';
 import 'rtc_channel.dart';
 
-/// RtcEngine is the main class of the Wuji SDK.
+/// RtcEngine is the main class of the Meta SDK.
 class RtcEngine with RtcEngineInterface {
-  static const MethodChannel _methodChannel = MethodChannel('wuji_rtc_engine');
+  static const MethodChannel _methodChannel = MethodChannel('meta_rtc_engine');
   static const EventChannel _eventChannel =
-      EventChannel('wuji_rtc_engine/events');
+      EventChannel('meta_rtc_engine/events');
 
   static RtcEngine _engine;
 
@@ -34,14 +34,14 @@ class RtcEngine with RtcEngineInterface {
 
   /// Creates an [RtcEngine] instance.
   ///
-  /// Unless otherwise specified, all the methods provided by the RtcEngine class are executed asynchronously. Wuji recommends calling these methods in the same thread.
+  /// Unless otherwise specified, all the methods provided by the RtcEngine class are executed asynchronously. Meta recommends calling these methods in the same thread.
   ///
   /// **Note**
   /// - You must create an [RtcEngine] instance before calling any other method.
   /// - You can create an [RtcEngine] instance either by calling this method or by calling [RtcEngine.createWithAreaCode]. The difference between [RtcEngine.createWithAreaCode] and this method is that [RtcEngine.createWithAreaCode] enables you to specify the connection area.
   /// - The RTC Flutter SDK supports creating only one [RtcEngine] instance for an app for now.
   ///
-  /// **Parameter** [appId] The App ID issued to you by Wuji. See How to get the App ID. Only users in apps with the same App ID can join the same channel and communicate with each other. Use an App ID to create only one [RtcEngine] instance. To change your App ID, call destroy to destroy the current [RtcEngine] instance, and after destroy returns 0, call create to create an [RtcEngine] instance with the new App ID.
+  /// **Parameter** [appId] The App ID issued to you by Meta. See How to get the App ID. Only users in apps with the same App ID can join the same channel and communicate with each other. Use an App ID to create only one [RtcEngine] instance. To change your App ID, call destroy to destroy the current [RtcEngine] instance, and after destroy returns 0, call create to create an [RtcEngine] instance with the new App ID.
   ///
   /// **Returns**
   /// - An [RtcEngine] instance if the method call succeeds.
@@ -53,22 +53,22 @@ class RtcEngine with RtcEngineInterface {
 
   /// Creates an [RtcEngine] instance.
   ///
-  /// Unless otherwise specified, all the methods provided by the RtcEngine class are executed asynchronously. Wuji recommends calling these methods in the same thread.
+  /// Unless otherwise specified, all the methods provided by the RtcEngine class are executed asynchronously. Meta recommends calling these methods in the same thread.
   ///
   /// **Note**
   /// - You must create an [RtcEngine] instance before calling any other method.
   /// - You can create an [RtcEngine] instance either by calling this method or by calling [RtcEngine.create]. The difference between [RtcEngine.create] and this method is that this method enables you to specify the connection area.
-  /// - The WUji RTC Native SDK supports creating only one [RtcEngine] instance for an app for now.
+  /// - The Meta RTC Native SDK supports creating only one [RtcEngine] instance for an app for now.
   ///
-  /// **Parameter** [appId] The App ID issued to you by Wuji. See How to get the App ID. Only users in apps with the same App ID can join the same channel and communicate with each other. Use an App ID to create only one [RtcEngine] instance. To change your App ID, call destroy to destroy the current [RtcEngine] instance and after destroy returns 0, call create to create an [RtcEngine] instance with the new App ID.
+  /// **Parameter** [appId] The App ID issued to you by Meta. See How to get the App ID. Only users in apps with the same App ID can join the same channel and communicate with each other. Use an App ID to create only one [RtcEngine] instance. To change your App ID, call destroy to destroy the current [RtcEngine] instance and after destroy returns 0, call create to create an [RtcEngine] instance with the new App ID.
   ///
   /// **Parameter** [areaCode] The area of connection. This advanced feature applies to scenarios that have regional restrictions.
   ///
   /// For details, see [IPAreaCode].
   ///
   /// After specifying the area of connection:
-  /// - When the app that integrates the Wuji SDK is used within the specified area, it connects to the Wuji servers within the specified area under normal circumstances.
-  /// - When the app that integrates the Wuji SDK is used out of the specified area, it connects to the Wuji servers either in the specified area or in the area where the app is located.
+  /// - When the app that integrates the Meta SDK is used within the specified area, it connects to the Meta servers within the specified area under normal circumstances.
+  /// - When the app that integrates the Meta SDK is used out of the specified area, it connects to the Meta servers either in the specified area or in the area where the app is located.
   ///
   /// **Returns**
   /// - An [RtcEngine] instance if the method call succeeds.
@@ -884,7 +884,7 @@ mixin RtcEngineInterface
         RtcInjectStreamInterface,
         RtcCameraInterface,
         RtcStreamMessageInterface {
-  /// Destroys the [RtcEngine] instance and releases all resources used by the Wuji SDK.
+  /// Destroys the [RtcEngine] instance and releases all resources used by the Meta SDK.
   ///
   /// This method is useful for apps that occasionally make voice or video calls, to free up resources for other operations when not making calls.
   ///
@@ -893,11 +893,11 @@ mixin RtcEngineInterface
   /// - Once the app calls [RtcEngine.destroy] to destroy the created [RtcEngine] instance, you cannot use any method or callback in the SDK.
   Future<void> destroy();
 
-  /// Sets the channel profile of the Wuji RtcEngine.
+  /// Sets the channel profile of the Meta RtcEngine.
   ///
-  /// The Wuji RtcEngine differentiates channel profiles and applies different optimization algorithms accordingly. For example, it prioritizes smoothness and low latency for a video call, and prioritizes video quality for a video broadcast.
+  /// The Meta RtcEngine differentiates channel profiles and applies different optimization algorithms accordingly. For example, it prioritizes smoothness and low latency for a video call, and prioritizes video quality for a video broadcast.
   ///
-  /// **Parameter** [profile] The channel profile of the Wuji RtcEngine. See [ChannelProfile].
+  /// **Parameter** [profile] The channel profile of the Meta RtcEngine. See [ChannelProfile].
   Future<void> setChannelProfile(ChannelProfile profile);
 
   /// Sets the role of a user ([ChannelProfile.LiveBroadcasting] only).
@@ -918,7 +918,7 @@ mixin RtcEngineInterface
   /// - The local client: [RtcEngineEventHandler.joinChannelSuccess].
   /// - The remote client: [RtcEngineEventHandler.userJoined], if the user joining the channel is in the [ChannelProfile.Communication] profile, or is a [ClientRole.Broadcaster] in the [ChannelProfile.LiveBroadcasting] profile.
   ///
-  /// When the connection between the client and Wuji's server is interrupted due to poor network conditions, the SDK tries reconnecting to the server. When the local client successfully rejoins the channel, the SDK triggers the [RtcEngineEventHandler.rejoinChannelSuccess] callback on the local client.
+  /// When the connection between the client and Meta's server is interrupted due to poor network conditions, the SDK tries reconnecting to the server. When the local client successfully rejoins the channel, the SDK triggers the [RtcEngineEventHandler.rejoinChannelSuccess] callback on the local client.
   ///
   /// **Note**
   /// - A channel does not accept duplicate uids, such as two users with the same uid. If you set uid as 0, the system automatically assigns a uid.
@@ -930,7 +930,7 @@ mixin RtcEngineInterface
   /// - In situations not requiring high security: You can use the temporary token generated at Console. For details, see [Get a temporary token].
   /// - In situations requiring high security: Set it as the token generated at your server. For details, see [Get a token].
   ///
-  /// **Parameter** [channelName] The unique channel name for the WujiRTC session in the string format. The string length must be less than 64 bytes. Supported character scopes are:
+  /// **Parameter** [channelName] The unique channel name for the MetaRTC session in the string format. The string length must be less than 64 bytes. Supported character scopes are:
   /// - All lowercase English letters: a to z.
   /// - All uppercase English letters: A to Z.
   /// - All numeric characters: 0 to 9.
@@ -955,7 +955,7 @@ mixin RtcEngineInterface
   /// - In situations not requiring high security: You can use the temporary token generated at Console. For details, see [Get a temporary token].
   /// - In situations requiring high security: Set it as the token generated at your server. For details, see [Get a token].
   ///
-  /// **Parameter** [channelName] Unique channel name for the WujiRTC session in the string format. The string length must be less than 64 bytes. Supported character scopes are:
+  /// **Parameter** [channelName] Unique channel name for the MetaRTC session in the string format. The string length must be less than 64 bytes. Supported character scopes are:
   /// - All lowercase English letters: a to z.
   /// - All uppercase English letters: A to Z.
   /// - All numeric characters: 0 to 9.
@@ -985,13 +985,13 @@ mixin RtcEngineInterface
   /// **Parameter** [token] The new token.
   Future<void> renewToken(String token);
 
-  /// Enables interoperability with the Wuji Web SDK (LiveBroadcasting only).
+  /// Enables interoperability with the Meta Web SDK (LiveBroadcasting only).
   ///
   /// The SDK automatically enables interoperability with the Web SDK, so you no longer need to call this method.
   /// If the channel has Web SDK users, ensure that you call this method, or the video of the Native user will be a black screen for the Web user.
-  /// Use this method when the channel profile is [ChannelProfile.LiveBroadcasting]. Interoperability with the Wuji Web SDK is enabled by default when the channel profile is [ChannelProfile.Communication].
+  /// Use this method when the channel profile is [ChannelProfile.LiveBroadcasting]. Interoperability with the Meta Web SDK is enabled by default when the channel profile is [ChannelProfile.Communication].
   ///
-  /// **Parameter** [enabled] Sets whether to enable/disable interoperability with the Wuji Web SDK:
+  /// **Parameter** [enabled] Sets whether to enable/disable interoperability with the Meta Web SDK:
   /// - `true`: Enable.
   /// - `false`: (Default) Disable.
   @deprecated
@@ -1038,7 +1038,7 @@ mixin RtcEngineInterface
   /// **Note**
   /// - Ensure that you call this method immediately after calling the [RtcEngine.create] method, otherwise the output log may not be complete.
   ///
-  /// **Parameter** [filePath] File path of the log file. The string of the log file is in UTF-8. The default file path is `/storage/emulated/0/Android/data/<package name>="">/files/wujisdk.log`.
+  /// **Parameter** [filePath] File path of the log file. The string of the log file is in UTF-8. The default file path is `/storage/emulated/0/Android/data/<package name>="">/files/metasdk.log`.
   Future<void> setLogFile(String filePath);
 
   /// Sets the output log level of the SDK.
@@ -1050,16 +1050,16 @@ mixin RtcEngineInterface
 
   /// Sets the log file size (KB).
   ///
-  /// By default, the SDK outputs five log files, `wujisdk.log`, `wujisdk_1.log`, `wujisdk_2.log`, `wujisdk_3.log`, `wujisdk_4.log`, each with a default size of 1024 KB.
+  /// By default, the SDK outputs five log files, `metasdk.log`, `metasdk_1.log`, `metasdk_2.log`, `metasdk_3.log`, `metasdk_4.log`, each with a default size of 1024 KB.
   ///
-  /// These log files are encoded in UTF-8. The SDK writes the latest logs in `wujisdk.log`. When wujisdk.log is full, the SDK deletes the log file with the earliest modification time among the other four, renames wujisdk.log to the name of the deleted log file, and create a new `wujisdk.log` to record latest logs.
+  /// These log files are encoded in UTF-8. The SDK writes the latest logs in `metasdk.log`. When metasdk.log is full, the SDK deletes the log file with the earliest modification time among the other four, renames metasdk.log to the name of the deleted log file, and create a new `metasdk.log` to record latest logs.
   ///
   /// **Parameter** [fileSizeInKBytes] The size (KB) of a log file. The default value is 1024 KB. If you set `fileSizeInKBytes` to 1024 KB, the SDK outputs at most 5 MB log files; if you set it to less than 1024 KB, the maximum size of a log file is still 1024 KB.
   Future<void> setLogFileSize(int fileSizeInKBytes);
 
   /// @nodoc Provides technical preview functionalities or special customizations by configuring the SDK with JSON options.
   ///
-  /// The JSON options are not public by default. Wuji is working on making commonly used JSON options public in a standard way.
+  /// The JSON options are not public by default. Meta is working on making commonly used JSON options public in a standard way.
   ///
   /// **Parameter** [parameters] Sets the parameter as a JSON string in the specified format.
   Future<void> setParameters(String parameters);
@@ -1078,7 +1078,7 @@ mixin RtcUserInfoInterface {
   /// **Note**
   /// - Ensure that you set the [userAccount] parameter. Otherwise, this method does not take effect.
   /// - Ensure that the value of the userAccount parameter is unique in the channel.
-  /// - To ensure smooth communication, use the same parameter type to identify the user. For example, if a user joins the channel with a user ID, then ensure all the other users use the user ID too. The same applies to the user account. If a user joins the channel with the Wuji Web SDK, ensure that the uid of the user is set to the same parameter type.
+  /// - To ensure smooth communication, use the same parameter type to identify the user. For example, if a user joins the channel with a user ID, then ensure all the other users use the user ID too. The same applies to the user account. If a user joins the channel with the Meta Web SDK, ensure that the uid of the user is set to the same parameter type.
   ///
   /// **Parameter** [appId] The App ID of your project.
   ///
@@ -1097,7 +1097,7 @@ mixin RtcUserInfoInterface {
   /// - The remote client: [RtcEngineEventHandler.userJoined] and [RtcEngineEventHandler.userInfoUpdated], if the user joining the channel is in the [ChannelProfile.Communication] profile, or is a [ClientRole.Broadcaster] in the [ChannelProfile.LiveBroadcasting] profile.
   ///
   /// **Note**
-  /// - To ensure smooth communication, use the same parameter type to identify the user. For example, if a user joins the channel with a user ID, then ensure all the other users use the user ID too. The same applies to the user account. If a user joins the channel with the Wuji Web SDK, ensure that the uid of the user is set to the same parameter type.
+  /// - To ensure smooth communication, use the same parameter type to identify the user. For example, if a user joins the channel with a user ID, then ensure all the other users use the user ID too. The same applies to the user account. If a user joins the channel with the Meta Web SDK, ensure that the uid of the user is set to the same parameter type.
   ///
   /// **Parameter** [token] The token generated at your server:
   /// - In situations not requiring high security: You can use the temporary token generated at Console. For details, see [Get a temporary token].
@@ -1193,7 +1193,7 @@ mixin RtcAudioInterface {
   /// Adjusts the recording volume.
   ///
   /// **Note**
-  /// - To avoid echoes and improve call quality, Wuji recommends setting the value of volume between 0 and 100. If you need to set the value higher than 100, contact support@wuji.co first.
+  /// - To avoid echoes and improve call quality, Meta recommends setting the value of volume between 0 and 100. If you need to set the value higher than 100, contact support@wuji.co first.
   ///
   /// **Parameter** [volume] Recording volume. The value ranges between 0 and 400:
   /// - 0: Mute.
@@ -1222,7 +1222,7 @@ mixin RtcAudioInterface {
   /// **Note**
   /// - This method adjusts the playback volume which is mixed volume of all remote users.
   /// - To mute the local audio playback, call both [RtcEngine.adjustPlaybackSignalVolume] and [RtcEngine.adjustAudioMixingVolume], and set volume as 0.
-  /// - To avoid echoes and improve call quality, Wuji recommends setting the value of volume between 0 and 100. If you need to set the value higher than 100, contact support@wuji.co first.
+  /// - To avoid echoes and improve call quality, Meta recommends setting the value of volume between 0 and 100. If you need to set the value higher than 100, contact support@wuji.co first.
   ///
   /// **Parameter** [volume] The playback volume of all remote users. The value ranges from 0 to 400:
   /// - 0: Mute.
@@ -1453,7 +1453,7 @@ mixin RtcAudioMixingInterface {
   /// - This method supports both Android and iOS. To use this method in Android, ensure that the Android device is v4.2 or later, and the API version is v16 or later.
   /// - Call this method when you are in the channel, otherwise it may cause issues.
   /// - If you want to play an online music file, ensure that the time interval between calling this method is more than 100 ms, or the [AudioMixingErrorCode.TooFrequentCall] error occurs.
-  /// - If you want to play an online music file, Wuji does not recommend using the redirected URL address. Some Android devices may fail to open a redirected URL address.
+  /// - If you want to play an online music file, Meta does not recommend using the redirected URL address. Some Android devices may fail to open a redirected URL address.
   /// - If the local audio mixing file does not exist, or if the SDK does not support the file format or cannot access the music file URL, the SDK returns [AudioMixingErrorCode.CanNotOpen].
   /// - If you call this method on an emulator, only the MP3 file format is supported.
   ///
@@ -1612,8 +1612,8 @@ mixin RtcAudioEffectInterface {
   /// **Parameter** [gain] Sets the volume of the audio effect. The value ranges between 0.0 and 100,0. The default value is 100.0. The lower the value, the lower the volume of the audio effect.
   ///
   /// **Parameter** [publish] Set whether or not to publish the specified audio effect to the remote stream:
-  /// - `true`: The locally played audio effect is published to the Wuji Cloud and the remote users can hear it.
-  /// - `false`: The locally played audio effect is not published to the Wuji Cloud and the remote users cannot hear it.
+  /// - `true`: The locally played audio effect is published to the Meta Cloud and the remote users can hear it.
+  /// - `false`: The locally played audio effect is not published to the Meta Cloud and the remote users cannot hear it.
   Future<void> playEffect(int soundId, String filePath, int loopCount,
       double pitch, double pan, double gain, bool publish);
 
@@ -1929,7 +1929,7 @@ mixin RtcFallbackInterface {
   /// When the locally published video stream falls back to audio only or when the audio-only stream switches back to the video, the SDK triggers the [RtcEngineEventHandler.localPublishFallbackToAudioOnly].
   ///
   /// **Note**
-  /// - WUji does not recommend using this method for CDN live streaming, because the remote CDN live user will have a noticeable lag when the locally published video stream falls back to audio only.
+  /// - Meta does not recommend using this method for CDN live streaming, because the remote CDN live user will have a noticeable lag when the locally published video stream falls back to audio only.
   ///
   /// **Parameter** [option] Sets the fallback option for the locally published video stream. See [StreamFallbackOptions].
   ///
@@ -1947,7 +1947,7 @@ mixin RtcFallbackInterface {
   /// Use this method with the [RtcEngine.setRemoteSubscribeFallbackOption] method. If the fallback function is enabled for a subscribed stream, the SDK ensures the high-priority user gets the best possible stream quality.
   ///
   /// **Note**
-  /// The Wuji SDK supports setting `userPriority` as `High` for one user only.
+  /// The Meta SDK supports setting `userPriority` as `High` for one user only.
   ///
   /// **Parameter** [uid] The ID of the remote user.
   ///
@@ -2041,7 +2041,7 @@ mixin RtcWatermarkInterface {
   ///
   /// This method adds a PNG watermark image to the local video stream in a live broadcast. Once the watermark image is added, all the audience in the channel (CDN audience included), and the recording device can see and capture it.
   ///
-  /// Wuji supports adding only one watermark image onto the local video, and the newly watermark image replaces the previous one.
+  /// Meta supports adding only one watermark image onto the local video, and the newly watermark image replaces the previous one.
   ///
   /// The watermark position depends on the settings in the [RtcEngine.setVideoEncoderConfiguration] method:
   /// - If the orientation mode of the encoding video is [VideoOutputOrientationMode.FixedLandscape], or the landscape mode in [VideoOutputOrientationMode.Adaptative], the watermark uses the landscape orientation.
@@ -2054,7 +2054,7 @@ mixin RtcWatermarkInterface {
   /// - This method supports adding a watermark image in the PNG file format only. Supported pixel formats of the PNG image are RGBA, RGB, Palette, Gray, and Alpha_gray.
   /// - If the dimensions the PNG image differ from your settings in this method, the image will be cropped or zoomed to conform to your settings.
   /// - If you have enabled the local video preview by calling the startPreview method, you can use the visibleInPreview member in the WatermarkOptions class to set whether or not the watermark is visible in preview.
-  /// - If you have enabled the mirror mode for the local video, the watermark on the local video is also mirrored. To avoid mirroring the watermark, Wuji recommends that you do not use the mirror and watermark functions for the local video at the same time. You can implement the watermark function in your application layer.
+  /// - If you have enabled the mirror mode for the local video, the watermark on the local video is also mirrored. To avoid mirroring the watermark, Meta recommends that you do not use the mirror and watermark functions for the local video at the same time. You can implement the watermark function in your application layer.
   ///
   /// **Parameter** [watermarkUrl] The local file path of the watermark image to be added. This method supports adding a watermark image from either the local file path or the assets file path. If you use the assets file path, you need to start with `/assets/` when filling in this parameter.
   ///
@@ -2088,7 +2088,7 @@ mixin RtcEncryptionInterface {
   ///
   /// This method is deprecated. Use [RtcEngine.enableEncryption] instead.
   ///
-  /// The Wuji SDK supports built-in encryption, which is set to aes-128-xts mode by default. Call this method to set the encryption mode to use other encryption modes. All users in the same channel must use the same encryption mode and password.
+  /// The Meta SDK supports built-in encryption, which is set to aes-128-xts mode by default. Call this method to set the encryption mode to use other encryption modes. All users in the same channel must use the same encryption mode and password.
   ///
   /// Refer to the information related to the AES encryption algorithm on the differences between the encryption modes.
   ///
@@ -2103,13 +2103,13 @@ mixin RtcEncryptionInterface {
   ///
   /// @since v3.1.2.
   ///
-  /// In scenarios requiring high security, Wuji recommends calling `enableEncryption` to enable the built-in encryption before joining a channel.
+  /// In scenarios requiring high security, Meta recommends calling `enableEncryption` to enable the built-in encryption before joining a channel.
   ///
   /// All users in the same channel must use the same encryption mode and encryption key. Once all users leave the channel, the encryption key of this channel is automatically cleared.
   ///
   /// **Note**
   /// - If you enable the built-in encryption, you cannot use the RTMP streaming function.
-  /// - Wuji supports four encryption modes. If you choose an encryption mode (excepting `SM4128ECB` mode), you need to add an external encryption library when integrating the SDK. For details, see the advanced guide *Channel Encryption*.
+  /// - Meta supports four encryption modes. If you choose an encryption mode (excepting `SM4128ECB` mode), you need to add an external encryption library when integrating the SDK. For details, see the advanced guide *Channel Encryption*.
   ///
   ///
   /// **Parameter** [enabled] Whether to enable the built-in encryption.

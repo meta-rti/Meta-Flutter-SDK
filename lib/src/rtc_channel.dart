@@ -11,9 +11,9 @@ import 'rtc_engine.dart';
 /// The RtcChannel class.
 class RtcChannel with RtcChannelInterface {
   static const MethodChannel _methodChannel =
-      MethodChannel('wuji_rtc_channel');
+      MethodChannel('meta_rtc_channel');
   static const EventChannel _eventChannel =
-      EventChannel('wuji_rtc_channel/events');
+      EventChannel('meta_rtc_channel/events');
 
   static StreamSubscription _subscription;
 
@@ -39,7 +39,7 @@ class RtcChannel with RtcChannelInterface {
   /// To join more than one channel, call this method multiple times to create as many [RtcChannel] instances as needed, and call the [RtcChannel.joinChannel] method of each created [RtcChannel] object.
   /// After joining multiple channels, you can simultaneously subscribe to streams of all the channels, but publish a stream in only one channel at one time.
   ///
-  /// **Parameter** [channelId] The unique channel name for the WujiRTC session in the string format. The string length must be less than 64 bytes. This parameter does not have a default value. You must set it. Do not set it as the empty string "". Otherwise, the SDK returns [ErrorCode.Refused]. Supported character scopes are:
+  /// **Parameter** [channelId] The unique channel name for the MetaRTC session in the string format. The string length must be less than 64 bytes. This parameter does not have a default value. You must set it. Do not set it as the empty string "". Otherwise, the SDK returns [ErrorCode.Refused]. Supported character scopes are:
   /// - All lowercase English letters: a to z.
   /// - All uppercase English letters: A to Z.
   /// - All numeric characters: 0 to 9.
@@ -391,7 +391,7 @@ mixin RtcChannelInterface
   /// In the following situations, the SDK decides that the current token has expired:
   /// - The SDK triggers the [RtcChannelEventHandler.tokenPrivilegeWillExpire] callback, or
   /// - The [RtcChannelEventHandler.connectionStateChanged] callback reports the [ConnectionChangedReason.TokenExpired] error.
-  /// You should get a new token from your server and call this method to renew it. Failure to do so results in the SDK disconnecting from the Wuji server.
+  /// You should get a new token from your server and call this method to renew it. Failure to do so results in the SDK disconnecting from the Meta server.
   /// **Parameter** [token] The new token.
   Future<void> renewToken(String token);
 
@@ -618,7 +618,7 @@ mixin RtcFallbackInterface {
   /// Use this method with the [RtcEngine.setRemoteSubscribeFallbackOption] method. If a remote video stream experiences the fallback, the SDK ensures the high-priority user gets the best possible stream quality.
   ///
   /// **Note**
-  /// - The Wuji SDK supports setting `userPriority` as `High` for one user only.
+  /// - The Meta SDK supports setting `userPriority` as `High` for one user only.
   ///
   /// **Parameter** [uid] The ID of the remote user.
   ///
@@ -675,7 +675,7 @@ mixin RtcEncryptionInterface {
   ///
   /// This method is deprecated. Use [RtcChannel.enableEncryption] instead.
   ///
-  /// The Wuji SDK supports built-in encryption, which is set to aes-128-xts mode by default. Call this method to set the encryption mode to use other encryption modes. All users in the same channel must use the same encryption mode and password.
+  /// The Meta SDK supports built-in encryption, which is set to aes-128-xts mode by default. Call this method to set the encryption mode to use other encryption modes. All users in the same channel must use the same encryption mode and password.
   /// Refer to the information related to the AES encryption algorithm on the differences between the encryption modes.
   ///
   /// **Note**
@@ -690,13 +690,13 @@ mixin RtcEncryptionInterface {
   ///
   /// @since v3.1.2.
   ///
-  /// In scenarios requiring high security, Wuji recommends calling `enableEncryption` to enable the built-in encryption before joining a channel.
+  /// In scenarios requiring high security, Meta recommends calling `enableEncryption` to enable the built-in encryption before joining a channel.
   ///
   /// All users in the same channel must use the same encryption mode and encryption key. Once all users leave the channel, the encryption key of this channel is automatically cleared.
   ///
   /// **Note**
   /// - If you enable the built-in encryption, you cannot use the RTMP streaming function.
-  /// - Wuji supports four encryption modes. If you choose an encryption mode (excepting `SM4128ECB` mode), you need to add an external encryption library when integrating the SDK. For details, see the advanced guide *Channel Encryption*.
+  /// - Meta supports four encryption modes. If you choose an encryption mode (excepting `SM4128ECB` mode), you need to add an external encryption library when integrating the SDK. For details, see the advanced guide *Channel Encryption*.
   ///
   ///
   /// **Parameter** [enabled] Whether to enable the built-in encryption.

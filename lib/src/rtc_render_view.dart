@@ -18,7 +18,7 @@ class RtcSurfaceView extends StatefulWidget {
   /// User ID.
   final int uid;
 
-  /// The unique channel name for the WujiRTC session in the string format. The string length must be less than 64 bytes. Supported character scopes are:
+  /// The unique channel name for the MetaRTC session in the string format. The string length must be less than 64 bytes. Supported character scopes are:
   /// - All lowercase English letters: a to z.
   /// - All uppercase English letters: A to Z.
   /// - All numeric characters: 0 to 9.
@@ -92,7 +92,7 @@ class _RtcSurfaceViewState extends State<RtcSurfaceView> {
       return GestureDetector(
         behavior: HitTestBehavior.opaque,
         child: AndroidView(
-          viewType: 'WujiSurfaceView',
+          viewType: 'MetaSurfaceView',
           onPlatformViewCreated: onPlatformViewCreated,
           hitTestBehavior: PlatformViewHitTestBehavior.transparent,
           creationParams: {
@@ -110,7 +110,7 @@ class _RtcSurfaceViewState extends State<RtcSurfaceView> {
       return GestureDetector(
         behavior: HitTestBehavior.opaque,
         child: UiKitView(
-          viewType: 'WujiSurfaceView',
+          viewType: 'MetaSurfaceView',
           onPlatformViewCreated: onPlatformViewCreated,
           hitTestBehavior: PlatformViewHitTestBehavior.transparent,
           creationParams: {
@@ -196,7 +196,7 @@ class _RtcSurfaceViewState extends State<RtcSurfaceView> {
   Future<void> onPlatformViewCreated(int id) async {
     _id = id;
     if (!_channels.containsKey(id)) {
-      _channels[id] = MethodChannel('wuji_rtc_engine/surface_view_$id');
+      _channels[id] = MethodChannel('meta_rtc_engine/surface_view_$id');
     }
     widget.onPlatformViewCreated?.call(id);
   }
@@ -209,7 +209,7 @@ class RtcTextureView extends StatefulWidget {
   /// User ID.
   final int uid;
 
-  /// The unique channel name for the WujiRTC session in the string format. The string length must be less than 64 bytes. Supported character scopes are:
+  /// The unique channel name for the MetaRTC session in the string format. The string length must be less than 64 bytes. Supported character scopes are:
   /// - All lowercase English letters: a to z.
   /// - All uppercase English letters: A to Z.
   /// - All numeric characters: 0 to 9.
@@ -271,7 +271,7 @@ class _RtcTextureViewState extends State<RtcTextureView> {
       return GestureDetector(
         behavior: HitTestBehavior.opaque,
         child: AndroidView(
-          viewType: 'WujiTextureView',
+          viewType: 'MetaTextureView',
           onPlatformViewCreated: onPlatformViewCreated,
           hitTestBehavior: PlatformViewHitTestBehavior.transparent,
           creationParams: {
@@ -337,7 +337,7 @@ class _RtcTextureViewState extends State<RtcTextureView> {
   Future<void> onPlatformViewCreated(int id) async {
     _id = id;
     if (!_channels.containsKey(id)) {
-      _channels[id] = MethodChannel('wuji_rtc_engine/texture_view_$id');
+      _channels[id] = MethodChannel('meta_rtc_engine/texture_view_$id');
     }
     widget.onPlatformViewCreated?.call(id);
   }

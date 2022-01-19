@@ -86,7 +86,7 @@ class VideoEncoderConfiguration {
   ///              - In the Communication profile, the video bitrate is the same as the base bitrate.
   ///              - In the LiveBroadcasting profile, the video bitrate is twice the base bitrate.
   ///     - [BitRate.Compatible]: The compatible bitrate mode. In this mode, the bitrate stays the same regardless of the profile. If you choose this mode for the Live Broadcast profile, the video frame rate may be lower than the set value.
-  /// Wuji uses different video codecs for different profiles to optimize the user experience. For example, the Communication profile prioritizes the smoothness while the Live Broadcast profile prioritizes the video quality (a higher bitrate). Therefore, We recommend setting this parameter as `0`.
+  /// Meta uses different video codecs for different profiles to optimize the user experience. For example, the Communication profile prioritizes the smoothness while the Live Broadcast profile prioritizes the video quality (a higher bitrate). Therefore, We recommend setting this parameter as `0`.
   ///
   /// **Video Bitrate Table**
   ///
@@ -124,7 +124,7 @@ class VideoEncoderConfiguration {
   @JsonKey(includeIfNull: false)
   int bitrate;
 
-  /// The minimum encoding bitrate (Kbps). The Wuji SDK automatically adjusts the encoding bitrate to adapt to the network conditions. Using a value greater than the default value forces the video encoder to output high-quality images but may cause more packet loss and hence sacrifice the smoothness of the video transmission. That said, unless you have special requirements for image quality, Wuji does not recommend changing this value.
+  /// The minimum encoding bitrate (Kbps). The Meta SDK automatically adjusts the encoding bitrate to adapt to the network conditions. Using a value greater than the default value forces the video encoder to output high-quality images but may cause more packet loss and hence sacrifice the smoothness of the video transmission. That said, unless you have special requirements for image quality, Meta does not recommend changing this value.
   @JsonKey(includeIfNull: false)
   int minBitrate;
 
@@ -197,9 +197,9 @@ class BeautyOptions {
   Map<String, dynamic> toJson() => _$BeautyOptionsToJson(this);
 }
 
-/// WUji image properties. A class for setting the properties of the watermark and background images.
+/// Meta image properties. A class for setting the properties of the watermark and background images.
 @JsonSerializable(explicitToJson: true)
-class WujiImage {
+class MetaImage {
   /// HTTP/HTTPS URL address of the image on the broadcasting video. The maximum length of this parameter is 1024 bytes.
   final String url;
 
@@ -215,18 +215,18 @@ class WujiImage {
   /// Height of the image on the broadcasting video.
   final int height;
 
-  /// Constructs a [WujiImage]
-  WujiImage(this.url, this.x, this.y, this.width, this.height);
+  /// Constructs a [MetaImage]
+  MetaImage(this.url, this.x, this.y, this.width, this.height);
 
   /// @nodoc
-  factory WujiImage.fromJson(Map<String, dynamic> json) =>
-      _$WujiImageFromJson(json);
+  factory MetaImage.fromJson(Map<String, dynamic> json) =>
+      _$MetaImageFromJson(json);
 
   /// @nodoc
-  Map<String, dynamic> toJson() => _$WujiImageToJson(this);
+  Map<String, dynamic> toJson() => _$MetaImageToJson(this);
 }
 
-/// The transcodingUser class, which defines the audio and video properties in the CDN live. Wuji supports a maximum of 17 transcoding users in a CDN live streaming channel.
+/// The transcodingUser class, which defines the audio and video properties in the CDN live. Meta supports a maximum of 17 transcoding users in a CDN live streaming channel.
 @JsonSerializable(explicitToJson: true)
 class TranscodingUser {
   /// ID of the user in the CDN live streaming.
@@ -307,13 +307,13 @@ class Color {
 @JsonSerializable(explicitToJson: true)
 class LiveTranscoding {
   /// Width (pixel) of the video. The default value is 360.
-  /// - When pushing video streams to the CDN, ensure that `width` is at least 64; otherwise, the Wuji server adjusts the value to 64.
+  /// - When pushing video streams to the CDN, ensure that `width` is at least 64; otherwise, the Meta server adjusts the value to 64.
   /// - When pushing audio streams to the CDN, set `width` and `height` as 0.
   @JsonKey(includeIfNull: false)
   int width;
 
   /// Height (pixel) of the video. The default value is 640.
-  /// - When pushing video streams to the CDN, ensure that `height` is at least 64; otherwise, the Wuji server adjusts the value to 64.
+  /// - When pushing video streams to the CDN, ensure that `height` is at least 64; otherwise, the Meta server adjusts the value to 64.
   /// - When pushing audio streams to the CDN, set `width` and `height` as 0.
   @JsonKey(includeIfNull: false)
   int height;
@@ -322,11 +322,11 @@ class LiveTranscoding {
   @JsonKey(includeIfNull: false)
   int videoBitrate;
 
-  /// The frame rate (fps) of the video. The value range is [0, 30]. The default value is 15. The Wuji server adjusts any value over 30 to 30.
+  /// The frame rate (fps) of the video. The value range is [0, 30]. The default value is 15. The Meta server adjusts any value over 30 to 30.
   @JsonKey(includeIfNull: false)
   VideoFrameRate videoFramerate;
 
-  /// Wuji does not recommend using this parameter.
+  /// Meta does not recommend using this parameter.
   /// - `true`: Low latency with unassured quality.
   /// - `false`: (Default) High latency with assured quality.
   @deprecated
@@ -338,14 +338,14 @@ class LiveTranscoding {
   int videoGop;
 
   /// The watermark image added to the CDN live publishing stream. Ensure that the format of the image is PNG. Once a watermark image is added, the audience of the CDN live publishing stream can see it.
-  /// See [WujiImage].
+  /// See [MetaImage].
   @JsonKey(includeIfNull: false)
-  WujiImage watermark;
+  MetaImage watermark;
 
   /// The background image added to the CDN live publishing stream. Once a background image is added, the audience of the CDN live publishing stream can see it.
-  /// See [WujiImage].
+  /// See [MetaImage].
   @JsonKey(includeIfNull: false)
-  WujiImage backgroundImage;
+  MetaImage backgroundImage;
 
   /// Self-defined audio-sample rate: [AudioSampleRateType].
   @JsonKey(includeIfNull: false)
@@ -355,7 +355,7 @@ class LiveTranscoding {
   @JsonKey(includeIfNull: false)
   int audioBitrate;
 
-  /// WUji’s self-defined audio channel type. WUji recommends choosing 1 (mono), or 2 (stereo) audio channels. Special players are required if you choose 3, 4, or 5.
+  /// Meta’s self-defined audio channel type. Meta recommends choosing 1 (mono), or 2 (stereo) audio channels. Special players are required if you choose 3, 4, or 5.
   /// See [AudioChannel].
   @JsonKey(includeIfNull: false)
   AudioChannel audioChannels;
@@ -364,7 +364,7 @@ class LiveTranscoding {
   @JsonKey(includeIfNull: false)
   AudioCodecProfileType audioCodecProfile;
 
-  /// Video codec profile type: [VideoCodecProfileType]. Set it as `BASELINE`, `MAIN`, or `HIGH` (default). If you set this parameter to other values, Wuji adjusts it to the default value `HIGH`.
+  /// Video codec profile type: [VideoCodecProfileType]. Set it as `BASELINE`, `MAIN`, or `HIGH` (default). If you set this parameter to other values, Meta adjusts it to the default value `HIGH`.
   @JsonKey(includeIfNull: false)
   VideoCodecProfileType videoCodecProfile;
 
@@ -377,7 +377,7 @@ class LiveTranscoding {
   @JsonKey(includeIfNull: false)
   String userConfigExtraInfo;
 
-  /// An TranscodingUser object managing the user layout configuration in the CDN live stream. Wuji supports a maximum of 17 transcoding users in a CDN live stream channel.
+  /// An TranscodingUser object managing the user layout configuration in the CDN live stream. Meta supports a maximum of 17 transcoding users in a CDN live stream channel.
   final List<TranscodingUser> transcodingUsers;
 
   /// Constructs a [LiveTranscoding]
@@ -517,7 +517,7 @@ class Rectangle {
   Map<String, dynamic> toJson() => _$RectangleToJson(this);
 }
 
-/// Wuji watermark options. A class for setting the properties of watermark.
+/// Meta watermark options. A class for setting the properties of watermark.
 @JsonSerializable(explicitToJson: true)
 class WatermarkOptions {
   /// Whether the watermark image is visible in the local video preview.
@@ -734,10 +734,10 @@ class RtcStats {
   /// Client-server latency.
   int lastmileDelay;
 
-  /// The packet loss rate (%) from the local client to Wuji's edge server, before network countermeasures.
+  /// The packet loss rate (%) from the local client to Meta's edge server, before network countermeasures.
   int txPacketLossRate;
 
-  /// The packet loss rate (%) from Wuji's edge server to the local client, before network countermeasures.
+  /// The packet loss rate (%) from Meta's edge server to the local client, before network countermeasures.
   int rxPacketLossRate;
 
   /// System CPU usage (%).
@@ -899,7 +899,7 @@ class LocalAudioStats {
   /// The average sending bitrate (Kbps).
   int sentBitrate;
 
-  /// The video packet loss rate (%) from the local client to the Wuji edge server before applying the anti-packet loss strategies.
+  /// The video packet loss rate (%) from the local client to the Meta edge server before applying the anti-packet loss strategies.
   ///
   /// @since v3.1.2.
   int txPacketLossRate;
@@ -956,7 +956,7 @@ class LocalVideoStats {
   /// See [VideoCodecType].
   VideoCodecType codecType;
 
-  /// The video packet loss rate (%) from the local client to the Wuji edge server before applying the anti-packet loss strategies.
+  /// The video packet loss rate (%) from the local client to the Meta edge server before applying the anti-packet loss strategies.
   ///
   /// @since v3.1.2.
   int txPacketLossRate;
