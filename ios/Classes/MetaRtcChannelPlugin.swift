@@ -1,15 +1,15 @@
 //
-//  WujiRtcChannelPlugin.swift
-//  RCTWuji
+//  MetaRtcChannelPlugin.swift
+//  RCTMeta
 //
 //  Created by 3 on 2020/12/7.
 //
 
 import Foundation
-import WujiRTCFramework
+import MetaRTCFramework
 
-public class WujiRtcChannelPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
-    private final weak var rtcEnginePlugin: SwiftWujiRtcEnginePlugin?
+public class MetaRtcChannelPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
+    private final weak var rtcEnginePlugin: SwiftMetaRtcEnginePlugin?
     private var methodChannel: FlutterMethodChannel?
     private var eventChannel: FlutterEventChannel?
     private var eventSink: FlutterEventSink? = nil
@@ -19,7 +19,7 @@ public class WujiRtcChannelPlugin: NSObject, FlutterPlugin, FlutterStreamHandler
         }
     }()
 
-    init(_ rtcEnginePlugin: SwiftWujiRtcEnginePlugin) {
+    init(_ rtcEnginePlugin: SwiftMetaRtcEnginePlugin) {
         self.rtcEnginePlugin = rtcEnginePlugin
     }
 
@@ -28,8 +28,8 @@ public class WujiRtcChannelPlugin: NSObject, FlutterPlugin, FlutterStreamHandler
     }
 
     public func initPlugin(_ registrar: FlutterPluginRegistrar) {
-        methodChannel = FlutterMethodChannel(name: "wuji_rtc_channel", binaryMessenger: registrar.messenger())
-        eventChannel = FlutterEventChannel(name: "wuji_rtc_channel/events", binaryMessenger: registrar.messenger())
+        methodChannel = FlutterMethodChannel(name: "meta_rtc_channel", binaryMessenger: registrar.messenger())
+        eventChannel = FlutterEventChannel(name: "meta_rtc_channel/events", binaryMessenger: registrar.messenger())
         registrar.addMethodCallDelegate(self, channel: methodChannel!)
         eventChannel?.setStreamHandler(self)
     }
@@ -60,11 +60,11 @@ public class WujiRtcChannelPlugin: NSObject, FlutterPlugin, FlutterStreamHandler
         eventSink?(event)
     }
 
-    private weak var engine: WujiRtcEngineKit? {
+    private weak var engine: MetaRtcEngineKit? {
         return rtcEnginePlugin?.engine
     }
 
-    func channel(_ channelId: String) -> WujiRtcChannel? {
+    func channel(_ channelId: String) -> MetaRtcChannel? {
         return manager[channelId]
     }
 

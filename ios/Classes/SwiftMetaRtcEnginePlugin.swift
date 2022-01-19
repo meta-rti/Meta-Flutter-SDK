@@ -1,8 +1,8 @@
 import Flutter
 import UIKit
-import WujiRTCFramework
+import MetaRTCFramework
 
-public class SwiftWujiRtcEnginePlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
+public class SwiftMetaRtcEnginePlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
     private var methodChannel: FlutterMethodChannel?
     private var eventChannel: FlutterEventChannel?
     private var eventSink: FlutterEventSink? = nil
@@ -11,23 +11,23 @@ public class SwiftWujiRtcEnginePlugin: NSObject, FlutterPlugin, FlutterStreamHan
             self?.emit(methodName, data)
         }
     }()
-    private lazy var rtcChannelPlugin: WujiRtcChannelPlugin = {
-        return WujiRtcChannelPlugin(self)
+    private lazy var rtcChannelPlugin: MetaRtcChannelPlugin = {
+        return MetaRtcChannelPlugin(self)
     }()
 
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let rtcEnginePlugin = SwiftWujiRtcEnginePlugin()
+        let rtcEnginePlugin = SwiftMetaRtcEnginePlugin()
         rtcEnginePlugin.rtcChannelPlugin.initPlugin(registrar)
         rtcEnginePlugin.initPlugin(registrar)
     }
 
     private func initPlugin(_ registrar: FlutterPluginRegistrar) {
-        methodChannel = FlutterMethodChannel(name: "wuji_rtc_engine", binaryMessenger: registrar.messenger())
-        eventChannel = FlutterEventChannel(name: "wuji_rtc_engine/events", binaryMessenger: registrar.messenger())
+        methodChannel = FlutterMethodChannel(name: "meta_rtc_engine", binaryMessenger: registrar.messenger())
+        eventChannel = FlutterEventChannel(name: "meta_rtc_engine/events", binaryMessenger: registrar.messenger())
         registrar.addMethodCallDelegate(self, channel: methodChannel!)
         eventChannel?.setStreamHandler(self)
 
-        registrar.register(WujiSurfaceViewFactory(registrar.messenger(), self, rtcChannelPlugin), withId: "WujiSurfaceView")
+        registrar.register(MetaSurfaceViewFactory(registrar.messenger(), self, rtcChannelPlugin), withId: "MetaSurfaceView")
     }
 
     public func detachFromEngine(for registrar: FlutterPluginRegistrar) {
@@ -57,7 +57,7 @@ public class SwiftWujiRtcEnginePlugin: NSObject, FlutterPlugin, FlutterStreamHan
         eventSink?(event)
     }
 
-    weak var engine: WujiRtcEngineKit? {
+    weak var engine: MetaRtcEngineKit? {
         return manager.engine
     }
 

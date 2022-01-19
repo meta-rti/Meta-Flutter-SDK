@@ -1,6 +1,6 @@
 //
 //  ResultCallback.swift
-//  RCTWuji
+//  RCTMeta
 //
 //  Created by 3 on 2020/12/7.
 //

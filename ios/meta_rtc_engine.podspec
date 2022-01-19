@@ -1,6 +1,6 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
-# Run `pod lib lint wuji_rtc_engine.podspec' to validate before publishing.
+# Run `pod lib lint meta_rtc_engine.podspec' to validate before publishing.
 #
 
 require "yaml"
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'zfz_wujiframework'
+  s.dependency 'MetaRTCFramework'
   s.platform = :ios, '10.0'
 
   # Flutter.framework does not contain a i386 slice.

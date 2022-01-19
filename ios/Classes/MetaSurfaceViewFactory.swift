@@ -1,19 +1,19 @@
 //
-//  WujiSurfaceViewFactory.swift
+//  MetaSurfaceViewFactory.swift
 //  copy
 //
 //  Created by 3 on 2020/12/7.
 //
 
 import Foundation
-import WujiRTCFramework
+import MetaRTCFramework
 
-class WujiSurfaceViewFactory: NSObject, FlutterPlatformViewFactory {
+class MetaSurfaceViewFactory: NSObject, FlutterPlatformViewFactory {
     private final weak var messager: FlutterBinaryMessenger?
-    private final weak var rtcEnginePlugin: SwiftWujiRtcEnginePlugin?
-    private final weak var rtcChannelPlugin: WujiRtcChannelPlugin?
+    private final weak var rtcEnginePlugin: SwiftMetaRtcEnginePlugin?
+    private final weak var rtcChannelPlugin: MetaRtcChannelPlugin?
 
-    init(_ messager: FlutterBinaryMessenger, _ rtcEnginePlugin: SwiftWujiRtcEnginePlugin, _ rtcChannelPlugin: WujiRtcChannelPlugin) {
+    init(_ messager: FlutterBinaryMessenger, _ rtcEnginePlugin: SwiftMetaRtcEnginePlugin, _ rtcChannelPlugin: MetaRtcChannelPlugin) {
         self.messager = messager
         self.rtcEnginePlugin = rtcEnginePlugin
         self.rtcChannelPlugin = rtcChannelPlugin
@@ -24,21 +24,21 @@ class WujiSurfaceViewFactory: NSObject, FlutterPlatformViewFactory {
     }
 
     func create(withFrame frame: CGRect, viewIdentifier viewId: Int64, arguments args: Any?) -> FlutterPlatformView {
-        return WujiSurfaceView(messager!, frame, viewId, args as? Dictionary<String, Any?>, rtcEnginePlugin!, rtcChannelPlugin!)
+        return MetaSurfaceView(messager!, frame, viewId, args as? Dictionary<String, Any?>, rtcEnginePlugin!, rtcChannelPlugin!)
     }
 }
 
-class WujiSurfaceView: NSObject, FlutterPlatformView {
-    private final weak var rtcEnginePlugin: SwiftWujiRtcEnginePlugin?
-    private final weak var rtcChannelPlugin: WujiRtcChannelPlugin?
+class MetaSurfaceView: NSObject, FlutterPlatformView {
+    private final weak var rtcEnginePlugin: SwiftMetaRtcEnginePlugin?
+    private final weak var rtcChannelPlugin: MetaRtcChannelPlugin?
     private let _view: RtcSurfaceView
     private let channel: FlutterMethodChannel
 
-    init(_ messager: FlutterBinaryMessenger, _ frame: CGRect, _ viewId: Int64, _ args: Dictionary<String, Any?>?, _ rtcEnginePlugin: SwiftWujiRtcEnginePlugin, _ rtcChannelPlugin: WujiRtcChannelPlugin) {
+    init(_ messager: FlutterBinaryMessenger, _ frame: CGRect, _ viewId: Int64, _ args: Dictionary<String, Any?>?, _ rtcEnginePlugin: SwiftMetaRtcEnginePlugin, _ rtcChannelPlugin: MetaRtcChannelPlugin) {
         self.rtcEnginePlugin = rtcEnginePlugin
         self.rtcChannelPlugin = rtcChannelPlugin
         self._view = RtcSurfaceView(frame: frame)
-        self.channel = FlutterMethodChannel(name: "wuji_rtc_engine/surface_view_\(viewId)", binaryMessenger: messager)
+        self.channel = FlutterMethodChannel(name: "meta_rtc_engine/surface_view_\(viewId)", binaryMessenger: messager)
         super.init()
         if let map = args {
             setData(map["data"] as! NSDictionary)
@@ -72,7 +72,7 @@ class WujiSurfaceView: NSObject, FlutterPlatformView {
     }
 
     func setData(_ data: NSDictionary) {
-        var channel: WujiRtcChannel? = nil
+        var channel: MetaRtcChannel? = nil
         if let channelId = data["channelId"] as? String {
             channel = getChannel(channelId)
         }
@@ -93,11 +93,11 @@ class WujiSurfaceView: NSObject, FlutterPlatformView {
         }
     }
 
-    private var engine: WujiRtcEngineKit? {
+    private var engine: MetaRtcEngineKit? {
         return rtcEnginePlugin?.engine
     }
 
-    private func getChannel(_ channelId: String?) -> WujiRtcChannel? {
+    private func getChannel(_ channelId: String?) -> MetaRtcChannel? {
         guard let `channelId` = channelId else {
             return nil
         }
