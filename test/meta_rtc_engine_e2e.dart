@@ -1,4 +1,4 @@
-import 'package:wuji_rtc_engine/rtc_engine.dart';
+import 'package:meta_rtc_engine/rtc_engine.dart';
 import 'package:e2e/e2e.dart';
 import 'package:flutter_test/flutter_test.dart';
 
