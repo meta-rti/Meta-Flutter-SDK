@@ -1,14 +1,14 @@
 //
 //  Extensions.swift
-//  RCTWuji
+//  RCTMeta
 //
 //  Created by 3 on 2020/12/7.
 //
 
 import Foundation
-import WujiRTCFramework
+import MetaRTCFramework
 
-extension WujiUserInfo {
+extension MetaUserInfo {
     func toMap() -> Dictionary<String, Any?> {
         return [
             "uid": uid,
@@ -17,7 +17,7 @@ extension WujiUserInfo {
     }
 }
 
-extension WujiRtcLocalAudioStats {
+extension MetaRtcLocalAudioStats {
     func toMap() -> Dictionary<String, Any?> {
         return [
             "numChannels": numChannels,
@@ -28,7 +28,7 @@ extension WujiRtcLocalAudioStats {
     }
 }
 
-extension WujiChannelStats {
+extension MetaChannelStats {
     func toMap() -> Dictionary<String, Any?> {
         return [
             "totalDuration": duration,
@@ -69,7 +69,7 @@ extension CGRect {
     }
 }
 
-extension WujiRtcRemoteAudioStats {
+extension MetaRtcRemoteAudioStats {
     func toMap() -> Dictionary<String, Any?> {
         return [
             "uid": uid,
@@ -88,7 +88,7 @@ extension WujiRtcRemoteAudioStats {
     }
 }
 
-extension WujiRtcLocalVideoStats {
+extension MetaRtcLocalVideoStats {
     func toMap() -> Dictionary<String, Any?> {
         return [
             "sentBitrate": sentBitrate,
@@ -109,7 +109,7 @@ extension WujiRtcLocalVideoStats {
     }
 }
 
-extension WujiRtcRemoteVideoStats {
+extension MetaRtcRemoteVideoStats {
     func toMap() -> Dictionary<String, Any?> {
         return [
             "uid": uid,
@@ -129,7 +129,7 @@ extension WujiRtcRemoteVideoStats {
     }
 }
 
-extension WujiRtcAudioVolumeInfo {
+extension MetaRtcAudioVolumeInfo {
     func toMap() -> Dictionary<String, Any?> {
         return [
             "uid": uid,
@@ -140,7 +140,7 @@ extension WujiRtcAudioVolumeInfo {
     }
 }
 
-extension Array where Element: WujiRtcAudioVolumeInfo {
+extension Array where Element: MetaRtcAudioVolumeInfo {
     func toMapList() -> Array<Dictionary<String, Any?>> {
         var list = [Dictionary<String, Any?>]()
         self.forEach { (item) in
@@ -150,7 +150,7 @@ extension Array where Element: WujiRtcAudioVolumeInfo {
     }
 }
 
-extension WujiLastmileProbeOneWayResult {
+extension MetaLastmileProbeOneWayResult {
     func toMap() -> Dictionary<String, Any?> {
         return [
             "packetLossRate": packetLossRate,
@@ -160,7 +160,7 @@ extension WujiLastmileProbeOneWayResult {
     }
 }
 
-extension WujiLastmileProbeResult {
+extension MetaLastmileProbeResult {
     func toMap() -> Dictionary<String, Any?> {
         return [
             "state": state.rawValue,
@@ -171,7 +171,7 @@ extension WujiLastmileProbeResult {
     }
 }
 
-extension WujiFacePositionInfo {
+extension MetaFacePositionInfo {
     func toMap() -> Dictionary<String, Any?> {
         return [
             "x": x,
@@ -183,7 +183,7 @@ extension WujiFacePositionInfo {
     }
 }
 
-extension Array where Element: WujiFacePositionInfo {
+extension Array where Element: MetaFacePositionInfo {
     func toMapList() -> Array<Dictionary<String, Any?>> {
         var list = [Dictionary<String, Any?>]()
         self.forEach { (item) in

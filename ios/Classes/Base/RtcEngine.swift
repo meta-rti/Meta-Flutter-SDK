@@ -1,12 +1,12 @@
 //
 //  RtcEngine.swift
-//  RCTWuji
+//  RCTMeta
 //
 //  Created by 3 on 2020/12/7.
 //
 
 import Foundation
-import WujiRTCFramework
+import MetaRTCFramework
 
 protocol RtcEngineInterface:
         RtcEngineUserInfoInterface,
@@ -335,7 +335,7 @@ protocol RtcEngineStreamMessageInterface {
 @objc
 class RtcEngineManager: NSObject, RtcEngineInterface {
     private var emitter: (_ methodName: String, _ data: Dictionary<String, Any?>?) -> Void
-    private(set) var engine: WujiRtcEngineKit?
+    private(set) var engine: MetaRtcEngineKit?
     private var delegate: RtcEngineEventHandler?
     private var mediaObserver: MediaObserver?
 
@@ -344,7 +344,7 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
 
     func Release() {
-        WujiRtcEngineKit.destroy()
+        MetaRtcEngineKit.destroy()
         engine = nil
         delegate = nil
         mediaObserver = nil
@@ -354,11 +354,11 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
         delegate = RtcEngineEventHandler() { [weak self] methodName, data in
             self?.emitter(methodName, data)
         }
-        let config = WujiRtcEngineConfig()
+        let config = MetaRtcEngineConfig()
         config.appId = params["appId"] as? String
         config.areaCode = Int32((params["areaCode"] as! NSNumber).intValue)
-        engine = WujiRtcEngineKit.sharedEngine(with: config, delegate: delegate)
-//        callback.code(engine?.setAppType(WujiRtcAppType(rawValue: params["appType"] as! UInt)!))
+        engine = MetaRtcEngineKit.sharedEngine(with: config, delegate: delegate)
+//        callback.code(engine?.setAppType(MetaRtcAppType(rawValue: params["appType"] as! UInt)!))
         callback.code(1);
     }
 
@@ -369,11 +369,11 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
 
     @objc func setChannelProfile(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(engine?.setChannelProfile(WujiChannelProfile(rawValue: params["profile"] as! Int)!))
+        callback.code(engine?.setChannelProfile(MetaChannelProfile(rawValue: params["profile"] as! Int)!))
     }
 
     @objc func setClientRole(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(engine?.setClientRole(WujiClientRole(rawValue: params["role"] as! Int)!))
+        callback.code(engine?.setClientRole(MetaClientRole(rawValue: params["role"] as! Int)!))
     }
 
     @objc func joinChannel(_ params: NSDictionary, _ callback: Callback) {
@@ -466,7 +466,7 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
 
     @objc func setAudioProfile(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(engine?.setAudioProfile(WujiAudioProfile(rawValue: params["profile"] as! Int)!, scenario: WujiAudioScenario(rawValue: params["scenario"] as! Int)!))
+        callback.code(engine?.setAudioProfile(MetaAudioProfile(rawValue: params["profile"] as! Int)!, scenario: MetaAudioScenario(rawValue: params["scenario"] as! Int)!))
     }
 
     @objc func adjustRecordingSignalVolume(_ params: NSDictionary, _ callback: Callback) {
@@ -661,16 +661,16 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     
     @objc func setAudioSessionOperationRestriction(_ params: NSDictionary, _ callback: Callback) {
         callback.resolve(engine) { it in
-            it.setAudioSessionOperationRestriction(WujiAudioSessionOperationRestriction(rawValue: params["restriction"] as! UInt))
+            it.setAudioSessionOperationRestriction(MetaAudioSessionOperationRestriction(rawValue: params["restriction"] as! UInt))
         }
     }
 
     @objc func setLocalVoiceChanger(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(engine?.setLocalVoiceChanger(WujiAudioVoiceChanger(rawValue: params["voiceChanger"] as! Int)!))
+        callback.code(engine?.setLocalVoiceChanger(MetaAudioVoiceChanger(rawValue: params["voiceChanger"] as! Int)!))
     }
 
     @objc func setLocalVoiceReverbPreset(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(engine?.setLocalVoiceReverbPreset(WujiAudioReverbPreset(rawValue: params["preset"] as! Int)!))
+        callback.code(engine?.setLocalVoiceReverbPreset(MetaAudioReverbPreset(rawValue: params["preset"] as! Int)!))
     }
 
     @objc func setLocalVoicePitch(_ params: NSDictionary, _ callback: Callback) {
@@ -678,11 +678,11 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
 
     @objc func setLocalVoiceEqualization(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(engine?.setLocalVoiceEqualizationOf(WujiAudioEqualizationBandFrequency(rawValue: params["bandFrequency"] as! Int)!, withGain: params["bandGain"] as! Int))
+        callback.code(engine?.setLocalVoiceEqualizationOf(MetaAudioEqualizationBandFrequency(rawValue: params["bandFrequency"] as! Int)!, withGain: params["bandGain"] as! Int))
     }
 
     @objc func setLocalVoiceReverb(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(engine?.setLocalVoiceReverbOf(WujiAudioReverbType(rawValue: params["reverbKey"] as! Int)!, withValue: params["value"] as! Int))
+        callback.code(engine?.setLocalVoiceReverbOf(MetaAudioReverbType(rawValue: params["reverbKey"] as! Int)!, withValue: params["value"] as! Int))
     }
 
     @objc func enableSoundPositionIndication(_ params: NSDictionary, _ callback: Callback) {
@@ -744,23 +744,23 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
 
     @objc func setRemoteVideoStreamType(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(engine?.setRemoteVideoStream(params["uid"] as! UInt, type: WujiVideoStreamType(rawValue: params["streamType"] as! Int)!))
+        callback.code(engine?.setRemoteVideoStream(params["uid"] as! UInt, type: MetaVideoStreamType(rawValue: params["streamType"] as! Int)!))
     }
 
     @objc func setRemoteDefaultVideoStreamType(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(engine?.setRemoteDefaultVideoStreamType(WujiVideoStreamType(rawValue: params["streamType"] as! Int)!))
+        callback.code(engine?.setRemoteDefaultVideoStreamType(MetaVideoStreamType(rawValue: params["streamType"] as! Int)!))
     }
 
     @objc func setLocalPublishFallbackOption(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(engine?.setLocalPublishFallbackOption(WujiStreamFallbackOptions(rawValue: params["option"] as! Int)!))
+        callback.code(engine?.setLocalPublishFallbackOption(MetaStreamFallbackOptions(rawValue: params["option"] as! Int)!))
     }
 
     @objc func setRemoteSubscribeFallbackOption(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(engine?.setRemoteSubscribeFallbackOption(WujiStreamFallbackOptions(rawValue: params["option"] as! Int)!))
+        callback.code(engine?.setRemoteSubscribeFallbackOption(MetaStreamFallbackOptions(rawValue: params["option"] as! Int)!))
     }
 
     @objc func setRemoteUserPriority(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(engine?.setRemoteUserPriority(params["uid"] as! UInt, type: WujiUserPriority(rawValue: params["userPriority"] as! Int)!))
+        callback.code(engine?.setRemoteUserPriority(params["uid"] as! UInt, type: MetaUserPriority(rawValue: params["userPriority"] as! Int)!))
     }
 
     @objc func startEchoTest(_ params: NSDictionary, _ callback: Callback) {
@@ -788,25 +788,25 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
 
     @objc func registerMediaMetadataObserver(_ callback: Callback) {
-        var code = -WujiErrorCode.notInitialized.rawValue
+        var code = -MetaErrorCode.notInitialized.rawValue
         if let it = engine {
             let mediaObserver = MediaObserver { [weak self] data in
                 self?.emitter(RtcEngineEvents.MetadataReceived, data)
             }
             if it.setMediaMetadataDelegate(mediaObserver, with: .video) {
                 self.mediaObserver = mediaObserver
-                code = WujiErrorCode.noError.rawValue
+                code = MetaErrorCode.noError.rawValue
             }
         }
         callback.code(Int32(code))
     }
 
     @objc func unregisterMediaMetadataObserver(_ callback: Callback) {
-        var code = -WujiErrorCode.notInitialized.rawValue
+        var code = -MetaErrorCode.notInitialized.rawValue
         if let it = engine {
             if it.setMediaMetadataDelegate(nil, with: .video) {
                 self.mediaObserver = nil
-                code = WujiErrorCode.noError.rawValue
+                code = MetaErrorCode.noError.rawValue
             }
         }
         callback.code(Int32(code))
@@ -839,11 +839,11 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     @objc func setEncryptionMode(_ params: NSDictionary, _ callback: Callback) {
         var encryptionMode = ""
         switch params["encryptionMode"] as! Int {
-        case WujiEncryptionMode.AES128XTS.rawValue:
+        case MetaEncryptionMode.AES128XTS.rawValue:
             encryptionMode = "aes-128-xts"
-        case WujiEncryptionMode.AES128ECB.rawValue:
+        case MetaEncryptionMode.AES128ECB.rawValue:
             encryptionMode = "aes-128-ecb"
-        case WujiEncryptionMode.AES256XTS.rawValue:
+        case MetaEncryptionMode.AES256XTS.rawValue:
             encryptionMode = "aes-256-xts"
         default: encryptionMode = ""
         }
@@ -851,7 +851,7 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
 
     @objc func startAudioRecording(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(engine?.startAudioRecording(params["filePath"] as! String, sampleRate: params["sampleRate"] as! Int, quality: WujiAudioRecordingQuality(rawValue: params["quality"] as! Int)!))
+        callback.code(engine?.startAudioRecording(params["filePath"] as! String, sampleRate: params["sampleRate"] as! Int, quality: MetaAudioRecordingQuality(rawValue: params["quality"] as! Int)!))
     }
 
     @objc func stopAudioRecording(_ callback: Callback) {
@@ -883,7 +883,7 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
 
     @objc func isCameraFocusSupported(_ callback: Callback) {
-        callback.code(-Int32(WujiErrorCode.notSupported.rawValue))
+        callback.code(-Int32(MetaErrorCode.notSupported.rawValue))
     }
 
     @objc func isCameraExposurePositionSupported(_ callback: Callback) {
@@ -906,7 +906,7 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
 
     @objc func getCameraMaxZoomFactor(_ callback: Callback) {
-        callback.code(-Int32(WujiErrorCode.notSupported.rawValue))
+        callback.code(-Int32(MetaErrorCode.notSupported.rawValue))
     }
 
     @objc func setCameraFocusPositionInPreview(_ params: NSDictionary, _ callback: Callback) {
@@ -945,7 +945,7 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
 
     @objc func createDataStream(_ params: NSDictionary, _ callback: Callback) {
-        var code: Int32 = -Int32(WujiErrorCode.notInitialized.rawValue)
+        var code: Int32 = -Int32(MetaErrorCode.notInitialized.rawValue)
         var streamId = 0
         if let it = engine {
             code = it.createDataStream(&streamId, reliable: params["reliable"] as! Bool, ordered: params["ordered"] as! Bool)
@@ -956,12 +956,12 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
 
     @objc func sendStreamMessage(_ params: NSDictionary, _ callback: Callback) {
-        var code: Int32 = -Int32(WujiErrorCode.notInitialized.rawValue)
+        var code: Int32 = -Int32(MetaErrorCode.notInitialized.rawValue)
         if let it = engine {
             if let data = (params["message"] as! String).data(using: .utf8) {
                 code = it.sendStreamMessage(params["streamId"] as! Int, data: data)
             } else {
-                code = -Int32(WujiErrorCode.invalidArgument.rawValue)
+                code = -Int32(MetaErrorCode.invalidArgument.rawValue)
             }
         }
         callback.code(code)

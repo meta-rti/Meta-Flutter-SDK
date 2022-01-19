@@ -1,12 +1,12 @@
 //
 //  RtcEngineEvent.swift
-//  RCTWuji
+//  RCTMeta
 //
 //  Created by 3 on 2020/12/7.
 //
 
 import Foundation
-import WujiRTCFramework
+import MetaRTCFramework
 class RtcEngineEvents {
     static let Warning = "Warning"
     static let Error = "Error"
@@ -170,7 +170,7 @@ class RtcEngineEvents {
 }
 
 class RtcEngineEventHandler: NSObject {
-    static let PREFIX = "co.wuji.rtc."
+    static let PREFIX = "co.meta.rtc."
 
     var emitter: (_ methodName: String, _ data: Dictionary<String, Any?>?) -> Void
 
@@ -183,296 +183,296 @@ class RtcEngineEventHandler: NSObject {
     }
 }
 
-extension RtcEngineEventHandler: WujiRtcEngineDelegate {
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didOccurWarning warningCode: WujiWarningCode) {
+extension RtcEngineEventHandler: MetaRtcEngineDelegate {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didOccurWarning warningCode: MetaWarningCode) {
         callback(RtcEngineEvents.Warning, warningCode.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didOccurError errorCode: WujiErrorCode) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didOccurError errorCode: MetaErrorCode) {
         callback(RtcEngineEvents.Error, errorCode.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didApiCallExecute error: Int, api: String, result: String) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didApiCallExecute error: Int, api: String, result: String) {
         callback(RtcEngineEvents.ApiCallExecuted, error, api, result)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didJoinChannel channel: String, withUid uid: UInt, elapsed: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didJoinChannel channel: String, withUid uid: UInt, elapsed: Int) {
         callback(RtcEngineEvents.JoinChannelSuccess, channel, uid, elapsed)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didRejoinChannel channel: String, withUid uid: UInt, elapsed: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didRejoinChannel channel: String, withUid uid: UInt, elapsed: Int) {
         callback(RtcEngineEvents.RejoinChannelSuccess, channel, uid, elapsed)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didLeaveChannelWith stats: WujiChannelStats) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didLeaveChannelWith stats: MetaChannelStats) {
         callback(RtcEngineEvents.LeaveChannel, stats.toMap())
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didRegisteredLocalUser userAccount: String, withUid uid: UInt) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didRegisteredLocalUser userAccount: String, withUid uid: UInt) {
         callback(RtcEngineEvents.LocalUserRegistered, uid, userAccount)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didUpdatedUserInfo userInfo: WujiUserInfo, withUid uid: UInt) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didUpdatedUserInfo userInfo: MetaUserInfo, withUid uid: UInt) {
         callback(RtcEngineEvents.UserInfoUpdated, uid, userInfo.toMap())
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didClientRoleChanged oldRole: WujiClientRole, newRole: WujiClientRole) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didClientRoleChanged oldRole: MetaClientRole, newRole: MetaClientRole) {
         callback(RtcEngineEvents.ClientRoleChanged, oldRole.rawValue, newRole.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didJoinedOfUid uid: UInt, elapsed: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didJoinedOfUid uid: UInt, elapsed: Int) {
         callback(RtcEngineEvents.UserJoined, uid, elapsed)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didOfflineOfUid uid: UInt, reason: WujiUserOfflineReason) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didOfflineOfUid uid: UInt, reason: MetaUserOfflineReason) {
         callback(RtcEngineEvents.UserOffline, uid, reason.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, connectionChangedTo state: WujiConnectionStateType, reason: WujiConnectionChangedReason) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, connectionChangedTo state: MetaConnectionStateType, reason: MetaConnectionChangedReason) {
         callback(RtcEngineEvents.ConnectionStateChanged, state.rawValue, reason.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, networkTypeChangedTo type: WujiNetworkType) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, networkTypeChangedTo type: MetaNetworkType) {
         callback(RtcEngineEvents.NetworkTypeChanged, type.rawValue)
     }
 
-    public func rtcEngineConnectionDidLost(_ engine: WujiRtcEngineKit) {
+    public func rtcEngineConnectionDidLost(_ engine: MetaRtcEngineKit) {
         callback(RtcEngineEvents.ConnectionLost)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, tokenPrivilegeWillExpire token: String) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, tokenPrivilegeWillExpire token: String) {
         callback(RtcEngineEvents.TokenPrivilegeWillExpire, token)
     }
 
-    public func rtcEngineRequestToken(_ engine: WujiRtcEngineKit) {
+    public func rtcEngineRequestToken(_ engine: MetaRtcEngineKit) {
         callback(RtcEngineEvents.RequestToken)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, reportAudioVolumeIndicationOfSpeakers speakers: [WujiRtcAudioVolumeInfo], totalVolume: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, reportAudioVolumeIndicationOfSpeakers speakers: [MetaRtcAudioVolumeInfo], totalVolume: Int) {
         callback(RtcEngineEvents.AudioVolumeIndication, speakers.toMapList(), totalVolume)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, activeSpeaker speakerUid: UInt) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, activeSpeaker speakerUid: UInt) {
         callback(RtcEngineEvents.ActiveSpeaker, speakerUid)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, firstLocalAudioFrame elapsed: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, firstLocalAudioFrame elapsed: Int) {
         callback(RtcEngineEvents.FirstLocalAudioFrame, elapsed)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, firstLocalVideoFrameWith size: CGSize, elapsed: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, firstLocalVideoFrameWith size: CGSize, elapsed: Int) {
         callback(RtcEngineEvents.FirstLocalVideoFrame, Int(size.width), Int(size.height), elapsed)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didVideoMuted muted: Bool, byUid uid: UInt) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didVideoMuted muted: Bool, byUid uid: UInt) {
         callback(RtcEngineEvents.UserMuteVideo, uid, muted)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, videoSizeChangedOfUid uid: UInt, size: CGSize, rotation: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, videoSizeChangedOfUid uid: UInt, size: CGSize, rotation: Int) {
         callback(RtcEngineEvents.VideoSizeChanged, uid, Int(size.width), Int(size.height), rotation)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, remoteVideoStateChangedOfUid uid: UInt, state: WujiVideoRemoteState, reason: WujiVideoRemoteStateReason, elapsed: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, remoteVideoStateChangedOfUid uid: UInt, state: MetaVideoRemoteState, reason: MetaVideoRemoteStateReason, elapsed: Int) {
         callback(RtcEngineEvents.RemoteVideoStateChanged, uid, state.rawValue, reason.rawValue, elapsed)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, localVideoStateChange state: WujiLocalVideoStreamState, error: WujiLocalVideoStreamError) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, localVideoStateChange state: MetaLocalVideoStreamState, error: MetaLocalVideoStreamError) {
         callback(RtcEngineEvents.LocalVideoStateChanged, state.rawValue, error.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, remoteAudioStateChangedOfUid uid: UInt, state: WujiAudioRemoteState, reason: WujiAudioRemoteStateReason, elapsed: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, remoteAudioStateChangedOfUid uid: UInt, state: MetaAudioRemoteState, reason: MetaAudioRemoteStateReason, elapsed: Int) {
         callback(RtcEngineEvents.RemoteAudioStateChanged, uid, state.rawValue, reason.rawValue, elapsed)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, localAudioStateChange state: WujiAudioLocalState, error: WujiAudioLocalError) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, localAudioStateChange state: MetaAudioLocalState, error: MetaAudioLocalError) {
         callback(RtcEngineEvents.LocalAudioStateChanged, state.rawValue, error.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didLocalPublishFallbackToAudioOnly isFallbackOrRecover: Bool) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didLocalPublishFallbackToAudioOnly isFallbackOrRecover: Bool) {
         callback(RtcEngineEvents.LocalPublishFallbackToAudioOnly, isFallbackOrRecover)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didRemoteSubscribeFallbackToAudioOnly isFallbackOrRecover: Bool, byUid uid: UInt) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didRemoteSubscribeFallbackToAudioOnly isFallbackOrRecover: Bool, byUid uid: UInt) {
         callback(RtcEngineEvents.RemoteSubscribeFallbackToAudioOnly, uid, isFallbackOrRecover)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didAudioRouteChanged routing: WujiAudioOutputRouting) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didAudioRouteChanged routing: MetaAudioOutputRouting) {
         callback(RtcEngineEvents.AudioRouteChanged, routing.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, cameraFocusDidChangedTo rect: CGRect) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, cameraFocusDidChangedTo rect: CGRect) {
         callback(RtcEngineEvents.CameraFocusAreaChanged, rect.toMap())
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, cameraExposureDidChangedTo rect: CGRect) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, cameraExposureDidChangedTo rect: CGRect) {
         callback(RtcEngineEvents.CameraExposureAreaChanged, rect.toMap())
     }
 
-    func rtcEngine(_ engine: WujiRtcEngineKit, facePositionDidChangeWidth width: Int32, previewHeight height: Int32, faces: [WujiFacePositionInfo]?) {
+    func rtcEngine(_ engine: MetaRtcEngineKit, facePositionDidChangeWidth width: Int32, previewHeight height: Int32, faces: [MetaFacePositionInfo]?) {
         callback(RtcEngineEvents.FacePositionChanged, width, height, faces?.toMapList())
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, reportRtcStats stats: WujiChannelStats) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, reportRtcStats stats: MetaChannelStats) {
         callback(RtcEngineEvents.RtcStats, stats.toMap())
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, lastmileQuality quality: WujiNetworkQuality) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, lastmileQuality quality: MetaNetworkQuality) {
         callback(RtcEngineEvents.LastmileQuality, quality.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, networkQuality uid: UInt, txQuality: WujiNetworkQuality, rxQuality: WujiNetworkQuality) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, networkQuality uid: UInt, txQuality: MetaNetworkQuality, rxQuality: MetaNetworkQuality) {
         callback(RtcEngineEvents.NetworkQuality, uid, txQuality.rawValue, rxQuality.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, lastmileProbeTest result: WujiLastmileProbeResult) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, lastmileProbeTest result: MetaLastmileProbeResult) {
         callback(RtcEngineEvents.LastmileProbeResult, result.toMap())
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, localVideoStats stats: WujiRtcLocalVideoStats) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, localVideoStats stats: MetaRtcLocalVideoStats) {
         callback(RtcEngineEvents.LocalVideoStats, stats.toMap())
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, localAudioStats stats: WujiRtcLocalAudioStats) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, localAudioStats stats: MetaRtcLocalAudioStats) {
         callback(RtcEngineEvents.LocalAudioStats, stats.toMap())
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, remoteVideoStats stats: WujiRtcRemoteVideoStats) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, remoteVideoStats stats: MetaRtcRemoteVideoStats) {
         callback(RtcEngineEvents.RemoteVideoStats, stats.toMap())
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, remoteAudioStats stats: WujiRtcRemoteAudioStats) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, remoteAudioStats stats: MetaRtcRemoteAudioStats) {
         callback(RtcEngineEvents.RemoteAudioStats, stats.toMap())
     }
 
-    public func rtcEngineLocalAudioMixingDidFinish(_ engine: WujiRtcEngineKit) {
+    public func rtcEngineLocalAudioMixingDidFinish(_ engine: MetaRtcEngineKit) {
         callback(RtcEngineEvents.AudioMixingFinished)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, localAudioMixingStateDidChanged state: WujiAudioMixingStateCode, errorCode: WujiAudioMixingErrorCode) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, localAudioMixingStateDidChanged state: MetaAudioMixingStateCode, errorCode: MetaAudioMixingErrorCode) {
         callback(RtcEngineEvents.AudioMixingStateChanged, state.rawValue, errorCode.rawValue)
     }
 
-    public func rtcEngineRemoteAudioMixingDidStart(_ engine: WujiRtcEngineKit) {
+    public func rtcEngineRemoteAudioMixingDidStart(_ engine: MetaRtcEngineKit) {
         // TODO Not in Android
     }
 
-    public func rtcEngineRemoteAudioMixingDidFinish(_ engine: WujiRtcEngineKit) {
+    public func rtcEngineRemoteAudioMixingDidFinish(_ engine: MetaRtcEngineKit) {
         // TODO Not in Android
     }
 
-    public func rtcEngineDidAudioEffectFinish(_ engine: WujiRtcEngineKit, soundId: Int) {
+    public func rtcEngineDidAudioEffectFinish(_ engine: MetaRtcEngineKit, soundId: Int) {
         callback(RtcEngineEvents.AudioEffectFinished, soundId)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, rtmpStreamingChangedToState url: String, state: WujiRtmpStreamingState, errorCode: WujiRtmpStreamingErrorCode) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, rtmpStreamingChangedToState url: String, state: MetaRtmpStreamingState, errorCode: MetaRtmpStreamingErrorCode) {
         callback(RtcEngineEvents.RtmpStreamingStateChanged, url, state.rawValue, errorCode.rawValue)
     }
 
-    public func rtcEngineTranscodingUpdated(_ engine: WujiRtcEngineKit) {
+    public func rtcEngineTranscodingUpdated(_ engine: MetaRtcEngineKit) {
         callback(RtcEngineEvents.TranscodingUpdated)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, streamInjectedStatusOfUrl url: String, uid: UInt, status: WujiInjectStreamStatus) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, streamInjectedStatusOfUrl url: String, uid: UInt, status: MetaInjectStreamStatus) {
         callback(RtcEngineEvents.StreamInjectedStatus, url, uid, status.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, receiveStreamMessageFromUid uid: UInt, streamId: Int, data: Data) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, receiveStreamMessageFromUid uid: UInt, streamId: Int, data: Data) {
         callback(RtcEngineEvents.StreamMessage, uid, streamId, String(data: data, encoding: .utf8))
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didOccurStreamMessageErrorFromUid uid: UInt, streamId: Int, error: Int, missed: Int, cached: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didOccurStreamMessageErrorFromUid uid: UInt, streamId: Int, error: Int, missed: Int, cached: Int) {
         callback(RtcEngineEvents.StreamMessageError, uid, streamId, error, missed, cached)
     }
 
-    public func rtcEngineMediaEngineDidLoaded(_ engine: WujiRtcEngineKit) {
+    public func rtcEngineMediaEngineDidLoaded(_ engine: MetaRtcEngineKit) {
         callback(RtcEngineEvents.MediaEngineLoadSuccess)
     }
 
-    public func rtcEngineMediaEngineDidStartCall(_ engine: WujiRtcEngineKit) {
+    public func rtcEngineMediaEngineDidStartCall(_ engine: MetaRtcEngineKit) {
         callback(RtcEngineEvents.MediaEngineStartCallSuccess)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, channelMediaRelayStateDidChange state: WujiChannelMediaRelayState, error: WujiChannelMediaRelayError) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, channelMediaRelayStateDidChange state: MetaChannelMediaRelayState, error: MetaChannelMediaRelayError) {
         callback(RtcEngineEvents.ChannelMediaRelayStateChanged, state.rawValue, error.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didReceive event: WujiChannelMediaRelayEvent) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didReceive event: MetaChannelMediaRelayEvent) {
         callback(RtcEngineEvents.ChannelMediaRelayEvent, event.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, firstRemoteVideoFrameOfUid uid: UInt, size: CGSize, elapsed: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, firstRemoteVideoFrameOfUid uid: UInt, size: CGSize, elapsed: Int) {
         callback(RtcEngineEvents.FirstRemoteVideoFrame, uid, Int(size.width), Int(size.height), elapsed)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, firstRemoteAudioFrameOfUid uid: UInt, elapsed: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, firstRemoteAudioFrameOfUid uid: UInt, elapsed: Int) {
         callback(RtcEngineEvents.FirstRemoteAudioFrame, uid, elapsed)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, firstRemoteAudioFrameDecodedOfUid uid: UInt, elapsed: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, firstRemoteAudioFrameDecodedOfUid uid: UInt, elapsed: Int) {
         callback(RtcEngineEvents.FirstRemoteAudioDecoded, uid, elapsed)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didAudioMuted muted: Bool, byUid uid: UInt) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didAudioMuted muted: Bool, byUid uid: UInt) {
         callback(RtcEngineEvents.UserMuteAudio, uid, muted)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, streamPublishedWithUrl url: String, errorCode: WujiErrorCode) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, streamPublishedWithUrl url: String, errorCode: MetaErrorCode) {
         callback(RtcEngineEvents.StreamPublished, url, errorCode.rawValue)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, streamUnpublishedWithUrl url: String) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, streamUnpublishedWithUrl url: String) {
         callback(RtcEngineEvents.StreamUnpublished, url)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, audioTransportStatsOfUid uid: UInt, delay: UInt, lost: UInt, rxKBitRate: UInt) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, audioTransportStatsOfUid uid: UInt, delay: UInt, lost: UInt, rxKBitRate: UInt) {
         callback(RtcEngineEvents.RemoteAudioTransportStats, uid, delay, lost, rxKBitRate)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, videoTransportStatsOfUid uid: UInt, delay: UInt, lost: UInt, rxKBitRate: UInt) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, videoTransportStatsOfUid uid: UInt, delay: UInt, lost: UInt, rxKBitRate: UInt) {
         callback(RtcEngineEvents.RemoteVideoTransportStats, uid, delay, lost, rxKBitRate)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didVideoEnabled enabled: Bool, byUid uid: UInt) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didVideoEnabled enabled: Bool, byUid uid: UInt) {
         callback(RtcEngineEvents.UserEnableVideo, uid, enabled)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didLocalVideoEnabled enabled: Bool, byUid uid: UInt) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didLocalVideoEnabled enabled: Bool, byUid uid: UInt) {
         callback(RtcEngineEvents.UserEnableLocalVideo, uid, enabled)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, firstRemoteVideoDecodedOfUid uid: UInt, size: CGSize, elapsed: Int) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, firstRemoteVideoDecodedOfUid uid: UInt, size: CGSize, elapsed: Int) {
         callback(RtcEngineEvents.FirstRemoteVideoDecoded, uid, Int(size.width), Int(size.height), elapsed)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, didMicrophoneEnabled enabled: Bool) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, didMicrophoneEnabled enabled: Bool) {
         callback(RtcEngineEvents.MicrophoneEnabled, enabled)
     }
 
-    public func rtcEngineConnectionDidInterrupted(_ engine: WujiRtcEngineKit) {
+    public func rtcEngineConnectionDidInterrupted(_ engine: MetaRtcEngineKit) {
         callback(RtcEngineEvents.ConnectionInterrupted)
     }
 
-    public func rtcEngineConnectionDidBanned(_ engine: WujiRtcEngineKit) {
+    public func rtcEngineConnectionDidBanned(_ engine: MetaRtcEngineKit) {
         callback(RtcEngineEvents.ConnectionBanned)
     }
 
-    public func rtcEngine(_ engine: WujiRtcEngineKit, audioQualityOfUid uid: UInt, quality: WujiNetworkQuality, delay: UInt, lost: UInt) {
+    public func rtcEngine(_ engine: MetaRtcEngineKit, audioQualityOfUid uid: UInt, quality: MetaNetworkQuality, delay: UInt, lost: UInt) {
         callback(RtcEngineEvents.AudioQuality, uid, quality.rawValue, delay, lost)
     }
 
-    public func rtcEngineCameraDidReady(_ engine: WujiRtcEngineKit) {
+    public func rtcEngineCameraDidReady(_ engine: MetaRtcEngineKit) {
         callback(RtcEngineEvents.CameraReady)
     }
 
-    public func rtcEngineVideoDidStop(_ engine: WujiRtcEngineKit) {
+    public func rtcEngineVideoDidStop(_ engine: MetaRtcEngineKit) {
         callback(RtcEngineEvents.VideoStopped)
     }
     
-    func rtcEngine(_ engine: WujiRtcEngineKit, firstLocalAudioFramePublished elapsed: Int) {
+    func rtcEngine(_ engine: MetaRtcEngineKit, firstLocalAudioFramePublished elapsed: Int) {
         callback(RtcEngineEvents.FirstLocalAudioFramePublished, elapsed)
     }
     
-    func rtcEngine(_ engine: WujiRtcEngineKit, firstLocalVideoFramePublished elapsed: Int) {
+    func rtcEngine(_ engine: MetaRtcEngineKit, firstLocalVideoFramePublished elapsed: Int) {
         callback(RtcEngineEvents.FirstLocalVideoFramePublished, elapsed)
     }
 }

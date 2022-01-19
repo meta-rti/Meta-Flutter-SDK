@@ -1,31 +1,31 @@
 //
 //  RtcSurfaceView.swift
-//  RCTWuji
+//  RCTMeta
 //
 //  Created by 3 on 2020/12/7.
 //
 
 import Foundation
 import UIKit
-import WujiRTCFramework
+import MetaRTCFramework
 
 class RtcSurfaceView: UIView {
-    private lazy var canvas: WujiRtcVideoCanvas = {
-        var canvas = WujiRtcVideoCanvas()
+    private lazy var canvas: MetaRtcVideoCanvas = {
+        var canvas = MetaRtcVideoCanvas()
         canvas.view = self
         return canvas
     }()
-    private weak var channel: WujiRtcChannel?
+    private weak var channel: MetaRtcChannel?
 
-    func setData(_ engine: WujiRtcEngineKit, _ channel: WujiRtcChannel?, _ uid: Int) {
+    func setData(_ engine: MetaRtcEngineKit, _ channel: MetaRtcChannel?, _ uid: Int) {
         self.channel = channel
         canvas.channelId = channel?.getId()
         canvas.uid = UInt(uid)
         setupVideoCanvas(engine)
     }
     
-    func resetVideoCanvas(_ engine: WujiRtcEngineKit) {
-        let canvas = WujiRtcVideoCanvas()
+    func resetVideoCanvas(_ engine: MetaRtcEngineKit) {
+        let canvas = MetaRtcVideoCanvas()
         canvas.view = nil
         canvas.renderMode = self.canvas.renderMode
         canvas.channelId = self.canvas.channelId
@@ -39,7 +39,7 @@ class RtcSurfaceView: UIView {
         }
     }
     
-    private func setupVideoCanvas(_ engine: WujiRtcEngineKit) {
+    private func setupVideoCanvas(_ engine: MetaRtcEngineKit) {
         if canvas.uid == 0 {
             engine.setupLocalVideo(canvas)
         } else {
@@ -47,17 +47,17 @@ class RtcSurfaceView: UIView {
         }
     }
     
-    func setRenderMode(_ engine: WujiRtcEngineKit, _ renderMode: Int) {
-        canvas.renderMode = WujiVideoRenderMode(rawValue: UInt(renderMode))!
+    func setRenderMode(_ engine: MetaRtcEngineKit, _ renderMode: Int) {
+        canvas.renderMode = MetaVideoRenderMode(rawValue: UInt(renderMode))!
         setupRenderMode(engine)
     }
 
-    func setMirrorMode(_ engine: WujiRtcEngineKit, _ mirrorMode: Int) {
-        canvas.mirrorMode = WujiVideoMirrorMode(rawValue: UInt(mirrorMode))!
+    func setMirrorMode(_ engine: MetaRtcEngineKit, _ mirrorMode: Int) {
+        canvas.mirrorMode = MetaVideoMirrorMode(rawValue: UInt(mirrorMode))!
         setupRenderMode(engine)
     }
 
-    private func setupRenderMode(_ engine: WujiRtcEngineKit) {
+    private func setupRenderMode(_ engine: MetaRtcEngineKit) {
         if canvas.uid == 0 {
             engine.setLocalRenderMode(canvas.renderMode, mirrorMode: canvas.mirrorMode)
         } else {

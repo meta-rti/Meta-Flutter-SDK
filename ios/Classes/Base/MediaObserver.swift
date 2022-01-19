@@ -1,12 +1,12 @@
 //
 //  MediaObserver.swift
-//  RCTWuji
+//  RCTMeta
 //
 //  Created by 3 on 2020/12/7.
 //
 
 import Foundation
-import WujiRTCFramework
+import MetaRTCFramework
 
 class MediaObserver: NSObject {
     private var emitter: (_ data: Dictionary<String, Any?>?) -> Void
@@ -26,7 +26,7 @@ class MediaObserver: NSObject {
     }
 }
 
-extension MediaObserver: WujiMediaMetadataDataSource {
+extension MediaObserver: MetaMediaMetadataDataSource {
     func metadataMaxSize() -> Int {
         return maxMetadataSize
     }
@@ -39,7 +39,7 @@ extension MediaObserver: WujiMediaMetadataDataSource {
     }
 }
 
-extension MediaObserver: WujiMediaMetadataDelegate {
+extension MediaObserver: MetaMediaMetadataDelegate {
     func receiveMetadata(_ data: Data, fromUser uid: Int, atTimestamp timestamp: TimeInterval) {
         emitter([
             "buffer": String(data: data, encoding: .utf8),

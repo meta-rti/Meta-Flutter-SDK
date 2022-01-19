@@ -1,12 +1,12 @@
 //
 //  BeanCovertor.swift
-//  RCTWuji
+//  RCTMeta
 //
 //  Created by 3 on 2020/12/7.
 //
 
 import Foundation
-import WujiRTCFramework
+import MetaRTCFramework
 
 func mapToPoint(_ map: Dictionary<String, Any>) -> CGPoint {
     var point = CGPoint()
@@ -37,8 +37,8 @@ func mapToRect(_ map: Dictionary<String, Any>) -> CGRect {
     )
 }
 
-func mapToVideoEncoderConfiguration(_ map: Dictionary<String, Any>) -> WujiVideoEncoderConfiguration {
-    let config = WujiVideoEncoderConfiguration()
+func mapToVideoEncoderConfiguration(_ map: Dictionary<String, Any>) -> MetaVideoEncoderConfiguration {
+    let config = MetaVideoEncoderConfiguration()
     if let dimensions = map["dimensions"] as? Dictionary<String, Any> {
         config.dimensions = mapToSize(dimensions)
     }
@@ -55,27 +55,27 @@ func mapToVideoEncoderConfiguration(_ map: Dictionary<String, Any>) -> WujiVideo
         config.minBitrate = minBitrate
     }
     if let orientationMode = map["orientationMode"] as? Int {
-        if let orientationMode = WujiVideoOutputOrientationMode(rawValue: orientationMode) {
+        if let orientationMode = MetaVideoOutputOrientationMode(rawValue: orientationMode) {
             config.orientationMode = orientationMode
         }
     }
     if let degradationPreference = map["degradationPrefer"] as? Int {
-        if let degradationPreference = WujiDegradationPreference(rawValue: degradationPreference) {
+        if let degradationPreference = MetaDegradationPreference(rawValue: degradationPreference) {
             config.degradationPreference = degradationPreference
         }
     }
     if let mirrorMode = map["mirrorMode"] as? Int {
-        if let mirrorMode = WujiVideoMirrorMode(rawValue: UInt(mirrorMode)) {
+        if let mirrorMode = MetaVideoMirrorMode(rawValue: UInt(mirrorMode)) {
             config.mirrorMode = mirrorMode
         }
     }
     return config
 }
 
-func mapToBeautyOptions(_ map: Dictionary<String, Any>) -> WujiBeautyOptions {
-    let options = WujiBeautyOptions()
+func mapToBeautyOptions(_ map: Dictionary<String, Any>) -> MetaBeautyOptions {
+    let options = MetaBeautyOptions()
     if let lighteningContrastLevel = map["lighteningContrastLevel"] as? Int {
-        if let lighteningContrastLevel = WujiLighteningContrastLevel(rawValue: UInt(lighteningContrastLevel)) {
+        if let lighteningContrastLevel = MetaLighteningContrastLevel(rawValue: UInt(lighteningContrastLevel)) {
             options.lighteningContrastLevel = lighteningContrastLevel
         }
     }
@@ -91,8 +91,8 @@ func mapToBeautyOptions(_ map: Dictionary<String, Any>) -> WujiBeautyOptions {
     return options
 }
 
-func mapToWujiImage(_ map: Dictionary<String, Any>) -> WujiImage {
-    let image = WujiImage()
+func mapToMetaImage(_ map: Dictionary<String, Any>) -> MetaImage {
+    let image = MetaImage()
     if let url = map["url"] as? String {
         if let url = URL(string: url) {
             image.url = url
@@ -102,8 +102,8 @@ func mapToWujiImage(_ map: Dictionary<String, Any>) -> WujiImage {
     return image
 }
 
-func mapToTranscodingUser(_ map: Dictionary<String, Any>) -> WujiLiveTranscodingUser {
-    let user = WujiLiveTranscodingUser()
+func mapToTranscodingUser(_ map: Dictionary<String, Any>) -> MetaLiveTranscodingUser {
+    let user = MetaLiveTranscodingUser()
     if let uid = map["uid"] as? Int {
         user.uid = UInt(uid)
     }
@@ -129,8 +129,8 @@ func mapToColor(_ map: Dictionary<String, Any>) -> UIColor {
     )
 }
 
-func mapToLiveTranscoding(_ map: Dictionary<String, Any>) -> WujiLiveTranscoding {
-    let transcoding = WujiLiveTranscoding.default()
+func mapToLiveTranscoding(_ map: Dictionary<String, Any>) -> MetaLiveTranscoding {
+    let transcoding = MetaLiveTranscoding.default()
     transcoding.size = mapToSize(map)
     if let videoBitrate = map["videoBitrate"] as? Int {
         transcoding.videoBitrate = videoBitrate
@@ -145,13 +145,13 @@ func mapToLiveTranscoding(_ map: Dictionary<String, Any>) -> WujiLiveTranscoding
         transcoding.videoGop = videoGop
     }
     if let watermark = map["watermark"] as? Dictionary<String, Any> {
-        transcoding.watermark = mapToWujiImage(watermark)
+        transcoding.watermark = mapToMetaImage(watermark)
     }
     if let backgroundImage = map["backgroundImage"] as? Dictionary<String, Any> {
-        transcoding.backgroundImage = mapToWujiImage(backgroundImage)
+        transcoding.backgroundImage = mapToMetaImage(backgroundImage)
     }
     if let audioSampleRate = map["audioSampleRate"] as? Int {
-        if let audioSampleRate = WujiAudioSampleRateType(rawValue: audioSampleRate) {
+        if let audioSampleRate = MetaAudioSampleRateType(rawValue: audioSampleRate) {
             transcoding.audioSampleRate = audioSampleRate
         }
     }
@@ -162,12 +162,12 @@ func mapToLiveTranscoding(_ map: Dictionary<String, Any>) -> WujiLiveTranscoding
         transcoding.audioChannels = audioChannels
     }
     if let audioCodecProfile = map["audioCodecProfile"] as? Int {
-        if let audioCodecProfile = WujiAudioCodecProfileType(rawValue: audioCodecProfile) {
+        if let audioCodecProfile = MetaAudioCodecProfileType(rawValue: audioCodecProfile) {
             transcoding.audioCodecProfile = audioCodecProfile
         }
     }
     if let videoCodecProfile = map["videoCodecProfile"] as? Int {
-        if let videoCodecProfile = WujiVideoCodecProfileType(rawValue: videoCodecProfile) {
+        if let videoCodecProfile = MetaVideoCodecProfileType(rawValue: videoCodecProfile) {
             transcoding.videoCodecProfile = videoCodecProfile
         }
     }
@@ -187,8 +187,8 @@ func mapToLiveTranscoding(_ map: Dictionary<String, Any>) -> WujiLiveTranscoding
     return transcoding
 }
 
-func mapToChannelMediaInfo(_ map: Dictionary<String, Any>) -> WujiChannelMediaRelayInfo {
-    let info = WujiChannelMediaRelayInfo()
+func mapToChannelMediaInfo(_ map: Dictionary<String, Any>) -> MetaChannelMediaRelayInfo {
+    let info = MetaChannelMediaRelayInfo()
     if let channelName = map["channelName"] as? String {
         info.channelName = channelName
     }
@@ -201,8 +201,8 @@ func mapToChannelMediaInfo(_ map: Dictionary<String, Any>) -> WujiChannelMediaRe
     return info
 }
 
-func mapToChannelMediaRelayConfiguration(_ map: Dictionary<String, Any>) -> WujiChannelMediaRelayConfiguration {
-    let config = WujiChannelMediaRelayConfiguration()
+func mapToChannelMediaRelayConfiguration(_ map: Dictionary<String, Any>) -> MetaChannelMediaRelayConfiguration {
+    let config = MetaChannelMediaRelayConfiguration()
     if let srcInfo = map["srcInfo"] as? Dictionary<String, Any> {
         config.sourceInfo = mapToChannelMediaInfo(srcInfo)
     }
@@ -217,8 +217,8 @@ func mapToChannelMediaRelayConfiguration(_ map: Dictionary<String, Any>) -> Wuji
     return config
 }
 
-func mapToLastmileProbeConfig(_ map: Dictionary<String, Any>) -> WujiLastmileProbeConfig {
-    let config = WujiLastmileProbeConfig()
+func mapToLastmileProbeConfig(_ map: Dictionary<String, Any>) -> MetaLastmileProbeConfig {
+    let config = MetaLastmileProbeConfig()
     if let probeUplink = map["probeUplink"] as? Bool {
         config.probeUplink = probeUplink
     }
@@ -248,8 +248,8 @@ func mapToWatermarkOptions(_ map: Dictionary<String, Any>) -> WatermarkOptions {
     return options
 }
 
-func mapToLiveInjectStreamConfig(_ map: Dictionary<String, Any>) -> WujiLiveInjectStreamConfig {
-    let config = WujiLiveInjectStreamConfig.default()
+func mapToLiveInjectStreamConfig(_ map: Dictionary<String, Any>) -> MetaLiveInjectStreamConfig {
+    let config = MetaLiveInjectStreamConfig.default()
     config.size = mapToSize(map)
     if let videoGop = map["videoGop"] as? Int {
         config.videoGop = videoGop
@@ -261,7 +261,7 @@ func mapToLiveInjectStreamConfig(_ map: Dictionary<String, Any>) -> WujiLiveInje
         config.videoBitrate = videoBitrate
     }
     if let audioSampleRate = map["audioSampleRate"] as? Int {
-        if let audioSampleRate = WujiAudioSampleRateType(rawValue: audioSampleRate) {
+        if let audioSampleRate = MetaAudioSampleRateType(rawValue: audioSampleRate) {
             config.audioSampleRate = audioSampleRate
         }
     }
@@ -274,15 +274,15 @@ func mapToLiveInjectStreamConfig(_ map: Dictionary<String, Any>) -> WujiLiveInje
     return config
 }
 
-func mapToCameraCapturerConfiguration(_ map: Dictionary<String, Any>) -> WujiCameraCapturerConfiguration {
-    let config = WujiCameraCapturerConfiguration()
-    config.preference = WujiCameraCaptureOutputPreference(rawValue: map["preference"] as! Int)!
-    config.cameraDirection = WujiCameraDirection(rawValue: map["cameraDirection"] as! Int)!
+func mapToCameraCapturerConfiguration(_ map: Dictionary<String, Any>) -> MetaCameraCapturerConfiguration {
+    let config = MetaCameraCapturerConfiguration()
+    config.preference = MetaCameraCaptureOutputPreference(rawValue: map["preference"] as! Int)!
+    config.cameraDirection = MetaCameraDirection(rawValue: map["cameraDirection"] as! Int)!
     return config
 }
 
-func mapToChannelMediaOptions(_ map: Dictionary<String, Any>) -> WujiRtcChannelMediaOptions {
-    let options = WujiRtcChannelMediaOptions()
+func mapToChannelMediaOptions(_ map: Dictionary<String, Any>) -> MetaRtcChannelMediaOptions {
+    let options = MetaRtcChannelMediaOptions()
     if let autoSubscribeAudio = map["autoSubscribeAudio"] as? Bool {
         options.autoSubscribeAudio = autoSubscribeAudio
     }

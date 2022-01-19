@@ -1,12 +1,12 @@
 //
 //  RtcChannel.swift
-//  RCTWuji
+//  RCTMeta
 //
 //  Created by 3 on 2020/12/7.
 //
 
 import Foundation
-import WujiRTCFramework
+import MetaRTCFramework
 
 protocol RtcChannelInterface:
         RtcChannelAudioInterface,
@@ -123,7 +123,7 @@ protocol RtcChannelStreamMessageInterface {
 @objc
 class RtcChannelManager: NSObject, RtcChannelInterface {
     private var emitter: (_ methodName: String, _ data: Dictionary<String, Any?>?) -> Void
-    private var rtcChannelMap = [String: WujiRtcChannel]()
+    private var rtcChannelMap = [String: MetaRtcChannel]()
     private var rtcChannelDelegateMap = [String: RtcChannelEventHandler]()
     private var mediaObserverMap = [String: MediaObserver]()
 
@@ -140,14 +140,14 @@ class RtcChannelManager: NSObject, RtcChannelInterface {
         mediaObserverMap.removeAll()
     }
 
-    subscript(channelId: String) -> WujiRtcChannel? {
+    subscript(channelId: String) -> MetaRtcChannel? {
         get {
             return rtcChannelMap[channelId]
         }
     }
 
     @objc func create(_ params: NSDictionary, _ callback: Callback) {
-        callback.resolve(params["engine"] as? WujiRtcEngineKit) { [weak self] it in
+        callback.resolve(params["engine"] as? MetaRtcEngineKit) { [weak self] it in
             if let rtcChannel = it.createRtcChannel(params["channelId"] as! String) {
                 let delegate = RtcChannelEventHandler() { [weak self] methodName, data in
                     self?.emitter(methodName, data)
@@ -161,7 +161,7 @@ class RtcChannelManager: NSObject, RtcChannelInterface {
     }
 
     @objc func destroy(_ params: NSDictionary, _ callback: Callback) {
-        var code: Int32? = -Int32(WujiErrorCode.notInitialized.rawValue)
+        var code: Int32? = -Int32(MetaErrorCode.notInitialized.rawValue)
         if let it = self[params["channelId"] as! String] {
             code = rtcChannelMap.removeValue(forKey: it.getId()!)?.destroy()
         }
@@ -169,7 +169,7 @@ class RtcChannelManager: NSObject, RtcChannelInterface {
     }
 
     @objc func setClientRole(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(self[params["channelId"] as! String]?.setClientRole(WujiClientRole(rawValue: params["role"] as! Int)!))
+        callback.code(self[params["channelId"] as! String]?.setClientRole(MetaClientRole(rawValue: params["role"] as! Int)!))
     }
 
     @objc func joinChannel(_ params: NSDictionary, _ callback: Callback) {
@@ -265,37 +265,37 @@ class RtcChannelManager: NSObject, RtcChannelInterface {
     }
 
     @objc func setRemoteVideoStreamType(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(self[params["channelId"] as! String]?.setRemoteVideoStream(params["uid"] as! UInt, type: WujiVideoStreamType(rawValue: params["streamType"] as! Int)!))
+        callback.code(self[params["channelId"] as! String]?.setRemoteVideoStream(params["uid"] as! UInt, type: MetaVideoStreamType(rawValue: params["streamType"] as! Int)!))
     }
 
     @objc func setRemoteDefaultVideoStreamType(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(self[params["channelId"] as! String]?.setRemoteDefaultVideoStreamType( WujiVideoStreamType(rawValue: params["streamType"] as! Int)!))
+        callback.code(self[params["channelId"] as! String]?.setRemoteDefaultVideoStreamType( MetaVideoStreamType(rawValue: params["streamType"] as! Int)!))
     }
 
     @objc func setRemoteUserPriority(_ params: NSDictionary, _ callback: Callback) {
-        callback.code(self[params["channelId"] as! String]?.setRemoteUserPriority(params["uid"] as! UInt, type: WujiUserPriority(rawValue: params["userPriority"] as! Int)!))
+        callback.code(self[params["channelId"] as! String]?.setRemoteUserPriority(params["uid"] as! UInt, type: MetaUserPriority(rawValue: params["userPriority"] as! Int)!))
     }
 
     @objc func registerMediaMetadataObserver(_ params: NSDictionary, _ callback: Callback) {
-        var code = -WujiErrorCode.notInitialized.rawValue
+        var code = -MetaErrorCode.notInitialized.rawValue
         if let it = self[params["channelId"] as! String] {
             let mediaObserver = MediaObserver { [weak self] data in
                 self?.emitter(RtcEngineEvents.MetadataReceived, data)
             }
             if it.setMediaMetadataDelegate(mediaObserver, with: .video) {
                 mediaObserverMap[it.getId()!] = mediaObserver
-                code = WujiErrorCode.noError.rawValue
+                code = MetaErrorCode.noError.rawValue
             }
         }
         callback.code(Int32(code))
     }
 
     @objc func unregisterMediaMetadataObserver(_ params: NSDictionary, _ callback: Callback) {
-        var code = -WujiErrorCode.notInitialized.rawValue
+        var code = -MetaErrorCode.notInitialized.rawValue
         if let it = self[params["channelId"] as! String] {
             if it.setMediaMetadataDelegate(nil, with: .video) {
                 mediaObserverMap.removeValue(forKey: it.getId()!)
-                code = WujiErrorCode.noError.rawValue
+                code = MetaErrorCode.noError.rawValue
             }
         }
         callback.code(Int32(code))
@@ -320,11 +320,11 @@ class RtcChannelManager: NSObject, RtcChannelInterface {
     @objc func setEncryptionMode(_ params: NSDictionary, _ callback: Callback) {
         var encryptionMode = ""
         switch params["encryptionMode"] as! Int {
-        case WujiEncryptionMode.AES128XTS.rawValue:
+        case MetaEncryptionMode.AES128XTS.rawValue:
             encryptionMode = "aes-128-xts"
-        case WujiEncryptionMode.AES128ECB.rawValue:
+        case MetaEncryptionMode.AES128ECB.rawValue:
             encryptionMode = "aes-128-ecb"
-        case WujiEncryptionMode.AES256XTS.rawValue:
+        case MetaEncryptionMode.AES256XTS.rawValue:
             encryptionMode = "aes-256-xts"
         default: encryptionMode = ""
         }
@@ -340,7 +340,7 @@ class RtcChannelManager: NSObject, RtcChannelInterface {
     }
 
     @objc func createDataStream(_ params: NSDictionary, _ callback: Callback) {
-        var code: Int32 = -Int32(WujiErrorCode.notInitialized.rawValue)
+        var code: Int32 = -Int32(MetaErrorCode.notInitialized.rawValue)
         var streamId = 0
         if let it = self[params["channelId"] as! String] {
             code = it.createDataStream(&streamId, reliable: params["reliable"] as! Bool, ordered: params["ordered"] as! Bool)
@@ -351,12 +351,12 @@ class RtcChannelManager: NSObject, RtcChannelInterface {
     }
 
     @objc func sendStreamMessage(_ params: NSDictionary, _ callback: Callback) {
-        var code: Int32 = -Int32(WujiErrorCode.notInitialized.rawValue)
+        var code: Int32 = -Int32(MetaErrorCode.notInitialized.rawValue)
         if let it = self[params["channelId"] as! String] {
             if let data = (params["message"] as! String).data(using: .utf8) {
                 code = it.sendStreamMessage(params["streamId"] as! Int, data: data)
             } else {
-                code = -Int32(WujiErrorCode.invalidArgument.rawValue)
+                code = -Int32(MetaErrorCode.invalidArgument.rawValue)
             }
         }
         callback.code(code)

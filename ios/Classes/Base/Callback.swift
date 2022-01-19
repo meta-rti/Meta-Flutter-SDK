@@ -1,12 +1,12 @@
 //
 //  Callback.swift
-//  RCTWuji
+//  RCTMeta
 //
 //  Created by 3 on 2020/12/7.
 //
 
 import Foundation
-import WujiRTCFramework
+import MetaRTCFramework
 
 @objc
 protocol Callback: class {
@@ -18,8 +18,8 @@ protocol Callback: class {
 extension Callback {
     func code(_ code: Int32?, _ runnable: ((Int32) -> Any?)? = nil) {
         if code == nil || code! < 0 {
-            let newCode = abs(Int(code ?? Int32(WujiErrorCode.notInitialized.rawValue)))
-            failure(String(newCode), WujiRtcEngineKit.getErrorDescription(newCode) ?? "")
+            let newCode = abs(Int(code ?? Int32(MetaErrorCode.notInitialized.rawValue)))
+            failure(String(newCode), MetaRtcEngineKit.getErrorDescription(newCode) ?? "")
             return
         }
 
@@ -33,8 +33,8 @@ extension Callback {
 
     func resolve<T>(_ source: T?, _ runnable: (T) -> Any?) {
         guard let `source` = source else {
-            let code = WujiErrorCode.notInitialized.rawValue
-            failure(String(code), WujiRtcEngineKit.getErrorDescription(code) ?? "")
+            let code = MetaErrorCode.notInitialized.rawValue
+            failure(String(code), MetaRtcEngineKit.getErrorDescription(code) ?? "")
             return
         }
 

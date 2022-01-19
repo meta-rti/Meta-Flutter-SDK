@@ -1,12 +1,12 @@
 //
 //  RtcChannelEvent.swift
-//  RCTWuji
+//  RCTMeta
 //
 //  Created by 3 on 2020/12/7.
 //
 
 import Foundation
-import WujiRTCFramework
+import MetaRTCFramework
 
 class RtcChannelEvents {
     static let Warning = "Warning"
@@ -87,7 +87,7 @@ class RtcChannelEvents {
 }
 
 class RtcChannelEventHandler: NSObject {
-    static let PREFIX = "co.wuji.rtc."
+    static let PREFIX = "co.meta.rtc."
 
     var emitter: (_ methodName: String, _ data: Dictionary<String, Any?>?) -> Void
 
@@ -95,7 +95,7 @@ class RtcChannelEventHandler: NSObject {
         self.emitter = emitter
     }
 
-    private func callback(_ methodName: String, _ channel: WujiRtcChannel, _ data: Any?...) {
+    private func callback(_ methodName: String, _ channel: MetaRtcChannel, _ data: Any?...) {
         emitter(methodName, [
             "channelId": channel.getId(),
             "data": data
@@ -103,120 +103,120 @@ class RtcChannelEventHandler: NSObject {
     }
 }
 
-extension RtcChannelEventHandler: WujiRtcChannelDelegate {
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, didOccurWarning warningCode: WujiWarningCode) {
+extension RtcChannelEventHandler: MetaRtcChannelDelegate {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, didOccurWarning warningCode: MetaWarningCode) {
         callback(RtcChannelEvents.Warning, rtcChannel, warningCode.rawValue)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, didOccurError errorCode: WujiErrorCode) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, didOccurError errorCode: MetaErrorCode) {
         callback(RtcChannelEvents.Error, rtcChannel, errorCode.rawValue)
     }
 
-    public func rtcChannelDidJoin(_ rtcChannel: WujiRtcChannel, withUid uid: UInt, elapsed: Int) {
+    public func rtcChannelDidJoin(_ rtcChannel: MetaRtcChannel, withUid uid: UInt, elapsed: Int) {
         callback(RtcChannelEvents.JoinChannelSuccess, rtcChannel, rtcChannel.getId(), uid, elapsed)
     }
 
-    public func rtcChannelDidRejoin(_ rtcChannel: WujiRtcChannel, withUid uid: UInt, elapsed: Int) {
+    public func rtcChannelDidRejoin(_ rtcChannel: MetaRtcChannel, withUid uid: UInt, elapsed: Int) {
         callback(RtcChannelEvents.RejoinChannelSuccess, rtcChannel, rtcChannel.getId(), uid, elapsed)
     }
 
-    public func rtcChannelDidLeave(_ rtcChannel: WujiRtcChannel, with stats: WujiChannelStats) {
+    public func rtcChannelDidLeave(_ rtcChannel: MetaRtcChannel, with stats: MetaChannelStats) {
         callback(RtcChannelEvents.LeaveChannel, rtcChannel, stats.toMap())
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, didClientRoleChanged oldRole: WujiClientRole, newRole: WujiClientRole) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, didClientRoleChanged oldRole: MetaClientRole, newRole: MetaClientRole) {
         callback(RtcChannelEvents.ClientRoleChanged, rtcChannel, oldRole.rawValue, newRole.rawValue)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, didJoinedOfUid uid: UInt, elapsed: Int) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, didJoinedOfUid uid: UInt, elapsed: Int) {
         callback(RtcChannelEvents.UserJoined, rtcChannel, uid, elapsed)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, didOfflineOfUid uid: UInt, reason: WujiUserOfflineReason) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, didOfflineOfUid uid: UInt, reason: MetaUserOfflineReason) {
         callback(RtcChannelEvents.UserOffline, rtcChannel, uid, reason.rawValue)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, connectionChangedTo state: WujiConnectionStateType, reason: WujiConnectionChangedReason) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, connectionChangedTo state: MetaConnectionStateType, reason: MetaConnectionChangedReason) {
         callback(RtcChannelEvents.ConnectionStateChanged, rtcChannel, state.rawValue, reason.rawValue)
     }
 
-    public func rtcChannelDidLost(_ rtcChannel: WujiRtcChannel) {
+    public func rtcChannelDidLost(_ rtcChannel: MetaRtcChannel) {
         callback(RtcChannelEvents.ConnectionLost, rtcChannel)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, tokenPrivilegeWillExpire token: String) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, tokenPrivilegeWillExpire token: String) {
         callback(RtcChannelEvents.TokenPrivilegeWillExpire, rtcChannel, token)
     }
 
-    public func rtcChannelRequestToken(_ rtcChannel: WujiRtcChannel) {
+    public func rtcChannelRequestToken(_ rtcChannel: MetaRtcChannel) {
         callback(RtcChannelEvents.RequestToken, rtcChannel)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, activeSpeaker speakerUid: UInt) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, activeSpeaker speakerUid: UInt) {
         callback(RtcChannelEvents.ActiveSpeaker, rtcChannel, speakerUid)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, videoSizeChangedOfUid uid: UInt, size: CGSize, rotation: Int) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, videoSizeChangedOfUid uid: UInt, size: CGSize, rotation: Int) {
         callback(RtcChannelEvents.VideoSizeChanged, rtcChannel, uid, Int(size.width), Int(size.height), rotation)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, remoteVideoStateChangedOfUid uid: UInt, state: WujiVideoRemoteState, reason: WujiVideoRemoteStateReason, elapsed: Int) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, remoteVideoStateChangedOfUid uid: UInt, state: MetaVideoRemoteState, reason: MetaVideoRemoteStateReason, elapsed: Int) {
         callback(RtcChannelEvents.RemoteVideoStateChanged, rtcChannel, uid, state.rawValue, reason.rawValue, elapsed)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, remoteAudioStateChangedOfUid uid: UInt, state: WujiAudioRemoteState, reason: WujiVideoRemoteStateReason, elapsed: Int) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, remoteAudioStateChangedOfUid uid: UInt, state: MetaAudioRemoteState, reason: MetaVideoRemoteStateReason, elapsed: Int) {
         callback(RtcChannelEvents.RemoteAudioStateChanged, rtcChannel, uid, state.rawValue, reason.rawValue, elapsed)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, didLocalPublishFallbackToAudioOnly isFallbackOrRecover: Bool) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, didLocalPublishFallbackToAudioOnly isFallbackOrRecover: Bool) {
         callback(RtcChannelEvents.LocalPublishFallbackToAudioOnly, rtcChannel, isFallbackOrRecover)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, didRemoteSubscribeFallbackToAudioOnly isFallbackOrRecover: Bool, byUid uid: UInt) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, didRemoteSubscribeFallbackToAudioOnly isFallbackOrRecover: Bool, byUid uid: UInt) {
         callback(RtcChannelEvents.RemoteSubscribeFallbackToAudioOnly, rtcChannel, uid, isFallbackOrRecover)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, reportRtcStats stats: WujiChannelStats) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, reportRtcStats stats: MetaChannelStats) {
         callback(RtcChannelEvents.RtcStats, rtcChannel, stats.toMap())
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, networkQuality uid: UInt, txQuality: WujiNetworkQuality, rxQuality: WujiNetworkQuality) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, networkQuality uid: UInt, txQuality: MetaNetworkQuality, rxQuality: MetaNetworkQuality) {
         callback(RtcChannelEvents.NetworkQuality, rtcChannel, uid, txQuality.rawValue, rxQuality.rawValue)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, remoteVideoStats stats: WujiRtcRemoteVideoStats) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, remoteVideoStats stats: MetaRtcRemoteVideoStats) {
         callback(RtcChannelEvents.RemoteVideoStats, rtcChannel, stats.toMap())
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, remoteAudioStats stats: WujiRtcRemoteAudioStats) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, remoteAudioStats stats: MetaRtcRemoteAudioStats) {
         callback(RtcChannelEvents.RemoteAudioStats, rtcChannel, stats.toMap())
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, rtmpStreamingChangedToState url: String, state: WujiRtmpStreamingState, errorCode: WujiRtmpStreamingErrorCode) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, rtmpStreamingChangedToState url: String, state: MetaRtmpStreamingState, errorCode: MetaRtmpStreamingErrorCode) {
         callback(RtcChannelEvents.RtmpStreamingStateChanged, rtcChannel, url, state.rawValue, errorCode.rawValue)
     }
 
-    public func rtcChannelTranscodingUpdated(_ rtcChannel: WujiRtcChannel) {
+    public func rtcChannelTranscodingUpdated(_ rtcChannel: MetaRtcChannel) {
         callback(RtcChannelEvents.TranscodingUpdated, rtcChannel)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, streamInjectedStatusOfUrl url: String, uid: UInt, status: WujiInjectStreamStatus) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, streamInjectedStatusOfUrl url: String, uid: UInt, status: MetaInjectStreamStatus) {
         callback(RtcChannelEvents.StreamInjectedStatus, rtcChannel, url, uid, status.rawValue)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, receiveStreamMessageFromUid uid: UInt, streamId: Int, data: Data) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, receiveStreamMessageFromUid uid: UInt, streamId: Int, data: Data) {
         callback(RtcChannelEvents.StreamMessage, rtcChannel, uid, streamId, String(data: data, encoding: .utf8))
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, didOccurStreamMessageErrorFromUid uid: UInt, streamId: Int, error: Int, missed: Int, cached: Int) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, didOccurStreamMessageErrorFromUid uid: UInt, streamId: Int, error: Int, missed: Int, cached: Int) {
         callback(RtcChannelEvents.StreamMessageError, rtcChannel, uid, streamId, error, missed, cached)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, channelMediaRelayStateDidChange state: WujiChannelMediaRelayState, error: WujiChannelMediaRelayError) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, channelMediaRelayStateDidChange state: MetaChannelMediaRelayState, error: MetaChannelMediaRelayError) {
         callback(RtcChannelEvents.ChannelMediaRelayStateChanged, rtcChannel, state.rawValue, error.rawValue)
     }
 
-    public func rtcChannel(_ rtcChannel: WujiRtcChannel, didReceive event: WujiChannelMediaRelayEvent) {
+    public func rtcChannel(_ rtcChannel: MetaRtcChannel, didReceive event: MetaChannelMediaRelayEvent) {
         callback(RtcChannelEvents.ChannelMediaRelayEvent, rtcChannel, event.rawValue)
     }
 }
