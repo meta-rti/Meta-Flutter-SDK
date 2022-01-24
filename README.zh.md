@@ -40,6 +40,9 @@ meta 视频 SDK 需要 `摄像头` 和 `麦克风` 权限来开始视频通话�
     ...
 </manifest>
 ```
+ProGuard
+-keep class co.meta.** {*;}
+-keep class org.webrtc.** {*;}
 
 ### iOS
 
