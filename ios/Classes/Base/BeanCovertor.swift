@@ -145,10 +145,10 @@ func mapToLiveTranscoding(_ map: Dictionary<String, Any>) -> MetaLiveTranscoding
         transcoding.videoGop = videoGop
     }
     if let watermark = map["watermark"] as? Dictionary<String, Any> {
-        transcoding.watermark = mapToMetaImage(watermark)
+        transcoding.watermark = [mapToMetaImage(watermark)]
     }
     if let backgroundImage = map["backgroundImage"] as? Dictionary<String, Any> {
-        transcoding.backgroundImage = mapToMetaImage(backgroundImage)
+        transcoding.backgroundImage = [mapToMetaImage(backgroundImage)]
     }
     if let audioSampleRate = map["audioSampleRate"] as? Int {
         if let audioSampleRate = MetaAudioSampleRateType(rawValue: audioSampleRate) {
