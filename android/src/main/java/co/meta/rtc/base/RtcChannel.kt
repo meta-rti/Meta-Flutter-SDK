@@ -217,7 +217,7 @@ class RtcChannelManager(
     }
 
     override fun setLiveTranscoding(params: Map<String, *>, callback: Callback) {
-//        callback.code(this[params["channelId"] as String]?.setLiveTranscoding(mapToLiveTranscoding(params["transcoding"] as Map<*, *>)))
+        callback.code(this[params["channelId"] as String]?.setLiveTranscoding(mapToLiveTranscoding(params["transcoding"] as Map<*, *>)))
     }
 
     override fun addPublishStreamUrl(params: Map<String, *>, callback: Callback) {

@@ -668,7 +668,7 @@ class RtcEngineManager(
     }
 
     override fun setLiveTranscoding(params: Map<String, *>, callback: Callback) {
-//        callback.code(engine?.setLiveTranscoding(mapToLiveTranscoding(params["transcoding"] as Map<*, *>)))
+        callback.code(engine?.setLiveTranscoding(mapToLiveTranscoding(params["transcoding"] as Map<*, *>)))
     }
 //
     override fun addPublishStreamUrl(params: Map<String, *>, callback: Callback) {

@@ -38,15 +38,15 @@ fun mapToBeautyOptions(map: Map<*, *>): BeautyOptions {
     }
 }
 
-//fun mapToMetaImage(map: Map<*, *>): MetaImage {
-//    return MetaImage().apply {
-//        (map["url"] as? String)?.let { url = it }
-//        (map["x"] as? Number)?.let { x = it.toInt() }
-//        (map["y"] as? Number)?.let { y = it.toInt() }
-//        (map["width"] as? Number)?.let { width = it.toInt() }
-//        (map["height"] as? Number)?.let { height = it.toInt() }
-//    }
-//}
+fun mapToMetaImage(map: Map<*, *>): MetaImage {
+    return MetaImage().apply {
+        (map["url"] as? String)?.let { url = it }
+        (map["x"] as? Number)?.let { x = it.toInt() }
+        (map["y"] as? Number)?.let { y = it.toInt() }
+        (map["width"] as? Number)?.let { width = it.toInt() }
+        (map["height"] as? Number)?.let { height = it.toInt() }
+    }
+}
 
 fun mapToTranscodingUser(map: Map<*, *>): TranscodingUser {
     return TranscodingUser().apply {
@@ -69,32 +69,32 @@ fun mapToColor(map: Map<*, *>): Int {
     )
 }
 
-//fun mapToLiveTranscoding(map: Map<*, *>): LiveTranscoding {
-//    return LiveTranscoding().apply {
-//        (map["width"] as? Number)?.let { width = it.toInt() }
-//        (map["height"] as? Number)?.let { height = it.toInt() }
-//        (map["videoBitrate"] as? Number)?.let { videoBitrate = it.toInt() }
-//        (map["videoFramerate"] as? Number)?.let { videoFramerate = it.toInt() }
-//        (map["lowLatency"] as? Boolean)?.let { lowLatency = it }
-//        (map["videoGop"] as? Number)?.let { videoGop = it.toInt() }
-//        (map["watermark"] as? Map<*, *>)?.let { watermark = mapToMetaImage(it) }
-//        (map["backgroundImage"] as? Map<*, *>)?.let { backgroundImage = mapToMetaImage(it) }
-//        (map["audioSampleRate"] as? Number)?.let { audioSampleRate = intToLiveTranscodingAudioSampleRate(it.toInt()) }
-//        (map["audioBitrate"] as? Number)?.let { audioBitrate = it.toInt() }
-//        (map["audioChannels"] as? Number)?.let { audioChannels = it.toInt() }
-//        (map["audioCodecProfile"] as? Number)?.let { audioCodecProfile = intToAudioCodecProfile(it.toInt()) }
-//        (map["videoCodecProfile"] as? Number)?.let { videoCodecProfile = intToVideoCodecProfile(it.toInt()) }
-//        (map["backgroundColor"] as? Map<*, *>)?.let { backgroundColor = mapToColor(it) }
-//        (map["userConfigExtraInfo"] as? String)?.let { userConfigExtraInfo = it }
-//        (map["transcodingUsers"] as? List<*>)?.let { list ->
-//            list.forEach { item ->
-//                (item as? Map<*, *>)?.let {
-//                    addUser(mapToTranscodingUser(it))
-//                }
-//            }
-//        }
-//    }
-//}
+fun mapToLiveTranscoding(map: Map<*, *>): LiveTranscoding {
+    return LiveTranscoding().apply {
+        (map["width"] as? Number)?.let { width = it.toInt() }
+        (map["height"] as? Number)?.let { height = it.toInt() }
+        (map["videoBitrate"] as? Number)?.let { videoBitrate = it.toInt() }
+        (map["videoFramerate"] as? Number)?.let { videoFramerate = it.toInt() }
+        (map["lowLatency"] as? Boolean)?.let { lowLatency = it }
+        (map["videoGop"] as? Number)?.let { videoGop = it.toInt() }
+        (map["watermark"] as? Map<*, *>)?.let { watermarks = arrayListOf<MetaImage>(mapToMetaImage(it)) }
+        (map["backgroundImage"] as? Map<*, *>)?.let { backgroundImages = arrayListOf<MetaImage>(mapToMetaImage(it)) }
+        (map["audioSampleRate"] as? Number)?.let { audioSampleRate = intToLiveTranscodingAudioSampleRate(it.toInt()) }
+        (map["audioBitrate"] as? Number)?.let { audioBitrate = it.toInt() }
+        (map["audioChannels"] as? Number)?.let { audioChannels = it.toInt() }
+        (map["audioCodecProfile"] as? Number)?.let { audioCodecProfile = intToAudioCodecProfile(it.toInt()) }
+        (map["videoCodecProfile"] as? Number)?.let { videoCodecProfile = intToVideoCodecProfile(it.toInt()) }
+        (map["backgroundColor"] as? Map<*, *>)?.let { backgroundColor = mapToColor(it) }
+        (map["userConfigExtraInfo"] as? String)?.let { transcodingExtraInfo = it }
+        (map["transcodingUsers"] as? List<*>)?.let { list ->
+            list.forEach { item ->
+                (item as? Map<*, *>)?.let {
+                    addUser(mapToTranscodingUser(it))
+                }
+            }
+        }
+    }
+}
 
 fun mapToChannelMediaInfo(map: Map<*, *>): ChannelMediaInfo {
     return ChannelMediaInfo(
