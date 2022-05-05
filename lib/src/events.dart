@@ -1361,10 +1361,10 @@ class RtcEngineEventHandler {
             Map<String, dynamic> msg = jsonDecode(response["message"] as String);
             if (response.containsKey("state")) {
               int state = response["state"] as int;
+              String url =msg["url"] as String;
               if (state == 5) {
-                mediaRecordUploadSuccessCallback.call(response["error"] as int,state,url,response["etag"] as String,response["object_name"] as String,,response["local_name"] as String);
+                mediaRecordUploadSuccessCallback.call(response["error"] as int,state,url,response["etag"] as String,response["object_name"] as String,response["local_name"] as String);
               } else {
-                String url =msg["url"] as String;
                 mediaRecordStateChangeCallback.call(response["error"] as int,state,url);
               }
             }

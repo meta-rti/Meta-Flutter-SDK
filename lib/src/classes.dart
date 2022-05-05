@@ -1146,7 +1146,7 @@ class MediaRecordConfig {
   MediaRecordConfig();
 
   /// @nodoc
-  factory FacePositionInfo.fromJson(Map<String, dynamic> json) =>
+  factory MediaRecordConfig.fromJson(Map<String, dynamic> json) =>
       _$MediaRecordConfigFromJson(json);
 
   /// @nodoc
