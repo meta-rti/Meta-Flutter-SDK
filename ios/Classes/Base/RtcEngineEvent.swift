@@ -85,6 +85,8 @@ class RtcEngineEvents {
     static let AudioSubscribeStateChanged = "AudioSubscribeStateChanged"
     static let VideoSubscribeStateChanged = "VideoSubscribeStateChanged"
     static let RtmpStreamingEvent = "RtmpStreamingEvent"
+    static let ParametersResponse = "ParametersResponse"
+//    static let
 
     static func toMap() -> Dictionary<String, String> {
         return [
@@ -165,6 +167,7 @@ class RtcEngineEvents {
             "AudioSubscribeStateChanged": AudioSubscribeStateChanged,
             "VideoSubscribeStateChanged": VideoSubscribeStateChanged,
             "RtmpStreamingEvent": RtmpStreamingEvent,
+            "ParametersResponse":ParametersResponse,
         ]
     }
 }
@@ -474,5 +477,8 @@ extension RtcEngineEventHandler: MetaRtcEngineDelegate {
     
     func rtcEngine(_ engine: MetaRtcEngineKit, firstLocalVideoFramePublished elapsed: Int) {
         callback(RtcEngineEvents.FirstLocalVideoFramePublished, elapsed)
+    }
+    func rtcEngine(_ engine: MetaRtcEngineKit, type:Int, onParametersResponse response: String){
+        callback(RtcEngineEvents.ParametersResponse, type,response)
     }
 }
