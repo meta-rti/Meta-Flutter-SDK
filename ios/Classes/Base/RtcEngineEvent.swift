@@ -478,7 +478,7 @@ extension RtcEngineEventHandler: MetaRtcEngineDelegate {
     func rtcEngine(_ engine: MetaRtcEngineKit, firstLocalVideoFramePublished elapsed: Int) {
         callback(RtcEngineEvents.FirstLocalVideoFramePublished, elapsed)
     }
-    func rtcEngine(_ engine: MetaRtcEngineKit, type:Int, onParametersResponse response: String){
+    func rtcEngine(_ engine: MetaRtcEngineKit, type: Int32, onParametersResponse response: String?) {
         callback(RtcEngineEvents.ParametersResponse, type,response)
     }
 }

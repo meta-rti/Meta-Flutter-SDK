@@ -1363,7 +1363,7 @@ class RtcEngineEventHandler {
               int state = response["state"] as int;
               String url =msg["url"] as String;
               if (state == 5) {
-                mediaRecordUploadSuccessCallback.call(response["error"] as int,state,url,response["etag"] as String,response["object_name"] as String,response["local_name"] as String);
+                mediaRecordUploadSuccessCallback.call(response["error"] as int,state,url,msg["etag"] as String,msg["object_name"] as String,msg["local_name"] as String);
               } else {
                 mediaRecordStateChangeCallback.call(response["error"] as int,state,url);
               }

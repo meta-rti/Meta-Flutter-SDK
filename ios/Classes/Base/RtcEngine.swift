@@ -973,23 +973,24 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
     
     @objc func startMediaRecord(_ params: NSDictionary, _ callback: Callback) {
-        let config = params["mediaRecordConfig"] as! NSDictionary
-        let jsonDic:NSDictionary = ["media_record_stop":config]
-        if let data = try? JSONSerialization.data(withJSONObject: jsonDic, options: .prettyPrinted) {
-            if let jsonString = String(data: data, encoding: . utf8) {
-                callback.code(engine?.setParameters(jsonString))
-            } else {
-                callback.code(-1);
+        
+        callback.resolve(engine) { it in
+            let documentPath2 = NSHomeDirectory() + "/Documents/test.m3u8"
+            var config = params["mediaRecordConfig"] as! NSMutableDictionary
+            config["fileName"] = documentPath2
+            let jsonDic:NSDictionary = ["media_record_start":config]
+            if let data = try? JSONSerialization.data(withJSONObject: jsonDic, options: .prettyPrinted) {
+                if let jsonString = String(data: data, encoding: . utf8) {
+                    it.setParameters(jsonString)
+                }
             }
-        } else {
-            callback.code(-1);
+            return nil
         }
     }
     @objc func stopMediaRecord( _ callback: Callback) {
-        var code: Int32 = -Int32(MetaErrorCode.notInitialized.rawValue)
-        if let it = engine {
-            code  = it.setParameters("\"media_record_stop\":\"\"")
+        callback.resolve(engine) { it in
+            it.setParameters("\"media_record_stop\":\"\"")
+            return nil
         }
-        callback.code(code)
     }
 }
