@@ -164,7 +164,8 @@ class RtcEngineEvents {
                     "VideoPublishStateChanged" to VideoPublishStateChanged,
                     "AudioSubscribeStateChanged" to AudioSubscribeStateChanged,
                     "VideoSubscribeStateChanged" to VideoSubscribeStateChanged,
-                    "RtmpStreamingEvent" to RtmpStreamingEvent
+                    "RtmpStreamingEvent" to RtmpStreamingEvent,
+                    "ParametersResponse" to ParametersResponse
             )
         }
     }
