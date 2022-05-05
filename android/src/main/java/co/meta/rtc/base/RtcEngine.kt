@@ -49,6 +49,10 @@ class IRtcEngine {
         fun setLogFileSize(params: Map<String, *>, callback: Callback)
 
         fun setParameters(params: Map<String, *>, callback: Callback)
+
+        fun startMediaRecord(params: Map<String, *>, callback: Callback)
+
+        fun stopMediaRecord(callback: Callback)
     }
 
     interface RtcUserInfoInterface {
@@ -417,6 +421,14 @@ class RtcEngineManager(
 
     override fun setParameters(params: Map<String, *>, callback: Callback) {
         callback.code(RtcEngine.setParameters(params["parameters"] as String))
+    }
+
+    override fun startMediaRecord(params: Map<String, *>, callback: Callback) {
+        callback.code(RtcEngine.setParameters("{\"media_record_start\": ${params["mediaRecordConfig"] as String}}"))
+    }
+
+    override fun stopMediaRecord(callback: Callback) {
+        callback.code(RtcEngine.setParameters("{\"media_record_stop\": \"\"}"))
     }
 
     override fun registerLocalUserAccount(params: Map<String, *>, callback: Callback) {
