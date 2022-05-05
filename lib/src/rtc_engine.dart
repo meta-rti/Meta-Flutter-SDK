@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
@@ -862,7 +863,7 @@ class RtcEngine with RtcEngineInterface {
 
   @override
   Future<void> startMediaRecord(MediaRecordConfig mediaRecordConfig) {
-    return _invokeMethod('startMediaRecord', {'mediaRecordConfig': mediaRecordConfig.toJson()});
+    return _invokeMethod('startMediaRecord', {'mediaRecordConfig': jsonEncode(mediaRecordConfig)});
   }
 
   @override
