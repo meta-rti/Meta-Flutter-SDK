@@ -29,7 +29,8 @@ protocol RtcEngineInterface:
         RtcEngineAudioRecorderInterface,
         RtcEngineInjectStreamInterface,
         RtcEngineCameraInterface,
-        RtcEngineStreamMessageInterface {
+        RtcEngineStreamMessageInterface,
+        RtcEngineMediaRecordInterface{
     func create(_ params: NSDictionary, _ callback: Callback)
 
     func destroy(_ callback: Callback)
@@ -330,6 +331,10 @@ protocol RtcEngineStreamMessageInterface {
     func createDataStream(_ params: NSDictionary, _ callback: Callback)
 
     func sendStreamMessage(_ params: NSDictionary, _ callback: Callback)
+}
+protocol  RtcEngineMediaRecordInterface {
+    func startMediaRecord(_ params: NSDictionary, _ callback: Callback)
+    func stopMediaRecord( _ callback: Callback)
 }
 
 @objc
@@ -963,6 +968,27 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
             } else {
                 code = -Int32(MetaErrorCode.invalidArgument.rawValue)
             }
+        }
+        callback.code(code)
+    }
+    
+    @objc func startMediaRecord(_ params: NSDictionary, _ callback: Callback) {
+        let config = params["mediaRecordConfig"] as! NSDictionary
+        let jsonDic:NSDictionary = ["media_record_stop":config]
+        if let data = try? JSONSerialization.data(withJSONObject: jsonDic, options: .prettyPrinted) {
+            if let jsonString = String(data: data, encoding: . utf8) {
+                callback.code(engine?.setParameters(jsonString))
+            } else {
+                callback.code(-1);
+            }
+        } else {
+            callback.code(-1);
+        }
+    }
+    @objc func stopMediaRecord( _ callback: Callback) {
+        var code: Int32 = -Int32(MetaErrorCode.notInitialized.rawValue)
+        if let it = engine {
+            code  = it.setParameters("\"media_record_stop\":\"\"")
         }
         callback.code(code)
     }
