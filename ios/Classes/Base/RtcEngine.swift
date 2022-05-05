@@ -974,7 +974,7 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     
     @objc func startMediaRecord(_ params: NSDictionary, _ callback: Callback) {
         callback.resolve(engine) { it in
-            var config = params["mediaRecordConfig"] as! NSMutableDictionary
+            let config = params["mediaRecordConfig"] as! NSMutableDictionary
             let jsonDic:NSDictionary = ["media_record_start":config]
             if let data = try? JSONSerialization.data(withJSONObject: jsonDic, options: .prettyPrinted) {
                 if let jsonString = String(data: data, encoding: . utf8) {
