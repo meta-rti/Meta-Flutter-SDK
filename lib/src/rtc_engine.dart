@@ -861,12 +861,12 @@ class RtcEngine with RtcEngineInterface {
   }
 
   @override
-  Future<int> startMediaRecord(MediaRecordConfig mediaRecordConfig) {
+  Future<void> startMediaRecord(MediaRecordConfig mediaRecordConfig) {
     return _invokeMethod('startMediaRecord', {'mediaRecordConfig': mediaRecordConfig.toJson()});
   }
 
   @override
-  Future<int> stopMediaRecord() {
+  Future<void> stopMediaRecord() {
     return _invokeMethod('stopMediaRecord');
   }
 }
@@ -1077,12 +1077,12 @@ mixin RtcEngineInterface
   /// 开始录制
   /// **Note**
   /// 仅用于zfz
-  Future<int> startMediaRecord(MediaRecordConfig mediaRecordConfig);
+  Future<void> startMediaRecord(MediaRecordConfig mediaRecordConfig);
 
   /// 结束录制
   /// **Note**
   /// 仅用于zfz
-  Future<int> stopMediaRecord();
+  Future<void> stopMediaRecord();
 }
 
 mixin RtcUserInfoInterface {

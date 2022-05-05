@@ -1358,7 +1358,7 @@ class RtcEngineEventHandler {
         switch (data[0]) {
           case 10001:
             Map<String, dynamic> response = jsonDecode(data[1]);
-            Map<String, dynamic> msg = jsonDecode(response["message"] as String);
+            Map<String, dynamic> msg = response["message"] as Map<String, dynamic>;
             if (response.containsKey("state")) {
               int state = response["state"] as int;
               String url =msg["url"] as String;
