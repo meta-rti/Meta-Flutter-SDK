@@ -859,6 +859,16 @@ class RtcEngine with RtcEngineInterface {
           AudioSessionOperationRestrictionConverter(restriction).value()
     });
   }
+
+  @override
+  Future<int> startMediaRecord(MediaRecordConfig mediaRecordConfig) {
+    return _invokeMethod('startMediaRecord', {'mediaRecordConfig': mediaRecordConfig.toJson()});
+  }
+
+  @override
+  Future<int> stopMediaRecord() {
+    return _invokeMethod('stopMediaRecord');
+  }
 }
 
 mixin RtcEngineInterface
@@ -1063,6 +1073,16 @@ mixin RtcEngineInterface
   ///
   /// **Parameter** [parameters] Sets the parameter as a JSON string in the specified format.
   Future<void> setParameters(String parameters);
+
+  /// 开始录制
+  /// **Note**
+  /// 仅用于zfz
+  Future<int> startMediaRecord(MediaRecordConfig mediaRecordConfig);
+
+  /// 结束录制
+  /// **Note**
+  /// 仅用于zfz
+  Future<int> stopMediaRecord();
 }
 
 mixin RtcUserInfoInterface {

@@ -1116,3 +1116,37 @@ class FacePositionInfo {
   /// @nodoc
   Map<String, dynamic> toJson() => _$FacePositionInfoToJson(this);
 }
+
+/// The information of the media record.
+@JsonSerializable(explicitToJson: true)
+class MediaRecordConfig {
+  ///
+  String access_key_id;
+
+  ///
+  String secret_access_key;
+
+  ///
+  String server;
+
+  ///
+  String bucket;
+
+  ///
+  int audioBitsPerSecond;
+  int videoBitsPerSecond;
+  String fileName;
+  int fragmentDuration;
+  int retryCount;
+  int retrySleepMs;
+
+  /// Constructs a [MediaRecordConfig]
+  MediaRecordConfig();
+
+  /// @nodoc
+  factory FacePositionInfo.fromJson(Map<String, dynamic> json) =>
+      _$MediaRecordConfigFromJson(json);
+
+  /// @nodoc
+  Map<String, dynamic> toJson() => _$MediaRecordConfigToJson(this);
+}
