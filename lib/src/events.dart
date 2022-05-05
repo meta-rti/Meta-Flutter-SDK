@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'classes.dart';
 import 'enum_converter.dart';
 import 'enums.dart';
@@ -89,6 +91,10 @@ typedef StreamSubscribeStateCallback = void Function(
     int elapseSinceLastState);
 typedef RtmpStreamingEventCallback = void Function(
     String url, RtmpStreamingEvent eventCode);
+typedef MediaRecordStateChangeCallback = void Function(
+    int errorCode, int state , String url);
+typedef MediaRecordUploadSuccessCallback = void Function(
+    int errorCode, int state , String url,String etag , String objectName,String localName);
 
 /// The SDK uses the [RtcEngineEventHandler] class to send callbacks to the application, and the application inherits the methods of this class to retrieve these callbacks.
 ///
@@ -957,6 +963,10 @@ class RtcEngineEventHandler {
   /// - [RtmpStreamingEvent] `eventCode`: The event code. See [RtmpStreamingEvent].
   RtmpStreamingEventCallback rtmpStreamingEvent;
 
+  MediaRecordStateChangeCallback mediaRecordStateChangeCallback;
+
+  MediaRecordUploadSuccessCallback mediaRecordUploadSuccessCallback;
+
   /// Constructs a [RtcEngineEventHandler]
   RtcEngineEventHandler(
       {this.warning,
@@ -1035,7 +1045,9 @@ class RtcEngineEventHandler {
       this.videoPublishStateChanged,
       this.audioSubscribeStateChanged,
       this.videoSubscribeStateChanged,
-      this.rtmpStreamingEvent});
+      this.rtmpStreamingEvent,
+      this.mediaRecordStateChangeCallback,
+      this.mediaRecordUploadSuccessCallback});
 
   // ignore: public_member_api_docs
   void process(String methodName, List<dynamic> data) {
@@ -1341,6 +1353,23 @@ class RtcEngineEventHandler {
         break;
       case 'RtmpStreamingEvent':
         rtmpStreamingEvent?.call(data[0], data[1]);
+        break;
+      case 'ParametersResponse':
+        switch (data[0]) {
+          case 10001:
+            Map<String, dynamic> response = jsonDecode(data[1]);
+            Map<String, dynamic> msg = jsonDecode(response["message"] as String);
+            if (response.containsKey("state")) {
+              int state = response["state"] as int;
+              if (state == 5) {
+                mediaRecordUploadSuccessCallback.call(response["error"] as int,state,url,response["etag"] as String,response["object_name"] as String,,response["local_name"] as String);
+              } else {
+                String url =msg["url"] as String;
+                mediaRecordStateChangeCallback.call(response["error"] as int,state,url);
+              }
+            }
+            break;
+        }
         break;
     }
   }

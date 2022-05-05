@@ -84,6 +84,7 @@ class RtcEngineEvents {
         const val AudioSubscribeStateChanged = "AudioSubscribeStateChanged"
         const val VideoSubscribeStateChanged = "VideoSubscribeStateChanged"
         const val RtmpStreamingEvent = "RtmpStreamingEvent"
+        const val ParametersResponse = "ParametersResponse"
 
         fun toMap(): Map<String, String> {
             return hashMapOf(
@@ -484,6 +485,11 @@ class RtcEngineEventHandler(
     override fun onVideoStopped() {
         callback(RtcEngineEvents.VideoStopped)
     }
+
+    override fun onParametersResponse(type: Int, response : String) {
+        callback(RtcEngineEvents.ParametersResponse, type,response)
+    }
+
 
 //    override fun onFirstLocalAudioFramePublished(elapsed: Int) {
 //        callback(RtcEngineEvents.FirstLocalAudioFramePublished, elapsed)

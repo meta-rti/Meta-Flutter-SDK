@@ -840,3 +840,35 @@ Map<String, dynamic> _$FacePositionInfoToJson(FacePositionInfo instance) =>
       'height': instance.height,
       'distance': instance.distance,
     };
+
+MediaRecordConfig _$MediaRecordConfigFromJson(Map<String, dynamic> json) {
+  return MediaRecordConfig()
+    ..access_key_id = json['access_key_id'] as String
+    ..secret_access_key = json['secret_access_key'] as String
+    ..server = json['server'] as String
+    ..bucket = json['bucket'] as String
+    ..videoBitsPerSecond = json['videoBitsPerSecond'] as int
+    ..fileName = json['fileName'] as String
+    ..fragmentDuration = json['fragmentDuration'] as int
+    ..retryCount = json['retryCount'] as int
+    ..retrySleepMs = json['retrySleepMs'] as int
+    ..width = json['width'] as int
+    ..height = json['height'] as int
+    ..audioBitsPerSecond = json['audioBitsPerSecond'] as int;
+}
+
+Map<String, dynamic> _$MediaRecordConfigToJson(MediaRecordConfig instance) =>
+    <String, dynamic>{
+      'access_key_id': instance.access_key_id,
+      'secret_access_key': instance.secret_access_key,
+      'server': instance.server,
+      'bucket': instance.bucket,
+      'fileName': instance.fileName,
+      'fragmentDuration': instance.fragmentDuration,
+      'retryCount': instance.retryCount,
+      'retrySleepMs': instance.retrySleepMs,
+      'audioBitsPerSecond': instance.audioBitsPerSecond,
+      'videoBitsPerSecond': instance.videoBitsPerSecond,
+      'width': instance.width,
+      'height': instance.height,
+    };

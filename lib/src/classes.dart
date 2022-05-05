@@ -1139,6 +1139,8 @@ class MediaRecordConfig {
   int fragmentDuration;
   int retryCount;
   int retrySleepMs;
+  int width;
+  int height;
 
   /// Constructs a [MediaRecordConfig]
   MediaRecordConfig();
