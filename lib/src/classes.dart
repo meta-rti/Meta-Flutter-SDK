@@ -1141,6 +1141,7 @@ class MediaRecordConfig {
   int retrySleepMs;
   int width;
   int height;
+  String fileNamePrefix;
 
   /// Constructs a [MediaRecordConfig]
   MediaRecordConfig();

@@ -854,6 +854,7 @@ MediaRecordConfig _$MediaRecordConfigFromJson(Map<String, dynamic> json) {
     ..retrySleepMs = json['retrySleepMs'] as int
     ..width = json['width'] as int
     ..height = json['height'] as int
+    ..fileNamePrefix = json['fileNamePrefix'] as String
     ..audioBitsPerSecond = json['audioBitsPerSecond'] as int;
 }
 
@@ -871,4 +872,5 @@ Map<String, dynamic> _$MediaRecordConfigToJson(MediaRecordConfig instance) =>
       'videoBitsPerSecond': instance.videoBitsPerSecond,
       'width': instance.width,
       'height': instance.height,
+      'fileNamePrefix': instance.fileNamePrefix,
     };
