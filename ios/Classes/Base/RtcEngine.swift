@@ -982,7 +982,7 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
     }
     @objc func stopMediaRecord( _ callback: Callback) {
         callback.resolve(engine) { it in
-            it.setParameters("{\"media_record_stop\": \"\"}")
+            it.setParameters("{\"media_record_stop\":\"\"}")
             return nil
         }
     }
