@@ -19,8 +19,8 @@ class MetaSurfaceViewFactory(
         private val rtcEnginePlugin: MetaRtcEnginePlugin,
         private val rtcChannelPlugin: MetaRtcChannelPlugin
 ) : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
-    override fun create(context: Context, viewId: Int, args: Any?): PlatformView {
-        return MetaSurfaceView(context.applicationContext, messenger, viewId, args as? Map<*, *>, rtcEnginePlugin, rtcChannelPlugin)
+    override fun create(context: Context?, viewId: Int, args: Any?): PlatformView {
+        return MetaSurfaceView(context!!.applicationContext, messenger, viewId, args as? Map<*, *>, rtcEnginePlugin, rtcChannelPlugin)
     }
 }
 
@@ -60,9 +60,12 @@ class MetaSurfaceView(
                 val parameters = mutableListOf<Any?>()
                 function.parameters.forEach { parameter ->
                     val map = call.arguments<Map<*, *>>()
-                    if (map.containsKey(parameter.name)) {
-                        parameters.add(map[parameter.name])
+                    map?.run {
+                        if (this.containsKey(parameter.name)) {
+                            parameters.add(this[parameter.name])
+                        }
                     }
+
                 }
                 try {
                     method.invoke(this, *parameters.toTypedArray())
