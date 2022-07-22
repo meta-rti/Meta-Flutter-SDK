@@ -30,8 +30,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     await [Permission.camera, Permission.microphone, Permission.storage]
         .request();
-
-    // var engine = await RtcEngine.create('d193f2093417435cbcfc41720269bad0');
+    
     var engine = await RtcEngine.create('123');
     // engine.setParameters("{\"server_url_type\": 1000}");
     engine.setEventHandler(RtcEngineEventHandler(
@@ -55,7 +54,6 @@ class _MyAppState extends State<MyApp> {
           print('error ${errorCode}');
         }));
     await engine.enableVideo();
-    // await engine.joinChannel('006d193f2093417435cbcfc41720269bad0IADVGhWETcjAdojvYUFPFlVE+hQmhItEuY4EMRkwLNY13dJjSIgAAAAAEAAWal0mnjTHXwEAAQCfNMdf', '123', null, 0);
     await engine.joinChannel(null, 'meta_test', null, 0);
   }
 
