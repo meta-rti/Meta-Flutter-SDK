@@ -36,7 +36,7 @@ meta 视频 SDK 需要 `摄像头` 和 `麦克风` 权限来开始视频通话�
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     
     <!-- The Meta SDK requires Bluetooth permissions in case users are using Bluetooth devices.-->
-    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30"/>
     ...
 </manifest>
 ```

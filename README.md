@@ -19,7 +19,7 @@ Open the `AndroidManifest.xml` file and add the necessary permissions to this fi
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- The Meta SDK requires Bluetooth permissions in case users are using Bluetooth devices.-->
-    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH"  android:maxSdkVersion="30"/>
     ...
 </manifest>
 ```
