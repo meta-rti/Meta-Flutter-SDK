@@ -363,6 +363,7 @@ class RtcEngineManager: NSObject, RtcEngineInterface {
         config.appId = params["appId"] as? String
         config.areaCode = Int32((params["areaCode"] as! NSNumber).intValue)
         engine = MetaRtcEngineKit.sharedEngine(with: config, delegate: delegate)
+        engine?.setLogFilter(0)
 //        callback.code(engine?.setAppType(MetaRtcAppType(rawValue: params["appType"] as! UInt)!))
         callback.code(1);
     }

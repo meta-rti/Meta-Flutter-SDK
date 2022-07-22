@@ -28,7 +28,7 @@ class RtcSurfaceView extends StatefulWidget {
   /// **Note**
   /// - The default value is the empty string "". Use the default value if the user joins the channel using the [RtcEngine.joinChannel] method in the [RtcEngine] class.
   /// - If the user joins the channel using the [RtcChannel.joinChannel] method in the [RtcChannel] class, set this parameter as the channelId of the [RtcChannel] object.
-  final String channelId;
+  final String? channelId;
 
   /// The rendering mode of the video view.
   final VideoRenderMode renderMode;
@@ -49,7 +49,7 @@ class RtcSurfaceView extends StatefulWidget {
   /// Callback signature for when a platform view was created.
   ///
   /// `id` is the platform view's unique identifier.
-  final PlatformViewCreatedCallback onPlatformViewCreated;
+  final PlatformViewCreatedCallback? onPlatformViewCreated;
 
   /// Which gestures should be consumed by the web view.
   ///
@@ -60,12 +60,12 @@ class RtcSurfaceView extends StatefulWidget {
   ///
   /// When this set is empty or null, the web view will only handle pointer events for gestures that
   /// were not claimed by any other gesture recognizer.
-  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers;
+  final Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers;
 
   /// Constructs a [RtcSurfaceView]
   RtcSurfaceView({
-    Key key,
-    @required this.uid,
+    Key? key,
+    required this.uid,
     this.channelId,
     this.renderMode = VideoRenderMode.Hidden,
     this.mirrorMode = VideoMirrorMode.Auto,
@@ -73,7 +73,7 @@ class RtcSurfaceView extends StatefulWidget {
     this.zOrderMediaOverlay = false,
     this.onPlatformViewCreated,
     this.gestureRecognizers,
-  }) : super(key: key ?? Key('surface-${channelId}-${uid}'));
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -82,9 +82,9 @@ class RtcSurfaceView extends StatefulWidget {
 }
 
 class _RtcSurfaceViewState extends State<RtcSurfaceView> {
-  int _id;
-  int _renderMode;
-  int _mirrorMode;
+  int? _id;
+  int? _renderMode;
+  int? _mirrorMode;
 
   @override
   Widget build(BuildContext context) {
@@ -219,7 +219,7 @@ class RtcTextureView extends StatefulWidget {
   /// **Note**
   /// - The default value is the empty string "". Use the default value if the user joins the channel using the [RtcEngine.joinChannel] method in the [RtcEngine] class.
   /// - If the user joins the channel using the [RtcChannel.joinChannel] method in the [RtcChannel] class, set this parameter as the channelId of the [RtcChannel] object.
-  final String channelId;
+  final String? channelId;
 
   /// The rendering mode of the video view.
   final VideoRenderMode renderMode;
@@ -230,7 +230,7 @@ class RtcTextureView extends StatefulWidget {
   /// Callback signature for when a platform view was created.
   ///
   /// `id` is the platform view's unique identifier.
-  final PlatformViewCreatedCallback onPlatformViewCreated;
+  final PlatformViewCreatedCallback? onPlatformViewCreated;
 
   /// Which gestures should be consumed by the web view.
   ///
@@ -241,18 +241,18 @@ class RtcTextureView extends StatefulWidget {
   ///
   /// When this set is empty or null, the web view will only handle pointer events for gestures that
   /// were not claimed by any other gesture recognizer.
-  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers;
+  final Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers;
 
   /// Constructs a [RtcTextureView]
-  RtcTextureView({
-    Key key,
-    @required this.uid,
+  const RtcTextureView({
+    Key? key,
+    required this.uid,
     this.channelId,
     this.renderMode = VideoRenderMode.Hidden,
     this.mirrorMode = VideoMirrorMode.Auto,
     this.onPlatformViewCreated,
     this.gestureRecognizers,
-  }) : super(key: key ?? Key('texture-${channelId}-${uid}'));
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -261,9 +261,9 @@ class RtcTextureView extends StatefulWidget {
 }
 
 class _RtcTextureViewState extends State<RtcTextureView> {
-  int _id;
-  int _renderMode;
-  int _mirrorMode;
+  int? _id;
+  int? _renderMode;
+  int? _mirrorMode;
 
   @override
   Widget build(BuildContext context) {

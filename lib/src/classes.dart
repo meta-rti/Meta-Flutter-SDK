@@ -1,8 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
-
+import 'dart:typed_data';
 import 'enums.dart';
-
 part 'classes.g.dart';
+
+
 
 /// The UserInfo class.
 @JsonSerializable(explicitToJson: true)
@@ -14,7 +15,9 @@ class UserInfo {
   String userAccount;
 
   /// Constructs a [UserInfo]
-  UserInfo();
+  UserInfo( 
+    this.uid,
+    this.userAccount,);
 
   /// @nodoc
   factory UserInfo.fromJson(Map<String, dynamic> json) =>
@@ -28,10 +31,12 @@ class UserInfo {
 @JsonSerializable(explicitToJson: true)
 class VideoDimensions {
   /// The video resolution on the horizontal axis.
-  final int width;
+  
+   @JsonKey(includeIfNull: false)
+   int? width;
 
   /// The video resolution on the vertical axis.
-  final int height;
+   int? height;
 
   /// Constructs a [VideoDimensions]
   VideoDimensions(this.width, this.height);
@@ -70,15 +75,15 @@ class VideoEncoderConfiguration {
   /// - The value of the dimension does not indicate the orientation mode of the output ratio. For how to set the video orientation, see [VideoOutputOrientationMode].</li>
   /// - Whether 720p+ can be supported depends on the device. If the device cannot support 720p, the frame rate will be lower than the one listed in the table.</li>
   @JsonKey(includeIfNull: false)
-  VideoDimensions dimensions;
+  VideoDimensions? dimensions;
 
   /// The video frame rate (fps). The default value is 15. You can either set the frame rate manually or choose from [VideoFrameRate]. We do not recommend setting this to a value greater than 30.
   @JsonKey(includeIfNull: false)
-  VideoFrameRate frameRate;
+  VideoFrameRate? frameRate;
 
   /// The minimum video encoder frame rate (fps). The default value is [VideoFrameRate.Min] (the SDK uses the lowest encoder frame rate).
   @JsonKey(includeIfNull: false)
-  VideoFrameRate minFrameRate;
+  VideoFrameRate? minFrameRate;
 
   /// Bitrate of the video (Kbps). Refer to the table below and set your bitrate. If you set a bitrate beyond the proper range, the SDK automatically adjusts it to a value within the range.
   ///  You can also choose from the following options:
@@ -122,27 +127,27 @@ class VideoEncoderConfiguration {
   /// - The base bitrate in this table applies to the Communication profile.
   /// - The LiveBroadcasting profile generally requires a higher bitrate for better video quality. We recommend setting the bitrate mode as `0`. You can also set the bitrate as the base bitrate value x 2.
   @JsonKey(includeIfNull: false)
-  int bitrate;
+  int? bitrate;
 
   /// The minimum encoding bitrate (Kbps). The Meta SDK automatically adjusts the encoding bitrate to adapt to the network conditions. Using a value greater than the default value forces the video encoder to output high-quality images but may cause more packet loss and hence sacrifice the smoothness of the video transmission. That said, unless you have special requirements for image quality, Meta does not recommend changing this value.
   @JsonKey(includeIfNull: false)
-  int minBitrate;
+  int? minBitrate;
 
   /// The orientation mode.
   /// See [VideoOutputOrientationMode].
   @JsonKey(includeIfNull: false)
-  VideoOutputOrientationMode orientationMode;
+  VideoOutputOrientationMode? orientationMode;
 
   /// The video encoding degradation preference under limited bandwidth:
   /// See [DegradationPreference].
   @JsonKey(includeIfNull: false)
-  DegradationPreference degradationPrefer;
+  DegradationPreference? degradationPrefer;
 
   /// Sets the mirror mode of the published local video stream.
   /// This member only affects the video that the remote user sees.
   /// See [VideoMirrorMode].
   @JsonKey(includeIfNull: false)
-  VideoMirrorMode mirrorMode;
+  VideoMirrorMode? mirrorMode;
 
   /// Constructs a [VideoEncoderConfiguration]
   VideoEncoderConfiguration(
@@ -168,19 +173,19 @@ class VideoEncoderConfiguration {
 class BeautyOptions {
   /// The lightening contrast level, used with [lighteningLevel].
   @JsonKey(includeIfNull: false)
-  LighteningContrastLevel lighteningContrastLevel;
+  LighteningContrastLevel? lighteningContrastLevel;
 
   /// The brightness level. The value ranges between 0.0 (original) and 1.0. The default value is 0.7.
   @JsonKey(includeIfNull: false)
-  double lighteningLevel;
+  double? lighteningLevel;
 
   /// The sharpness level. The value ranges between 0.0 (original) and 1.0. The default value is 0.5. This parameter is usually used to remove blemishes.
   @JsonKey(includeIfNull: false)
-  double smoothnessLevel;
+  double? smoothnessLevel;
 
   /// The redness level. The value ranges between 0.0 (original) and 1.0. The default value is 0.1. This parameter adjusts the red saturation level.
   @JsonKey(includeIfNull: false)
-  double rednessLevel;
+  double? rednessLevel;
 
   /// Constructs a [BeautyOptions]
   BeautyOptions(
@@ -201,19 +206,21 @@ class BeautyOptions {
 @JsonSerializable(explicitToJson: true)
 class MetaImage {
   /// HTTP/HTTPS URL address of the image on the broadcasting video. The maximum length of this parameter is 1024 bytes.
-  final String url;
+  String url;
 
   /// Position of the image on the upper left of the broadcasting video on the horizontal axis.
-  final int x;
+  @JsonKey(includeIfNull: false)
+  int? x;
 
   /// Position of the image on the upper left of the broadcasting video on the vertical axis.
-  final int y;
+  @JsonKey(includeIfNull: false)
+  int? y;
 
   /// Width of the image on the broadcasting video.
-  final int width;
+  int? width;
 
   /// Height of the image on the broadcasting video.
-  final int height;
+  int? height;
 
   /// Constructs a [MetaImage]
   MetaImage(this.url, this.x, this.y, this.width, this.height);
@@ -230,36 +237,42 @@ class MetaImage {
 @JsonSerializable(explicitToJson: true)
 class TranscodingUser {
   /// ID of the user in the CDN live streaming.
-  final int uid;
+  int uid;
 
   /// Horizontal position of the video frame of the user from the top left corner of the CDN live streaming.
-  final int x;
+  @JsonKey(includeIfNull: false)
+  int? x;
 
   /// Vertical position of the video frame of the user from the top left corner of the CDN live streaming.
-  final int y;
+  @JsonKey(includeIfNull: false)
+  int? y;
 
   /// Width of the video frame of the user on the CDN live streaming. The default value is 360.
-  int width;
+  @JsonKey(includeIfNull: false)
+  int? width;
 
   /// Height of the video frame of the user on the CDN live streaming. The default value is 640.
-  int height;
+  @JsonKey(includeIfNull: false)
+  int? height;
 
   /// The layer index of the video frame. An integer. The value range is [0,100].
   /// - 0: (Default) Bottom layer.
   /// - 100: Top layer.
   ///
   /// **Note**: If the value is set lower than 0 or higher than 100, the [ErrorCode.InvalidArgument] error is reported.
-  int zOrder;
+  @JsonKey(includeIfNull: false)
+  int? zOrder;
 
   /// The transparency of the video frame of the user in the CDN live stream that ranges between 0.0 and 1.0. 0.0 means that the video frame is completely transparent and 1.0 means opaque. The default value is 1.0.
   @JsonKey(includeIfNull: false)
-  double alpha;
+  double? alpha;
 
   /// The audio channel ranging between 0 and 5. The default value is 0.
   /// See [AudioChannel].
   ///
   /// **Note** Special players are needed if `audioChannel` is not set as 0.
-  AudioChannel audioChannel;
+  @JsonKey(includeIfNull: false)
+  AudioChannel? audioChannel;
 
   /// Constructs a [TranscodingUser]
   TranscodingUser(
@@ -285,13 +298,14 @@ class TranscodingUser {
 @JsonSerializable(explicitToJson: true)
 class Color {
   /// Red.
-  final int red;
+  @JsonKey(includeIfNull: false)
+  int? red;
 
   /// Green.
-  final int green;
+  int? green;
 
   /// Blue.
-  final int blue;
+  int? blue;
 
   /// Constructs a [Color]
   Color(this.red, this.green, this.blue);
@@ -310,75 +324,75 @@ class LiveTranscoding {
   /// - When pushing video streams to the CDN, ensure that `width` is at least 64; otherwise, the Meta server adjusts the value to 64.
   /// - When pushing audio streams to the CDN, set `width` and `height` as 0.
   @JsonKey(includeIfNull: false)
-  int width;
+  int? width;
 
   /// Height (pixel) of the video. The default value is 640.
   /// - When pushing video streams to the CDN, ensure that `height` is at least 64; otherwise, the Meta server adjusts the value to 64.
   /// - When pushing audio streams to the CDN, set `width` and `height` as 0.
   @JsonKey(includeIfNull: false)
-  int height;
+  int? height;
 
   /// Bitrate (Kbps) of the CDN live output video stream. The default value is 400. Set this parameter according to the [VideoEncoderConfiguration.bitrate](Video Bitrate Table). If you set a bitrate beyond the proper range, the SDK automatically adapts it to a value within the range.
   @JsonKey(includeIfNull: false)
-  int videoBitrate;
+  int? videoBitrate;
 
   /// The frame rate (fps) of the video. The value range is [0, 30]. The default value is 15. The Meta server adjusts any value over 30 to 30.
   @JsonKey(includeIfNull: false)
-  VideoFrameRate videoFramerate;
+  VideoFrameRate? videoFramerate;
 
   /// Meta does not recommend using this parameter.
   /// - `true`: Low latency with unassured quality.
   /// - `false`: (Default) High latency with assured quality.
   @deprecated
   @JsonKey(includeIfNull: false)
-  bool lowLatency;
+  bool? lowLatency;
 
   /// Gop of the video frames in the CDN live stream. The default value is 30 fps.
   @JsonKey(includeIfNull: false)
-  int videoGop;
+  int? videoGop;
 
   /// The watermark image added to the CDN live publishing stream. Ensure that the format of the image is PNG. Once a watermark image is added, the audience of the CDN live publishing stream can see it.
   /// See [MetaImage].
   @JsonKey(includeIfNull: false)
-  MetaImage watermark;
+  MetaImage? watermark;
 
   /// The background image added to the CDN live publishing stream. Once a background image is added, the audience of the CDN live publishing stream can see it.
   /// See [MetaImage].
   @JsonKey(includeIfNull: false)
-  MetaImage backgroundImage;
+  MetaImage? backgroundImage;
 
   /// Self-defined audio-sample rate: [AudioSampleRateType].
   @JsonKey(includeIfNull: false)
-  AudioSampleRateType audioSampleRate;
+  AudioSampleRateType? audioSampleRate;
 
   /// Bitrate (Kbps) of the CDN live audio output stream. The default value is 48 and the highest value is 128.
   @JsonKey(includeIfNull: false)
-  int audioBitrate;
+  int? audioBitrate;
 
   /// Meta’s self-defined audio channel type. Meta recommends choosing 1 (mono), or 2 (stereo) audio channels. Special players are required if you choose 3, 4, or 5.
   /// See [AudioChannel].
   @JsonKey(includeIfNull: false)
-  AudioChannel audioChannels;
+  AudioChannel? audioChannels;
 
   /// Audio codec profile type: [AudioCodecProfileType]. Set it as `LCAAC` or `HEAAC`. The default value is `LCAAC`.
   @JsonKey(includeIfNull: false)
-  AudioCodecProfileType audioCodecProfile;
+  AudioCodecProfileType? audioCodecProfile;
 
   /// Video codec profile type: [VideoCodecProfileType]. Set it as `BASELINE`, `MAIN`, or `HIGH` (default). If you set this parameter to other values, Meta adjusts it to the default value `HIGH`.
   @JsonKey(includeIfNull: false)
-  VideoCodecProfileType videoCodecProfile;
+  VideoCodecProfileType? videoCodecProfile;
 
   /// The background color in RGB hex. Value only. Do not include a preceding #. For example, 0xFFB6C1 (light pink). The default value is 0x000000 (black).
   /// See [Color].
   @JsonKey(includeIfNull: false)
-  Color backgroundColor;
+  Color? backgroundColor;
 
   /// Reserved property. Extra user-defined information to send the Supplemental Enhancement Information (SEI) for the H.264/H.265 video stream to the CDN live client. Maximum length: 4096 Bytes.
   @JsonKey(includeIfNull: false)
-  String userConfigExtraInfo;
+  String? userConfigExtraInfo;
 
   /// An TranscodingUser object managing the user layout configuration in the CDN live stream. Meta supports a maximum of 17 transcoding users in a CDN live stream channel.
-  final List<TranscodingUser> transcodingUsers;
+  List<TranscodingUser> transcodingUsers;
 
   /// Constructs a [LiveTranscoding]
   LiveTranscoding(
@@ -412,18 +426,21 @@ class LiveTranscoding {
 @JsonSerializable(explicitToJson: true)
 class ChannelMediaInfo {
   /// The channel name.
-  @JsonKey(includeIfNull: false)
   String channelName;
 
   /// The token that enables the user to join the channel.
   @JsonKey(includeIfNull: false)
-  String token;
+  String? token;
 
   /// The user ID.
-  final int uid;
+  int uid;
 
   /// Constructs a [ChannelMediaInfo]
-  ChannelMediaInfo(this.uid, {this.channelName, this.token});
+ ChannelMediaInfo(
+    this.channelName,
+    this.uid,
+    this.token,
+  );
 
   /// @nodoc
   factory ChannelMediaInfo.fromJson(Map<String, dynamic> json) =>
@@ -442,7 +459,7 @@ class ChannelMediaRelayConfiguration {
   /// - `token`: The token for joining the source channel. It is generated with the `channelName` and `uid` you set in `srcInfo`.
   ///   - If you have not enabled the App Certificate, set this parameter as the default value NULL, which means the SDK applies the App ID.
   ///   - If you have enabled the App Certificate, you must use the token generated with the `channelName` and `uid`.
-  final ChannelMediaInfo srcInfo;
+  ChannelMediaInfo srcInfo;
 
   /// The information of the destination channel: [ChannelMediaInfo]. It contains the following members:
   ///- `channelName`: The name of the destination channel.
@@ -451,7 +468,7 @@ class ChannelMediaRelayConfiguration {
   ///  - `token`: The token for joining the destination channel. It is generated with the `channelName` and `uid` you set in `destInfo`.
   ///    - If you have not enabled the App Certificate, set this parameter as the default value NULL, which means the SDK applies the App ID.
   ///    - If you have enabled the App Certificate, you must use the token generated with the `channelName` and `uid`.
-  final List<ChannelMediaInfo> destInfos;
+  List<ChannelMediaInfo> destInfos;
 
   /// Constructs a [ChannelMediaRelayConfiguration]
   ChannelMediaRelayConfiguration(this.srcInfo, this.destInfos);
@@ -468,16 +485,16 @@ class ChannelMediaRelayConfiguration {
 @JsonSerializable(explicitToJson: true)
 class LastmileProbeConfig {
   /// Whether to probe uplink of lastmile. i.e., audience don't need probe uplink bandwidth.
-  final bool probeUplink;
+  bool probeUplink;
 
   /// Whether to probe downlink of lastmile.
-  final bool probeDownlink;
+  bool probeDownlink;
 
   /// The expected maximum sending bitrate in bps in range of [100000, 5000000]. It is recommended to set this value according to the required bitrate of selected video profile.
-  final int expectedUplinkBitrate;
+  int expectedUplinkBitrate;
 
   /// The expected maximum receive bitrate in bps in range of [100000, 5000000].
-  final int expectedDownlinkBitrate;
+  int expectedDownlinkBitrate;
 
   /// Constructs a [LastmileProbeConfig]
   LastmileProbeConfig(this.probeUplink, this.probeDownlink,
@@ -495,19 +512,23 @@ class LastmileProbeConfig {
 @JsonSerializable(explicitToJson: true)
 class Rectangle {
   /// The horizontal offset from the top-left corner.
-  final int x;
+  @JsonKey(includeIfNull: false)
+  int? x;
 
   /// The vertical offset from the top-left corner.
-  final int y;
+  @JsonKey(includeIfNull: false)
+  int? y;
 
   /// The width (pixels) of the watermark image.
-  final int width;
+  @JsonKey(includeIfNull: false)
+  int? width;
 
   /// The height (pixels) of the watermark image.
-  final int height;
+  @JsonKey(includeIfNull: false)
+  int? height;
 
   /// Constructs a [Rectangle]
-  Rectangle(this.x, this.y, this.width, this.height);
+  Rectangle({this.x, this.y, this.width, this.height});
 
   /// @nodoc
   factory Rectangle.fromJson(Map<String, dynamic> json) =>
@@ -524,15 +545,15 @@ class WatermarkOptions {
   /// - `true`: (Default) The watermark image is visible in preview.
   /// - `false`: The watermark image is not visible in preview.
   @JsonKey(includeIfNull: false)
-  bool visibleInPreview;
+  bool? visibleInPreview;
 
   /// The watermark position in the landscape mode.
   /// See [Rectangle].
-  final Rectangle positionInLandscapeMode;
+  Rectangle? positionInLandscapeMode;
 
   /// The watermark position in the portrait mode.
   /// See [Rectangle].
-  final Rectangle positionInPortraitMode;
+  Rectangle? positionInPortraitMode;
 
   /// Constructs a [WatermarkOptions]
   WatermarkOptions(this.positionInLandscapeMode, this.positionInPortraitMode,
@@ -550,40 +571,42 @@ class WatermarkOptions {
 @JsonSerializable(explicitToJson: true)
 class LiveInjectStreamConfig {
   /// Width of the added stream to the broadcast. The default value is 0, which is the same width as the original stream.
-  int width;
+  @JsonKey(includeIfNull: false)
+  int? width;
 
   /// Height of the added stream to the broadcast. The default value is 0, which is the same height as the original stream.
-  int height;
+  @JsonKey(includeIfNull: false)
+  int? height;
 
   /// Video GOP of the added stream to the broadcast. The default value is 30 frames.
   @JsonKey(includeIfNull: false)
-  int videoGop;
+  int? videoGop;
 
   /// Video frame rate of the added stream to the broadcast. The default value is 15 fps.
   @JsonKey(includeIfNull: false)
-  VideoFrameRate videoFramerate;
+  VideoFrameRate? videoFramerate;
 
   /// Video bitrate of the added stream to the broadcast. The default value is 400 Kbps.
   @JsonKey(includeIfNull: false)
-  int videoBitrate;
+  int? videoBitrate;
 
   /// Audio sample rate of the added stream to the broadcast: [AudioSampleRateType]. The default value is 44100 Hz.
   ///
   /// **Note** We recommend you use the default value and not reset it.
   @JsonKey(includeIfNull: false)
-  AudioSampleRateType audioSampleRate;
+  AudioSampleRateType? audioSampleRate;
 
   /// Audio bitrate of the added stream to the broadcast. The default value is 48.
   ///
   /// **Note** We recommend you use the default value and not reset it.
   @JsonKey(includeIfNull: false)
-  int audioBitrate;
+  int? audioBitrate;
 
   /// Audio channels to add into the broadcast. The value ranges between 1 and 2. The default value is 1.
   ///
   /// **Note** We recommend you use the default value and not reset it.
   @JsonKey(includeIfNull: false)
-  AudioChannel audioChannels;
+  AudioChannel? audioChannels;
 
   /// Constructs a [LiveInjectStreamConfig]
   LiveInjectStreamConfig(
@@ -609,11 +632,13 @@ class LiveInjectStreamConfig {
 class CameraCapturerConfiguration {
   /// The camera capturer configuration.
   /// See [CameraCaptureOutputPreference].
-  final CameraCaptureOutputPreference preference;
+  @JsonKey(includeIfNull: false)
+  CameraCaptureOutputPreference? preference;
 
   /// The camera direction.
   /// See [CameraDirection].
-  final CameraDirection cameraDirection;
+  @JsonKey(includeIfNull: false)
+  CameraDirection? cameraDirection;
 
   /// Constructs a [CameraCapturerConfiguration]
   CameraCapturerConfiguration(this.preference, this.cameraDirection);
@@ -635,7 +660,8 @@ class ChannelMediaOptions {
   ///
   /// This member serves a similar function to the [RtcEngine.muteAllRemoteAudioStreams] method.
   /// After joining the channel, you can call `muteAllRemoteAudioStreams` to set whether to subscribe to audio streams in the channel.
-  final bool autoSubscribeAudio;
+   @JsonKey(includeIfNull: false)
+   bool? autoSubscribeAudio;
 
   /// Determines whether to subscribe to video streams when the user joins the channel.
   /// - `true`: (Default) Subscribe.
@@ -643,7 +669,8 @@ class ChannelMediaOptions {
   ///
   /// This member serves a similar function to the [RtcEngine.muteAllRemoteVideoStreams] method.
   /// After joining the channel, you can call `muteAllRemoteVideoStreams` to set whether to subscribe to video streams in the channel.
-  final bool autoSubscribeVideo;
+  @JsonKey(includeIfNull: false)
+  bool autoSubscribeVideo;
 
   /// Constructs a [ChannelMediaOptions]
   ChannelMediaOptions(this.autoSubscribeAudio, this.autoSubscribeVideo);
@@ -662,14 +689,16 @@ class ChannelMediaOptions {
 @JsonSerializable(explicitToJson: true)
 class EncryptionConfig {
   /// Encryption mode. The default encryption mode is `AES128XTS`. See [EncryptionMode].
-  final EncryptionMode encryptionMode;
+  @JsonKey(includeIfNull: false)
+  EncryptionMode? encryptionMode;
 
   /// Encryption key in string type.
   ///
   /// **Note**
   ///
   /// If you do not set an encryption key or set it as null, you cannot use the built-in encryption, and the SDK returns [ErrorCode.InvalidArgument].
-  final String encryptionKey;
+  @JsonKey(includeIfNull: false)
+  String? encryptionKey;
 
   /// Constructs a [EncryptionConfig]
   EncryptionConfig(this.encryptionMode, this.encryptionKey);
@@ -765,7 +794,31 @@ class RtcStats {
   int memoryAppUsageInKbytes;
 
   /// Constructs a [RtcStats]
-  RtcStats();
+  RtcStats(
+    this.totalDuration,
+    this.txBytes,
+    this.rxBytes,
+    this.txAudioBytes,
+    this.txVideoBytes,
+    this.rxAudioBytes,
+    this.rxVideoBytes,
+    this.txKBitRate,
+    this.rxKBitRate,
+    this.txAudioKBitRate,
+    this.rxAudioKBitRate,
+    this.txVideoKBitRate,
+    this.rxVideoKBitRate,
+    this.users,
+    this.lastmileDelay,
+    this.txPacketLossRate,
+    this.rxPacketLossRate,
+    this.cpuTotalUsage,
+    this.cpuAppUsage,
+    this.gatewayRtt,
+    this.memoryAppUsageRatio,
+    this.memoryTotalUsageRatio,
+    this.memoryAppUsageInKbytes,
+  );
 
   /// @nodoc
   factory RtcStats.fromJson(Map<String, dynamic> json) =>
@@ -800,7 +853,12 @@ class AudioVolumeInfo {
   String channelId;
 
   /// Constructs a [AudioVolumeInfo]
-  AudioVolumeInfo();
+  AudioVolumeInfo(
+    this.uid,
+    this.volume,
+    this.vad,
+    this.channelId,
+  );
 
   /// @nodoc
   factory AudioVolumeInfo.fromJson(Map<String, dynamic> json) =>
@@ -814,19 +872,28 @@ class AudioVolumeInfo {
 @JsonSerializable(explicitToJson: true)
 class Rect {
   /// The X coordinate of the left side of the rectangle.
-  int left;
+  @JsonKey(includeIfNull: false)
+  int? left;
 
   /// The Y coordinate of the top side of the rectangle.
-  int top;
+  @JsonKey(includeIfNull: false)
+  int? top;
 
   /// The X coordinate of the right side of the rectangle.
-  int right;
+  @JsonKey(includeIfNull: false)
+  int? right;
 
   /// The Y coordinate of the bottom side of the rectangle.
-  int bottom;
+  @JsonKey(includeIfNull: false)
+  int? bottom;
 
   /// Constructs a [Rect]
-  Rect();
+  Rect(
+    this.left,
+    this.top,
+    this.right,
+    this.bottom,
+  );
 
   /// @nodoc
   factory Rect.fromJson(Map<String, dynamic> json) => _$RectFromJson(json);
@@ -848,7 +915,11 @@ class LastmileProbeOneWayResult {
   int availableBandwidth;
 
   /// Constructs a [LastmileProbeOneWayResult]
-  LastmileProbeOneWayResult();
+  LastmileProbeOneWayResult(
+    this.packetLossRate,
+    this.jitter,
+    this.availableBandwidth,
+  );
 
   /// @nodoc
   factory LastmileProbeOneWayResult.fromJson(Map<String, dynamic> json) =>
@@ -870,14 +941,19 @@ class LastmileProbeResult {
 
   /// The uplink last-mile network report.
   /// See [LastmileProbeOneWayResult].
-  LastmileProbeOneWayResult uplinkReport;
+  LastmileProbeOneWayResult? uplinkReport;
 
   /// The downlink last-mile network report.
   /// See [LastmileProbeOneWayResult].
-  LastmileProbeOneWayResult downlinkReport;
+  LastmileProbeOneWayResult? downlinkReport;
 
   /// Constructs a [LastmileProbeResult]
-  LastmileProbeResult();
+  LastmileProbeResult(
+    this.state,
+    this.rtt,
+    this.uplinkReport,
+    this.downlinkReport,
+  );
 
   /// @nodoc
   factory LastmileProbeResult.fromJson(Map<String, dynamic> json) =>
@@ -905,7 +981,11 @@ class LocalAudioStats {
   int txPacketLossRate;
 
   /// Constructs a [LocalAudioStats]
-  LocalAudioStats();
+  LocalAudioStats(
+    this.numChannels,
+    this.sentSampleRate,
+    this.sentBitrate,
+    this.txPacketLossRate,);
 
   /// @nodoc
   factory LocalAudioStats.fromJson(Map<String, dynamic> json) =>
@@ -967,7 +1047,22 @@ class LocalVideoStats {
   int captureFrameRate;
 
   /// Constructs a [LocalVideoStats]
-  LocalVideoStats();
+  LocalVideoStats(
+    this.sentBitrate,
+    this.sentFrameRate,
+    this.encoderOutputFrameRate,
+    this.rendererOutputFrameRate,
+    this.targetBitrate,
+    this.targetFrameRate,
+    this.qualityAdaptIndication,
+    this.encodedBitrate,
+    this.encodedFrameWidth,
+    this.encodedFrameHeight,
+    this.encodedFrameCount,
+    this.codecType,
+    this.txPacketLossRate,
+    this.captureFrameRate,
+  );
 
   /// @nodoc
   factory LocalVideoStats.fromJson(Map<String, dynamic> json) =>
@@ -1020,7 +1115,20 @@ class RemoteAudioStats {
   int publishDuration;
 
   /// Constructs a [RemoteAudioStats]
-  RemoteAudioStats();
+  RemoteAudioStats(    
+    this.uid,
+    this.quality,
+    this.networkTransportDelay,
+    this.jitterBufferDelay,
+    this.audioLossRate,
+    this.numChannels,
+    this.receivedSampleRate,
+    this.receivedBitrate,
+    this.totalFrozenTime,
+    this.frozenRate,
+    this.totalActiveTime,
+    this.publishDuration,
+    );
 
   /// @nodoc
   factory RemoteAudioStats.fromJson(Map<String, dynamic> json) =>
@@ -1078,7 +1186,21 @@ class RemoteVideoStats {
   int publishDuration;
 
   /// Constructs a [RemoteVideoStats]
-  RemoteVideoStats();
+  RemoteVideoStats(
+    this.uid,
+    this.delay,
+    this.width,
+    this.height,
+    this.receivedBitrate,
+    this.decoderOutputFrameRate,
+    this.rendererOutputFrameRate,
+    this.packetLossRate,
+    this.rxStreamType,
+    this.totalFrozenTime,
+    this.frozenRate,
+    this.totalActiveTime,
+    this.publishDuration,
+  );
 
   /// @nodoc
   factory RemoteVideoStats.fromJson(Map<String, dynamic> json) =>
@@ -1107,7 +1229,13 @@ class FacePositionInfo {
   int distance;
 
   /// Constructs a [FacePositionInfo]
-  FacePositionInfo();
+  FacePositionInfo(
+    this.x,
+    this.y,
+    this.width,
+    this.height,
+    this.distance,
+  );
 
   /// @nodoc
   factory FacePositionInfo.fromJson(Map<String, dynamic> json) =>
@@ -1121,27 +1249,27 @@ class FacePositionInfo {
 @JsonSerializable(explicitToJson: true)
 class MediaRecordConfig {
   ///
-  String access_key_id;
+  String? access_key_id;
 
   ///
-  String secret_access_key;
+  String? secret_access_key;
 
   ///
-  String server;
+  String? server;
 
   ///
-  String bucket;
+  String? bucket;
 
   ///
-  int audioBitsPerSecond;
-  int videoBitsPerSecond;
-  String fileName;
-  int fragmentDuration;
-  int retryCount;
-  int retrySleepMs;
-  int width;
-  int height;
-  String fileNamePrefix;
+  int? audioBitsPerSecond;
+  int? videoBitsPerSecond;
+  String? fileName;
+  int? fragmentDuration;
+  int? retryCount;
+  int? retrySleepMs;
+  int? width;
+  int? height;
+  String? fileNamePrefix;
 
   /// Constructs a [MediaRecordConfig]
   MediaRecordConfig();

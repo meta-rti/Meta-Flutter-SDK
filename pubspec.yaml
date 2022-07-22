@@ -1,26 +1,26 @@
 name: meta_rtc_engine
 description: Meta sdk update v2.0.2.5.
-version: 2.0.27
+version: 2.0.26
 repository:  https://github.com/meta-rti/Meta-Flutter-SDK
 homepage: https://www.wuji.co
-
 environment:
-  sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=2.0.0"
-
+  sdk: '>=2.12.0 <3.0.0'
+  flutter: '>=2.0.0'
 dependencies:
   flutter:
     sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  js: ^0.6.3
   json_annotation: ^4.4.0
-
 dev_dependencies:
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
-  flutter_driver:
-    sdk: flutter
-  pedantic: ^1.11.1
   build_runner: ^2.1.7
   json_serializable: ^6.1.1
+  flutter_lints: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

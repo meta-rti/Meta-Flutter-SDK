@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import '../rtc_local_view.dart';
@@ -16,9 +17,9 @@ class RtcEngine with RtcEngineInterface {
   static const EventChannel _eventChannel =
       EventChannel('meta_rtc_engine/events');
 
-  static RtcEngine _engine;
+  static RtcEngine? _engine;
 
-  RtcEngineEventHandler _handler;
+  RtcEngineEventHandler? _handler;
 
   RtcEngine._() {
     _eventChannel.receiveBroadcastStream().listen((event) {
@@ -29,7 +30,7 @@ class RtcEngine with RtcEngineInterface {
     });
   }
 
-  Future<T> _invokeMethod<T>(String method, [Map<String, dynamic> arguments]) {
+  Future<T?> _invokeMethod<T>(String method, [Map<String, dynamic>? arguments]) {
     return _methodChannel.invokeMethod(method, arguments);
   }
 
@@ -77,14 +78,14 @@ class RtcEngine with RtcEngineInterface {
   ///   - [ErrorCode.InvalidAppId]
   static Future<RtcEngine> createWithAreaCode(
       String appId, AreaCode areaCode) async {
-    if (_engine != null) return _engine;
+    if (_engine != null) return _engine!;
     await _methodChannel.invokeMethod('create', {
       'appId': appId,
       'areaCode': AreaCodeConverter(areaCode).value(),
       'appType': 4
     });
     _engine = RtcEngine._();
-    return _engine;
+    return _engine!;
   }
 
   @override
@@ -156,12 +157,12 @@ class RtcEngine with RtcEngineInterface {
   }
 
   @override
-  Future<String> getCallId() {
+  Future<String?> getCallId() {
     return _invokeMethod('getCallId');
   }
 
   @override
-  Future<void> rate(String callId, int rating, {String description}) {
+  Future<void> rate(String callId, int rating, {String? description}) {
     return _invokeMethod('rate',
         {'callId': callId, 'rating': rating, 'description': description});
   }
@@ -366,22 +367,22 @@ class RtcEngine with RtcEngineInterface {
   }
 
   @override
-  Future<int> getAudioMixingCurrentPosition() {
+  Future<int?> getAudioMixingCurrentPosition() {
     return _invokeMethod('getAudioMixingCurrentPosition');
   }
 
   @override
-  Future<int> getAudioMixingDuration() {
+  Future<int?> getAudioMixingDuration() {
     return _invokeMethod('getAudioMixingDuration');
   }
 
   @override
-  Future<int> getAudioMixingPlayoutVolume() {
+  Future<int?> getAudioMixingPlayoutVolume() {
     return _invokeMethod('getAudioMixingPlayoutVolume');
   }
 
   @override
-  Future<int> getAudioMixingPublishVolume() {
+  Future<int?> getAudioMixingPublishVolume() {
     return _invokeMethod('getAudioMixingPublishVolume');
   }
 
@@ -441,7 +442,7 @@ class RtcEngine with RtcEngineInterface {
   }
 
   @override
-  Future<int> createDataStream(bool reliable, bool ordered) {
+  Future<int?> createDataStream(bool reliable, bool ordered) {
     return _invokeMethod(
         'createDataStream', {'reliable': reliable, 'ordered': ordered});
   }
@@ -472,42 +473,42 @@ class RtcEngine with RtcEngineInterface {
   }
 
   @override
-  Future<double> getCameraMaxZoomFactor() {
+  Future<double?> getCameraMaxZoomFactor() {
     return _invokeMethod('getCameraMaxZoomFactor');
   }
 
   @override
-  Future<double> getEffectsVolume() {
+  Future<double?> getEffectsVolume() {
     return _invokeMethod('getEffectsVolume');
   }
 
   @override
-  Future<bool> isCameraAutoFocusFaceModeSupported() {
+  Future<bool?> isCameraAutoFocusFaceModeSupported() {
     return _invokeMethod('isCameraAutoFocusFaceModeSupported');
   }
 
   @override
-  Future<bool> isCameraExposurePositionSupported() {
+  Future<bool?> isCameraExposurePositionSupported() {
     return _invokeMethod('isCameraExposurePositionSupported');
   }
 
   @override
-  Future<bool> isCameraFocusSupported() {
+  Future<bool?> isCameraFocusSupported() {
     return _invokeMethod('isCameraFocusSupported');
   }
 
   @override
-  Future<bool> isCameraTorchSupported() {
+  Future<bool?> isCameraTorchSupported() {
     return _invokeMethod('isCameraTorchSupported');
   }
 
   @override
-  Future<bool> isCameraZoomSupported() {
+  Future<bool?> isCameraZoomSupported() {
     return _invokeMethod('isCameraZoomSupported');
   }
 
   @override
-  Future<bool> isSpeakerphoneEnabled() {
+  Future<bool?> isSpeakerphoneEnabled() {
     return _invokeMethod('isSpeakerphoneEnabled');
   }
 
@@ -1024,7 +1025,7 @@ mixin RtcEngineInterface
   ///  **Returns**
   /// - The current call ID, if the method call succeeds.
   /// - The empty string "", if the method call fails.
-  Future<String> getCallId();
+  Future<String?> getCallId();
 
   /// Allows the user to rate a call after the call ends.
   ///
@@ -1542,7 +1543,7 @@ mixin RtcAudioMixingInterface {
   /// **Returns**
   /// - The audio mixing volume for local playback, if the method call is successful. The value range is [0,100].
   /// - < 0: Failure.
-  Future<int> getAudioMixingPlayoutVolume();
+  Future<int?> getAudioMixingPlayoutVolume();
 
   /// Gets the audio mixing volume for publishing.
   ///
@@ -1551,7 +1552,7 @@ mixin RtcAudioMixingInterface {
   /// **Returns**
   /// - The audio mixing volume for publishing, if the method call is successful. The value range is [0,100].
   /// - < 0: Failure.
-  Future<int> getAudioMixingPublishVolume();
+  Future<int?> getAudioMixingPublishVolume();
 
   /// Gets the duration (ms) of the music file.
   ///
@@ -1560,7 +1561,7 @@ mixin RtcAudioMixingInterface {
   /// **Returns**
   /// - The audio mixing duration, if this method call is successful.
   /// - < 0: Failure.
-  Future<int> getAudioMixingDuration();
+  Future<int?> getAudioMixingDuration();
 
   /// Gets the playback position (ms) of the music file.
   ///
@@ -1569,7 +1570,7 @@ mixin RtcAudioMixingInterface {
   /// **Returns**
   /// - The current playback position of the audio mixing file, if this method call is successful.
   /// - < 0: Failure.
-  Future<int> getAudioMixingCurrentPosition();
+  Future<int?> getAudioMixingCurrentPosition();
 
   /// Sets the playback position (ms) of the music file to a different starting position (the default plays from the beginning).
   ///
@@ -1592,7 +1593,7 @@ mixin RtcAudioEffectInterface {
   /// Gets the volume of the audio effects.
   ///
   /// The value ranges between 0.0 and 100.0.
-  Future<double> getEffectsVolume();
+  Future<double?> getEffectsVolume();
 
   /// Sets the volume of the audio effects.
   ///
@@ -1892,7 +1893,7 @@ mixin RtcAudioRouteInterface {
   Future<void> setEnableSpeakerphone(bool enabled);
 
   /// Checks whether the speakerphone is enabled.
-  Future<bool> isSpeakerphoneEnabled();
+  Future<bool?> isSpeakerphoneEnabled();
 }
 
 mixin RtcEarMonitoringInterface {
@@ -2208,19 +2209,19 @@ mixin RtcCameraInterface {
   Future<void> switchCamera();
 
   /// Checks whether the camera zoom function is supported.
-  Future<bool> isCameraZoomSupported();
+  Future<bool?> isCameraZoomSupported();
 
   /// Checks whether the camera flash function is supported.
-  Future<bool> isCameraTorchSupported();
+  Future<bool?> isCameraTorchSupported();
 
   /// Checks whether the camera manual focus function is supported.
-  Future<bool> isCameraFocusSupported();
+  Future<bool?> isCameraFocusSupported();
 
   /// Checks whether the camera exposure function is supported.
-  Future<bool> isCameraExposurePositionSupported();
+  Future<bool?> isCameraExposurePositionSupported();
 
   /// Checks whether the camera auto-face focus function is supported.
-  Future<bool> isCameraAutoFocusFaceModeSupported();
+  Future<bool?> isCameraAutoFocusFaceModeSupported();
 
   /// Sets the camera zoom ratio.
   ///
@@ -2228,7 +2229,7 @@ mixin RtcCameraInterface {
   Future<void> setCameraZoomFactor(double factor);
 
   /// Gets the maximum zoom ratio supported by the camera.
-  Future<double> getCameraMaxZoomFactor();
+  Future<double?> getCameraMaxZoomFactor();
 
   /// Sets the camera manual focus position.
   /// A successful method call triggers the [RtcEngineEventHandler.cameraFocusAreaChanged] callback on the local client.
@@ -2311,7 +2312,7 @@ mixin RtcStreamMessageInterface {
   /// **Returns**
   /// - 0: Success.
   /// - < 0: Failure.
-  Future<int> createDataStream(bool reliable, bool ordered);
+  Future<int?> createDataStream(bool reliable, bool ordered);
 
   /// Sends data stream messages.
   ///

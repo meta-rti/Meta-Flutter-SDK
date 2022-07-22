@@ -6,17 +6,15 @@ import 'enums.dart';
 
 part 'enum_converter.g.dart';
 
-abstract class EnumConverter<E, T> {
+abstract class EnumConverter<E extends Enum, T> {
   E e;
 
   EnumConverter(this.e);
 
-  EnumConverter.fromValue(Map<E, T> map, T t) {
-    e = _$enumDecodeNullable(map, t);
-  }
+  EnumConverter.fromValue(Map<E, T> map, T t) : e = $enumDecode<E, T>(map, t);
 
   T toValue(Map<E, T> map) {
-    return map[e];
+    return map[e] as T;
   }
 }
 
