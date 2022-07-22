@@ -40,8 +40,34 @@ meta 视频 SDK 需要 `摄像头` 和 `麦克风` 权限来开始视频通话�
     ...
 </manifest>
 ```
+
+- 如果您的项目targetVersion 大于30 ，即Android 12 及以上需要适配蓝牙权限。在manifest中注册权限并动态申请。
+```xml
+<manifest>
+  ...
+  <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+  <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+  <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+  ...
+</manifest>
+
+private val PERMISSION_REQ_CODE = 10000
+private val PERMISSIONS = arrayOf(
+    Manifest.permission.BLUETOOTH_SCAN,
+    Manifest.permission.BLUETOOTH_CONNECT,
+    Manifest.permission.BLUETOOTH_ADVERTISE
+)
+private fun requestPermissions() {
+    if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.S){
+        ActivityCompat.requestPermissions(this@MainActivity, PERMISSIONS, PERMISSION_REQ_CODE)
+    }
+}
+```
+
 ProGuard
+
 -keep class co.meta.** {*;}
+
 -keep class org.webrtc.** {*;}
 
 ### iOS
@@ -52,6 +78,14 @@ ProGuard
 - `Privacy - Camera Usage Description`, 并且在 `Value` 列中添加描述。
 
 您的程序可以在后台运行音视频通话，前提是您开启了后台模式。在 Xcode 中选择您的 app target，点击 **Capabilities** 标签，开启 **Background Modes**，并且检查 **Audio、AirPlay 和 Picture in Picture**。
+
+## Flutter2 支持
+
+### 空安全
+
+我们在 [2.0.3](https://pub.dev/packages/meta_rtc_engine/versions) 版本已经正式支持了空安全。
+此版本不向下兼容，需要您的工程迁移至空安全，具体参考 [迁移至空安全](https://dart.cn/null-safety/migration-guide) 。
+
 
 ## 常见问题
 

@@ -23,9 +23,50 @@ Open the `AndroidManifest.xml` file and add the necessary permissions to this fi
     ...
 </manifest>
 ```
+
+- If the targetVersion of your project is greater than 30, that is, Android 12 and above need to adapt to the Bluetooth permission. Register permissions in manifest and apply dynamically.
+```xml
+<manifest>
+  ...
+  <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+  <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+  <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+  ...
+</manifest>
+
+private val PERMISSION_REQ_CODE = 10000
+private val PERMISSIONS = arrayOf(
+    Manifest.permission.BLUETOOTH_SCAN,
+    Manifest.permission.BLUETOOTH_CONNECT,
+    Manifest.permission.BLUETOOTH_ADVERTISE
+)
+private fun requestPermissions() {
+    if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.S){
+        ActivityCompat.requestPermissions(this@MainActivity, PERMISSIONS, PERMISSION_REQ_CODE)
+    }
+}
+```
+
 ProGuard
+
 -keep class co.meta.** {*;}
+
 -keep class org.webrtc.** {*;}
+
+#### iOS & macOS
+
+Open the `Info.plist` and add:
+
+- `Privacy - Microphone Usage Description`，and add some description into the `Value` column.
+- `Privacy - Camera Usage Description`, and add some description into the `Value` column.
+
+
+## Flutter2 support
+
+### Null Safety
+
+Null safety is supported from [2.0.3](https://pub.dev/packages/meta_rtc_engine/versions) version. 
+This version is not backwards compatible, your project needs to be migrated to null safety. For more information, please refer to [Migrating to null safety](https://dart.dev/null-safety/migration-guide).
 
 This project is a starting point for a Flutter
 [plug-in package](https://flutter.dev/developing-packages/),

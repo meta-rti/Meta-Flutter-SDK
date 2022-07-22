@@ -1,6 +1,6 @@
 name: meta_rtc_engine
-description: Meta sdk update v2.0.2.5.
-version: 2.0.26
+description: Meta sdk update v2.0.2.6.
+version: 2.0.3
 repository:  https://github.com/meta-rti/Meta-Flutter-SDK
 homepage: https://www.wuji.co
 environment:
