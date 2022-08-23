@@ -46,5 +46,5 @@ dependencies {
 
 
     //meta rtc sdk
-    implementation  'co.wuji:meta_rtc:2.0.26'
+    implementation  'co.wuji:meta_rtc:2.0.27'
 }
