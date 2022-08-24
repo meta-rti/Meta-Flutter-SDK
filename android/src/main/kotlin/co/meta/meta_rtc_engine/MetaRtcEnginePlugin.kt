@@ -59,6 +59,7 @@ class MetaRtcEnginePlugin : FlutterPlugin, MethodCallHandler, EventChannel.Strea
         eventChannel.setStreamHandler(this)
 
         platformViewRegistry.registerViewFactory("MetaSurfaceView", MetaSurfaceViewFactory(binaryMessenger, this, rtcChannelPlugin))
+        platformViewRegistry.registerViewFactory("MetaTextureView", MetaTextureViewFactory(binaryMessenger, this, rtcChannelPlugin))
     }
 
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
