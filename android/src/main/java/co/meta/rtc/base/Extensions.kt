@@ -22,7 +22,7 @@ fun LocalAudioStats.toMap(): Map<String, Any?> {
 
 fun RtcStats.toMap(): Map<String, Any?> {
     return hashMapOf(
-//            "totalDuration" to totalDuration,
+            "totalDuration" to duration,
             "txBytes" to txBytes,
             "rxBytes" to rxBytes,
             "txAudioBytes" to txAudioBytes,

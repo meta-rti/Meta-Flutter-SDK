@@ -978,14 +978,14 @@ class LocalAudioStats {
   /// The video packet loss rate (%) from the local client to the Meta edge server before applying the anti-packet loss strategies.
   ///
   /// @since v3.1.2.
-  int txPacketLossRate;
+  //int txPacketLossRate;
 
   /// Constructs a [LocalAudioStats]
   LocalAudioStats(
     this.numChannels,
     this.sentSampleRate,
-    this.sentBitrate,
-    this.txPacketLossRate,);
+    this.sentBitrate,);
+    //this.txPacketLossRate,);
 
   /// @nodoc
   factory LocalAudioStats.fromJson(Map<String, dynamic> json) =>
@@ -1039,12 +1039,12 @@ class LocalVideoStats {
   /// The video packet loss rate (%) from the local client to the Meta edge server before applying the anti-packet loss strategies.
   ///
   /// @since v3.1.2.
-  int txPacketLossRate;
+  //int txPacketLossRate;
 
   /// The capture frame rate (fps) of the local video.
   ///
   /// @since v3.1.2.
-  int captureFrameRate;
+  //int captureFrameRate;
 
   /// Constructs a [LocalVideoStats]
   LocalVideoStats(
@@ -1060,8 +1060,8 @@ class LocalVideoStats {
     this.encodedFrameHeight,
     this.encodedFrameCount,
     this.codecType,
-    this.txPacketLossRate,
-    this.captureFrameRate,
+    // this.txPacketLossRate,
+    // this.captureFrameRate,
   );
 
   /// @nodoc
@@ -1112,7 +1112,7 @@ class RemoteAudioStats {
   /// The total active time (ms) of the remote audio stream after the remote user publish the audio stream.
   ///
   /// @since v3.1.2.
-  int publishDuration;
+  //int publishDuration;
 
   /// Constructs a [RemoteAudioStats]
   RemoteAudioStats(    
@@ -1127,7 +1127,7 @@ class RemoteAudioStats {
     this.totalFrozenTime,
     this.frozenRate,
     this.totalActiveTime,
-    this.publishDuration,
+    //this.publishDuration,
     );
 
   /// @nodoc
@@ -1183,7 +1183,7 @@ class RemoteVideoStats {
   /// The total publish duration (ms) of the remote video stream.
   ///
   /// @since v3.1.2.
-  int publishDuration;
+  //int publishDuration;
 
   /// Constructs a [RemoteVideoStats]
   RemoteVideoStats(
@@ -1199,7 +1199,7 @@ class RemoteVideoStats {
     this.totalFrozenTime,
     this.frozenRate,
     this.totalActiveTime,
-    this.publishDuration,
+    //this.publishDuration,
   );
 
   /// @nodoc
