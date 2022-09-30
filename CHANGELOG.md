@@ -43,3 +43,7 @@
 ## 2.0.32
 
 * fix texture
+
+## 2.0.33
+
+* rtc sdk update 2.0.28
