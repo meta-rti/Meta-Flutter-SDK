@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'MetaRTCFramework'
+  s.dependency "MetaRTCFramework", "2.4.0.2"
   s.platform = :ios, '10.0'
 
   # Flutter.framework does not contain a i386 slice.
